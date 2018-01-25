@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "msdatgrd.ocx"
+Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form Form1 
    Caption         =   "Form1"
    ClientHeight    =   8220
@@ -10,6 +10,14 @@ Begin VB.Form Form1
    MDIChild        =   -1  'True
    ScaleHeight     =   8220
    ScaleWidth      =   15930
+   Begin VB.CommandButton Command1 
+      Caption         =   "Command1"
+      Height          =   495
+      Left            =   7320
+      TabIndex        =   2
+      Top             =   3840
+      Width           =   1215
+   End
    Begin MSDataGridLib.DataGrid DataGrid1 
       Height          =   6375
       Left            =   360
@@ -88,3 +96,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Private Sub Command1_Click()
+MsgBox "okke"
+
+End Sub

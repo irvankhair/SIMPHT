@@ -1,8 +1,8 @@
 Type=Exe
 Form=Form1.frm
-Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#C:\Windows\SysWOW64\stdole2.tlb#OLE Automation
+Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#C:\Windows\System32\stdole2.tlb#OLE Automation
 Form=SIMPHT.frm
-Object={CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0; msdatgrd.ocx
+Object={CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0; MSDATGRD.OCX
 IconForm="Form1"
 Startup="Form1"
 Command32=""
