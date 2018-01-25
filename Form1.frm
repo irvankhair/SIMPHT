@@ -10,6 +10,14 @@ Begin VB.Form Form1
    MDIChild        =   -1  'True
    ScaleHeight     =   8220
    ScaleWidth      =   15930
+   Begin VB.CommandButton Command1 
+      Caption         =   "Command1"
+      Height          =   615
+      Left            =   360
+      TabIndex        =   2
+      Top             =   120
+      Width           =   1935
+   End
    Begin MSDataGridLib.DataGrid DataGrid1 
       Height          =   6375
       Left            =   360
@@ -88,3 +96,6 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Private Sub Command1_Click()
+MsgBox "master"
+End Sub
