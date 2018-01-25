@@ -10,12 +10,20 @@ Begin VB.Form Form1
    MDIChild        =   -1  'True
    ScaleHeight     =   8220
    ScaleWidth      =   15930
+   Begin VB.CommandButton Command2 
+      Caption         =   "New Button"
+      Height          =   735
+      Left            =   600
+      TabIndex        =   3
+      Top             =   120
+      Width           =   2175
+   End
    Begin VB.CommandButton Command1 
       Caption         =   "Command1"
       Height          =   495
-      Left            =   7320
+      Left            =   3600
       TabIndex        =   2
-      Top             =   3840
+      Top             =   240
       Width           =   1215
    End
    Begin MSDataGridLib.DataGrid DataGrid1 
@@ -98,4 +106,8 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Private Sub Command1_Click()
 MsgBox "okke"
+End Sub
+
+Private Sub Command2_Click()
+MsgBox "editan DIan"
 End Sub
