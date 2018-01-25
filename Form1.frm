@@ -13,24 +13,24 @@ Begin VB.Form Form1
    Begin VB.CommandButton Command2 
       Caption         =   "New Button"
       Height          =   735
-      Left            =   600
+      Left            =   2280
       TabIndex        =   3
-      Top             =   120
+      Top             =   360
       Width           =   2175
    End
    Begin VB.CommandButton Command1 
       Caption         =   "Command1"
       Height          =   495
-      Left            =   3600
+      Left            =   8280
       TabIndex        =   2
-      Top             =   240
+      Top             =   960
       Width           =   1215
    End
    Begin MSDataGridLib.DataGrid DataGrid1 
       Height          =   6375
-      Left            =   360
+      Left            =   240
       TabIndex        =   1
-      Top             =   960
+      Top             =   2640
       Width           =   14415
       _ExtentX        =   25426
       _ExtentY        =   11245
@@ -109,5 +109,16 @@ MsgBox "okke"
 End Sub
 
 Private Sub Command2_Click()
-MsgBox "editan DIan"
+Dim dbStruk As ADODB.Connection
+Set dbStruk = New ADODB.Connection
+Dim rsStrukUmum As ADODB.Recordset
+dbStruk.CursorLocation = adUseClient
+dbStruk.Open "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & App.Path & "\EDit sumber baku.xls;Extended Properties='Excel 8.0;HDR=Yes;IMEX=0';"
+            
+
+Set rsStrukUmum = New ADODB.Recordset
+rsStrukUmum.Open "select * from [sheet1$]", dbStruk, adOpenDynamic, adLockOptimistic
+MsgBox rsStrukUmum.RecordCount
+MsgBox rsStrukUmum.Fields(4).Name
+
 End Sub

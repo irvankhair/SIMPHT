@@ -1,8 +1,9 @@
 Type=Exe
-Form=Form1.frm
 Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#C:\Windows\SysWOW64\stdole2.tlb#OLE Automation
-Form=SIMPHT.frm
+Reference=*\G{2A75196C-D9EB-4129-B803-931327F72D5C}#2.8#0#C:\Program Files (x86)\Common Files\System\ado\msado28.tlb#Microsoft ActiveX Data Objects 2.8 Library
 Object={CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0; msdatgrd.ocx
+Form=Form1.frm
+Form=SIMPHT.frm
 IconForm="Form1"
 Startup="Form1"
 Command32=""
