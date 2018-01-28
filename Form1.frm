@@ -10,12 +10,12 @@ Begin VB.Form Form1
    MDIChild        =   -1  'True
    ScaleHeight     =   8220
    ScaleWidth      =   15930
-   Begin VB.CommandButton Command2 
-      Caption         =   "New Button"
+   Begin VB.CommandButton Transfer 
+      Caption         =   "Transfer"
       Height          =   735
-      Left            =   2280
+      Left            =   3600
       TabIndex        =   3
-      Top             =   360
+      Top             =   1320
       Width           =   2175
    End
    Begin VB.CommandButton Command1 
@@ -27,13 +27,13 @@ Begin VB.Form Form1
       Width           =   1215
    End
    Begin MSDataGridLib.DataGrid DataGrid1 
-      Height          =   6375
+      Height          =   5175
       Left            =   240
       TabIndex        =   1
-      Top             =   2640
-      Width           =   14415
-      _ExtentX        =   25426
-      _ExtentY        =   11245
+      Top             =   3840
+      Width           =   5055
+      _ExtentX        =   8916
+      _ExtentY        =   9128
       _Version        =   393216
       HeadLines       =   1
       RowHeight       =   15
@@ -105,20 +105,40 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Private Sub Command1_Click()
-MsgBox "okke"
+    MsgBox "okke"
 End Sub
 
-Private Sub Command2_Click()
-Dim dbStruk As ADODB.Connection
-Set dbStruk = New ADODB.Connection
-Dim rsStrukUmum As ADODB.Recordset
-dbStruk.CursorLocation = adUseClient
-dbStruk.Open "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & App.Path & "\EDit sumber baku.xls;Extended Properties='Excel 8.0;HDR=Yes;IMEX=0';"
-            
 
-Set rsStrukUmum = New ADODB.Recordset
-rsStrukUmum.Open "select * from [sheet1$]", dbStruk, adOpenDynamic, adLockOptimistic
-MsgBox rsStrukUmum.RecordCount
-MsgBox rsStrukUmum.Fields(4).Name
+Private Sub Transfer_Click()
 
+    Dim excel As New ADODB.Recordset
+    Dim access As New ADODB.Recordset
+    
+    Dim i, j As Integer
+    Set excel = importExcel
+    Set access = konekAccess
+    
+    Dim temp As String
+   
+    temp = excel.Fields("nis")
+    For i = 1 To 602
+        With access
+            .AddNew
+            For j = 1 To 21
+                .Fields(j) = excel.Fields(j - 1)
+            Next
+        End With
+        If IsNull(access.Fields("nis")) Then
+            access.Fields("nis") = temp
+        ElseIf (Not IsNull(access.Fields("nis")) And (access.Fields("nis") <> temp)) Then
+            temp = access.Fields("nis")
+        End If
+        access.Update
+        excel.MoveNext
+        access.MoveNext
+    Next
+
+    MsgBox "Transfered"
+    excel.Close
+    access.Close
 End Sub
