@@ -92,7 +92,7 @@ Public Function konekAccess() As ADODB.Recordset
         .LockType = adLockOptimistic
     End With
     
-    conConnection.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & App.Path & "\" & "simpt.mdb;Mode=Read|Write"
+    conConnection.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & App.Path & "\" & "gian.mdb;Mode=Read|Write"
     conConnection.Open
     rstRecordSet.Open "Select * from Table1", conConnection, adOpenStatic, adLockOptimistic
     Set konekAccess = rstRecordSet
@@ -150,6 +150,7 @@ X = MsgBox("Apakah Anda akan mengambil data nominatif dari file " & CommonDialog
     End If
         
 End Sub
+
 
 Private Sub mnDaftarNominatif_Click()
 DaftarNominatif.Show
