@@ -36,7 +36,7 @@ Begin VB.Form DaftarNominatif
    Begin VB.PictureBox Tampilan 
       BackColor       =   &H00E0E0E0&
       Height          =   7155
-      Left            =   120
+      Left            =   0
       ScaleHeight     =   7095
       ScaleWidth      =   7635
       TabIndex        =   5
@@ -412,12 +412,8 @@ Private Function RapihkanGrid()
     grdNominatif.Columns("urutid").Visible = False
     grdNominatif.Columns("NIB").Visible = False
 
-
     Dim i As Integer
     Dim db As ADODB.Connection
-
-
-
 
     Set db = New ADODB.Connection
     db.Open "PROVIDER=Microsoft.Jet.OLEDB.4.0;Data Source=" & pROJECTPATH & ";Jet OLEDB:Database Password=globalisasi;Persist Security Info=False"
@@ -488,20 +484,22 @@ Private Sub Command3_Click()
 End Sub
 
 Private Sub Form_Load()
-    Dim db As ADODB.Connection
-    Set db = New ADODB.Connection
-    db.Open "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & pROJECTPATH & ";Persist Security Info=False;Jet OLEDB:Database "    ';pwd=globalisasi"
-    db.CursorLocation = adUseClient
-    Set RSDN = New ADODB.Recordset
-    RSDN.Open "SELECT * FROM [DAFTAR NOMINATIF] order by id", db, adOpenDynamic, adLockOptimistic
+  
+        Dim db As ADODB.Connection
+        Set db = New ADODB.Connection
+        db.Open "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & pROJECTPATH & ";Persist Security Info=False;Jet OLEDB:Database "    ';pwd=globalisasi"
+        db.CursorLocation = adUseClient
+        Set RSDN = New ADODB.Recordset
+        RSDN.Open "SELECT * FROM [DAFTAR NOMINATIF] order by UrutId", db, adOpenDynamic, adLockOptimistic
 
-    Set DaftarNominatif.grdNominatif.DataSource = RSDN
-    DaftarNominatif.grdNominatif.ReBind
+        Set DaftarNominatif.grdNominatif.DataSource = RSDN
+        DaftarNominatif.grdNominatif.ReBind
 
-    RapihkanGrid
+        RapihkanGrid
 
-    Set MyProperty = DaftarNominatif.grdNominatif   'nama datagrid yang inigin di scroll dengan mouse
-    WheelHook grdNominatif
+        Set MyProperty = DaftarNominatif.grdNominatif   'nama datagrid yang inigin di scroll dengan mouse
+        WheelHook grdNominatif
+  
 End Sub
 
 Private Sub Form_Resize()

@@ -1,15 +1,14 @@
 VERSION 5.00
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "comdlg32.ocx"
 Begin VB.MDIForm MainForm 
-   Appearance      =   0  'Flat
-   BackColor       =   &H8000000C&
+   BackColor       =   &H00FFFFFF&
    Caption         =   "SIMPHT"
-   ClientHeight    =   3135
+   ClientHeight    =   6690
    ClientLeft      =   165
-   ClientTop       =   810
-   ClientWidth     =   4680
+   ClientTop       =   510
+   ClientWidth     =   10275
    LinkTopic       =   "MDIForm1"
-   StartUpPosition =   3  'Windows Default
+   StartUpPosition =   1  'CenterOwner
    WindowState     =   2  'Maximized
    Begin MSComDlg.CommonDialog CommonDialog1 
       Left            =   0
@@ -81,6 +80,7 @@ Public Function importExcel() As ADODB.Recordset
     Set importExcel = rsStrukUmum
 
 End Function
+
 Public Function konekAccess() As ADODB.Recordset
 
     Dim conConnection As New ADODB.Connection
@@ -331,7 +331,10 @@ Private Sub mnBacaDataNominatif_click()
         excel.Close
         access.Close
     End If
-
+        Set excel = Nothing
+        Set access = Nothing
+        tmp = Empty
+        excelPath = Empty
 End Sub
 
 
@@ -352,3 +355,4 @@ Private Sub mnOpen_Click()
 
     DaftarNominatif.Show
 End Sub
+
