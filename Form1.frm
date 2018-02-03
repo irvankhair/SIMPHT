@@ -408,48 +408,48 @@ Attribute VB_Exposed = False
 '<<<<<<< HEAD
 
 Private Function RapihkanGrid()
-grdNominatif.Columns("id").Visible = False
-'grdNominatif.Columns("urutid").Visible = False
-'grdNominatif.Columns("idnib").Visible = False
+    grdNominatif.Columns("id").Visible = False
+    grdNominatif.Columns("urutid").Visible = False
+    grdNominatif.Columns("NIB").Visible = False
 
 
-Dim i As Integer
-Dim db As ADODB.Connection
-    
-    
-    
-    
+    Dim i As Integer
+    Dim db As ADODB.Connection
+
+
+
+
     Set db = New ADODB.Connection
     db.Open "PROVIDER=Microsoft.Jet.OLEDB.4.0;Data Source=" & pROJECTPATH & ";Jet OLEDB:Database Password=globalisasi;Persist Security Info=False"
     db.CursorLocation = adUseClient
-      Set rskolom = New ADODB.Recordset
-   
-'     rskolom.Open "select * from [kostum tabel] where [nama tabel]='Daftar Nominatif' ", db, adOpenDynamic, adLockOptimistic
-      
+    Set rskolom = New ADODB.Recordset
 
-'For i = 0 To grdNominatif.Columns.Count - 1
- '   rskolom.MoveFirst
-  '  rskolom.Find "isi='" & grdNominatif.Columns(i).Caption & "'"
-   ' If Not rskolom.EOF Then
+    '     rskolom.Open "select * from [kostum tabel] where [nama tabel]='Daftar Nominatif' ", db, adOpenDynamic, adLockOptimistic
+
+
+    'For i = 0 To grdNominatif.Columns.Count - 1
+    '   rskolom.MoveFirst
+    '  rskolom.Find "isi='" & grdNominatif.Columns(i).Caption & "'"
+    ' If Not rskolom.EOF Then
     '    grdNominatif.Columns(i).Width = rskolom![lebar kolom]
-    
+
     'End If
-'Next i
+    'Next i
 End Function
 
 Private Sub Command2_Click()
-Dim rskolom As ADODB.Recordset
-Dim db As ADODB.Connection
- Set db = New ADODB.Connection
- db.Open "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & pROJECTPATH & ";Persist Security Info=False;Jet OLEDB:Database " ';pwd=globalisasi"
-db.CursorLocation = adUseClient
+    Dim rskolom As ADODB.Recordset
+    Dim db As ADODB.Connection
+    Set db = New ADODB.Connection
+    db.Open "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & pROJECTPATH & ";Persist Security Info=False;Jet OLEDB:Database "    ';pwd=globalisasi"
+    db.CursorLocation = adUseClient
     Set rskolom = New ADODB.Recordset
     rskolom.Open "select * from [kostum tabel] where [nama tabel]='Daftar Nominatif'", db, adOpenDynamic, adLockOptimistic
-   While Not rskolom.EOF
-   rskolom.Delete
-   rskolom.MoveNext
-   Wend
-   For i = 0 To grdNominatif.Columns.Count - 1
+    While Not rskolom.EOF
+        rskolom.Delete
+        rskolom.MoveNext
+    Wend
+    For i = 0 To grdNominatif.Columns.Count - 1
         rskolom.AddNew
         rskolom![nama tabel] = "Daftar Nominatif"
         rskolom![indeks kolom] = grdNominatif.Columns(i).ColIndex
@@ -458,16 +458,16 @@ db.CursorLocation = adUseClient
         rskolom!tipe = RSDN.Fields(i).Type
         rskolom.Update
     Next i
-     
-  
+
+
 
 End Sub
 
 Private Sub Command3_Click()
-Dim i As Integer
-Dim db As ADODB.Connection
-'Tampilan.Top = txtNama.Top
-'Tampilan.Left = txtNama.Left
+    Dim i As Integer
+    Dim db As ADODB.Connection
+    'Tampilan.Top = txtNama.Top
+    'Tampilan.Left = txtNama.Left
     Set db = New ADODB.Connection
     db.Open "PROVIDER=Microsoft.Jet.OLEDB.4.0;Data Source=" & pROJECTPATH & ";Jet OLEDB:Database Password=globalisasi;Persist Security Info=False"
     db.CursorLocation = adUseClient
@@ -482,72 +482,72 @@ Dim db As ADODB.Connection
         Else
             List5.AddItem rskolom!isi
         End If
-    rskolom.MoveNext
+        rskolom.MoveNext
     Wend
     Tampilan.Visible = True
 End Sub
 
 Private Sub Form_Load()
-Dim db As ADODB.Connection
- Set db = New ADODB.Connection
- db.Open "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & pROJECTPATH & ";Persist Security Info=False;Jet OLEDB:Database " ';pwd=globalisasi"
-db.CursorLocation = adUseClient
-Set RSDN = New ADODB.Recordset
-RSDN.Open "SELECT * FROM [DAFTAR NOMINATIF] order by id", db, adOpenDynamic, adLockOptimistic
+    Dim db As ADODB.Connection
+    Set db = New ADODB.Connection
+    db.Open "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & pROJECTPATH & ";Persist Security Info=False;Jet OLEDB:Database "    ';pwd=globalisasi"
+    db.CursorLocation = adUseClient
+    Set RSDN = New ADODB.Recordset
+    RSDN.Open "SELECT * FROM [DAFTAR NOMINATIF] order by id", db, adOpenDynamic, adLockOptimistic
 
-Set DaftarNominatif.grdNominatif.DataSource = RSDN
-DaftarNominatif.grdNominatif.ReBind
+    Set DaftarNominatif.grdNominatif.DataSource = RSDN
+    DaftarNominatif.grdNominatif.ReBind
 
-RapihkanGrid
+    RapihkanGrid
 
-Set MyProperty = DaftarNominatif.grdNominatif   'nama datagrid yang inigin di scroll dengan mouse
-WheelHook grdNominatif
+    Set MyProperty = DaftarNominatif.grdNominatif   'nama datagrid yang inigin di scroll dengan mouse
+    WheelHook grdNominatif
 End Sub
 
 Private Sub Form_Resize()
-If Not Me.ScaleHeight = 0 Then
-    Label1.Width = Me.Width
-    Line1.X2 = Me.ScaleWidth
-    grdNominatif.Top = Line1.Y1 + 30
-    grdNominatif.Width = Me.ScaleWidth
-    grdNominatif.Height = Me.ScaleHeight - Line1.Y1 - 30
-    grdNominatif.Left = 0
-End If
+    If Not Me.ScaleHeight = 0 Then
+        Label1.Width = Me.Width
+        Line1.X2 = Me.ScaleWidth
+        grdNominatif.Top = Line1.Y1 + 30
+        grdNominatif.Width = Me.ScaleWidth
+        grdNominatif.Height = Me.ScaleHeight - Line1.Y1 - 30
+        grdNominatif.Left = 0
+    End If
 End Sub
 
 
 Private Sub grdNominatif_ColResize(ByVal ColIndex As Integer, Cancel As Integer)
-Dim db As ADODB.Connection
+    Dim db As ADODB.Connection
     Set db = New ADODB.Connection
     db.Open "PROVIDER=Microsoft.Jet.OLEDB.4.0;Data Source=" & pROJECTPATH & ";Persist Security Info=False"
     db.CursorLocation = adUseClient
     Set rskolom = New ADODB.Recordset
     rskolom.Open "select * from [kostum tabel] where [nama tabel]='Daftar Nominatif'", db, adOpenDynamic, adLockOptimistic
-   rskolom.Find "isi='" & grdNominatif.Columns(ColIndex).Caption & "'"
-   If Not rskolom.EOF Then
-   rskolom![lebar kolom] = grdNominatif.Columns(ColIndex).Width
-   'rskolom!tipe = rs.Fields(0).Type
-    rskolom.Update
+    rskolom.Find "isi='" & grdNominatif.Columns(ColIndex).Caption & "'"
+    If Not rskolom.EOF Then
+        rskolom![lebar kolom] = grdNominatif.Columns(ColIndex).Width
+        'rskolom!tipe = rs.Fields(0).Type
+        rskolom.Update
     End If
 End Sub
 
 Private Sub grdNominatif_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-If Button = 2 Then
-    If Not RSDN.EOF And Not RSDN.BOF Then
-        NIBTerpilih = "" & RSDN!idnib
-        PopupMenu EditBaris
+    If Button = 2 Then
+        If Not RSDN.EOF And Not RSDN.BOF Then
+            NIBTerpilih = "" & RSDN!idnib
+            PopupMenu EditBaris
+        End If
     End If
-End If
 End Sub
 
 Private Sub HapusBaris_Click()
-If Not RSDN.EOF And Not RSDN.BOF Then
-    X = MsgBox("Yakin akan menghapus kompionen bidang pada NIB : " & NIBTerpilih, vbYesNo, "Konfirmasi Hapus Baris Pada Bidang")
-    If X = vbYes Then
-        RSDN.Delete
-        RSDN.MoveNext
+    If Not RSDN.EOF And Not RSDN.BOF Then
+        X = MsgBox("Yakin akan menghapus kompionen bidang pada NIB : " & NIBTerpilih, vbYesNo, "Konfirmasi Hapus Baris Pada Bidang")
+        If X = vbYes Then
+            RSDN.Delete
+            RSDN.MoveNext
+        End If
     End If
-End If
 End Sub
 
 Private Sub List6_DragDrop(Source As Control, X As Single, Y As Single)
@@ -560,29 +560,29 @@ Private Sub List6_DragOver(Source As Control, X As Single, Y As Single, State As
 
 End Sub
 Private Sub List6_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-mintDragIndex = ListRowCalc(List6, Y)
+    mintDragIndex = ListRowCalc(List6, Y)
     List6.Drag
 End Sub
 Private Sub Sisip_Click()
-Dim urutSebelum As String
-Dim posisi As String
-If Not RSDN.EOF = True And Not RSDN.BOF = True Then
-    posisi = RSDN.AbsolutePosition
-    RSDN.MovePrevious
-    urutSebelum = RSDN!urutid
-    RSDN.AddNew
-    RSDN!urutid = urutSebelum + 0.1
-    RSDN!idnib = NIBTerpilih
-    RSDN.Update
-    RSDN.Requery
-    RSDN.Move posisi
-    
-    RapihkanGrid
-End If
+    Dim urutSebelum As String
+    Dim posisi As String
+    If Not RSDN.EOF = True And Not RSDN.BOF = True Then
+        posisi = RSDN.AbsolutePosition
+        RSDN.MovePrevious
+        urutSebelum = RSDN!urutid
+        RSDN.AddNew
+        RSDN!urutid = urutSebelum + 0.1
+        RSDN!idnib = NIBTerpilih
+        RSDN.Update
+        RSDN.Requery
+        RSDN.Move posisi
+
+        RapihkanGrid
+    End If
 End Sub
 '=======
 Private Sub Command1_Click()
-    'MsgBox "okke"
+'MsgBox "okke"
     Dim excel As New ADODB.Recordset
     Set excel = importExcel
     MsgBox excel.RecordCount
@@ -620,13 +620,6 @@ Public Function konekAccess() As ADODB.Recordset
 
 End Function
 
-Sub cekNIB(ByRef temp As String, ByRef nib As Variant)
-    If IsNull(nib) Then
-        nib = temp
-    ElseIf (Not IsNull(nib) And (nib <> temp)) Then
-        temp = nib
-    End If
-End Sub
 '>>>>>>> d3d07549d5308c63fd676dc3c8bf461ab7c97286
 
 Private Sub Transfer_Click()
@@ -645,10 +638,10 @@ Private Sub Transfer_Click()
     For i = 1 To excel.RecordCount
         With access
             .AddNew
-            For j = 1 To 18
-                .Fields(j) = excel.Fields(j - 1)
-            Next
+            For j = 2 To 19
+                .Fields(j) = excel.Fields(j - 2)
 
+            Next
 
             If ((excel.Fields(17) <> 0) And (excel.Fields(18) <> 0) And (excel.Fields(19) <> 0)) Then
                 .Fields("Ukuran Jenis Tanaman") = "Besar"
@@ -659,7 +652,7 @@ Private Sub Transfer_Click()
                 ElseIf (Not IsNull(access.Fields("NIB")) And (access.Fields("NIB") <> temp)) Then
                     temp = access.Fields("NIB")
                 End If
-                If (Not IsNull(access.Fields(1))) Then
+                If (Not IsNull(access.Fields(2))) Then
                     access.Fields("NIB Palsu") = access.Fields("NIB")
                 End If
 
@@ -670,7 +663,7 @@ Private Sub Transfer_Click()
                 ElseIf (Not IsNull(access.Fields("NIB")) And (access.Fields("NIB") <> temp)) Then
                     temp = access.Fields("NIB")
                 End If
-                If (Not IsNull(access.Fields(1))) Then
+                If (Not IsNull(access.Fields(2))) Then
                     access.Fields("NIB Palsu") = access.Fields("NIB")
                 End If
 
@@ -685,7 +678,7 @@ Private Sub Transfer_Click()
                 ElseIf (Not IsNull(access.Fields("NIB")) And (access.Fields("NIB") <> temp)) Then
                     temp = access.Fields("NIB")
                 End If
-                If (Not IsNull(access.Fields(1))) Then
+                If (Not IsNull(access.Fields(2))) Then
                     access.Fields("NIB Palsu") = access.Fields("NIB")
                 End If
 
@@ -702,7 +695,7 @@ Private Sub Transfer_Click()
                     temp = access.Fields("NIB")
 
                 End If
-                If (Not IsNull(access.Fields(1))) Then
+                If (Not IsNull(access.Fields(2))) Then
                     access.Fields("NIB Palsu") = access.Fields("NIB")
                 End If
 
@@ -713,7 +706,7 @@ Private Sub Transfer_Click()
                 ElseIf (Not IsNull(access.Fields("NIB")) And (access.Fields("NIB") <> temp)) Then
                     temp = access.Fields("NIB")
                 End If
-                If (Not IsNull(access.Fields(1))) Then
+                If (Not IsNull(access.Fields(2))) Then
                     access.Fields("NIB Palsu") = access.Fields("NIB")
                 End If
 
@@ -729,7 +722,7 @@ Private Sub Transfer_Click()
                 ElseIf (Not IsNull(access.Fields("NIB")) And (access.Fields("NIB") <> temp)) Then
                     temp = access.Fields("NIB")
                 End If
-                If (Not IsNull(access.Fields(1))) Then
+                If (Not IsNull(access.Fields(2))) Then
                     access.Fields("NIB Palsu") = access.Fields("NIB")
                 End If
 
@@ -740,7 +733,7 @@ Private Sub Transfer_Click()
                 ElseIf (Not IsNull(access.Fields("NIB")) And (access.Fields("NIB") <> temp)) Then
                     temp = access.Fields("NIB")
                 End If
-                If (Not IsNull(access.Fields(1))) Then
+                If (Not IsNull(access.Fields(2))) Then
                     access.Fields("NIB Palsu") = access.Fields("NIB")
                 End If
 
@@ -756,7 +749,7 @@ Private Sub Transfer_Click()
                 ElseIf (Not IsNull(access.Fields("NIB")) And (access.Fields("NIB") <> temp)) Then
                     temp = access.Fields("NIB")
                 End If
-                If (Not IsNull(access.Fields(1))) Then
+                If (Not IsNull(access.Fields(2))) Then
                     access.Fields("NIB Palsu") = access.Fields("NIB")
                 End If
 
@@ -767,7 +760,7 @@ Private Sub Transfer_Click()
                 ElseIf (Not IsNull(access.Fields("NIB")) And (access.Fields("NIB") <> temp)) Then
                     temp = access.Fields("NIB")
                 End If
-                If (Not IsNull(access.Fields(1))) Then
+                If (Not IsNull(access.Fields(2))) Then
                     access.Fields("NIB Palsu") = access.Fields("NIB")
                 End If
 
@@ -783,7 +776,7 @@ Private Sub Transfer_Click()
                 ElseIf (Not IsNull(access.Fields("NIB")) And (access.Fields("NIB") <> temp)) Then
                     temp = access.Fields("NIB")
                 End If
-                If (Not IsNull(access.Fields(1))) Then
+                If (Not IsNull(access.Fields(2))) Then
                     access.Fields("NIB Palsu") = access.Fields("NIB")
                 End If
 
@@ -796,7 +789,7 @@ Private Sub Transfer_Click()
                 ElseIf (Not IsNull(access.Fields("NIB")) And (access.Fields("NIB") <> temp)) Then
                     temp = access.Fields("NIB")
                 End If
-                If (Not IsNull(access.Fields(1))) Then
+                If (Not IsNull(access.Fields(2))) Then
                     access.Fields("NIB Palsu") = access.Fields("NIB")
                 End If
 
@@ -809,7 +802,7 @@ Private Sub Transfer_Click()
                 ElseIf (Not IsNull(access.Fields("NIB")) And (access.Fields("NIB") <> temp)) Then
                     temp = access.Fields("NIB")
                 End If
-                If (Not IsNull(access.Fields(1))) Then
+                If (Not IsNull(access.Fields(2))) Then
                     access.Fields("NIB Palsu") = access.Fields("NIB")
                 End If
 
@@ -832,7 +825,14 @@ Private Sub Transfer_Click()
         excel.MoveNext
         access.MoveNext
     Next
+    access.MoveFirst
 
+    For i = 1 To access.RecordCount
+
+        access.Fields(1) = access.Fields(0)
+        access.Update
+        access.MoveNext
+    Next
     MsgBox "Transfered"
     excel.Close
     access.Close

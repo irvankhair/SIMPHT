@@ -132,10 +132,10 @@ Private Sub mnBacaDataNominatif_click()
         For i = 1 To excel.RecordCount
             With access
                 .AddNew
-                For j = 1 To 18
-                    .Fields(j) = excel.Fields(j - 1)
-                Next
+                For j = 2 To 19
+                    .Fields(j) = excel.Fields(j - 2)
 
+                Next
 
                 If ((excel.Fields(17) <> 0) And (excel.Fields(18) <> 0) And (excel.Fields(19) <> 0)) Then
                     .Fields("Ukuran Jenis Tanaman") = "Besar"
@@ -146,7 +146,7 @@ Private Sub mnBacaDataNominatif_click()
                     ElseIf (Not IsNull(access.Fields("NIB")) And (access.Fields("NIB") <> temp)) Then
                         temp = access.Fields("NIB")
                     End If
-                    If (Not IsNull(access.Fields(1))) Then
+                    If (Not IsNull(access.Fields(2))) Then
                         access.Fields("NIB Palsu") = access.Fields("NIB")
                     End If
 
@@ -157,7 +157,7 @@ Private Sub mnBacaDataNominatif_click()
                     ElseIf (Not IsNull(access.Fields("NIB")) And (access.Fields("NIB") <> temp)) Then
                         temp = access.Fields("NIB")
                     End If
-                    If (Not IsNull(access.Fields(1))) Then
+                    If (Not IsNull(access.Fields(2))) Then
                         access.Fields("NIB Palsu") = access.Fields("NIB")
                     End If
 
@@ -172,7 +172,7 @@ Private Sub mnBacaDataNominatif_click()
                     ElseIf (Not IsNull(access.Fields("NIB")) And (access.Fields("NIB") <> temp)) Then
                         temp = access.Fields("NIB")
                     End If
-                    If (Not IsNull(access.Fields(1))) Then
+                    If (Not IsNull(access.Fields(2))) Then
                         access.Fields("NIB Palsu") = access.Fields("NIB")
                     End If
 
@@ -189,7 +189,7 @@ Private Sub mnBacaDataNominatif_click()
                         temp = access.Fields("NIB")
 
                     End If
-                    If (Not IsNull(access.Fields(1))) Then
+                    If (Not IsNull(access.Fields(2))) Then
                         access.Fields("NIB Palsu") = access.Fields("NIB")
                     End If
 
@@ -200,7 +200,7 @@ Private Sub mnBacaDataNominatif_click()
                     ElseIf (Not IsNull(access.Fields("NIB")) And (access.Fields("NIB") <> temp)) Then
                         temp = access.Fields("NIB")
                     End If
-                    If (Not IsNull(access.Fields(1))) Then
+                    If (Not IsNull(access.Fields(2))) Then
                         access.Fields("NIB Palsu") = access.Fields("NIB")
                     End If
 
@@ -216,7 +216,7 @@ Private Sub mnBacaDataNominatif_click()
                     ElseIf (Not IsNull(access.Fields("NIB")) And (access.Fields("NIB") <> temp)) Then
                         temp = access.Fields("NIB")
                     End If
-                    If (Not IsNull(access.Fields(1))) Then
+                    If (Not IsNull(access.Fields(2))) Then
                         access.Fields("NIB Palsu") = access.Fields("NIB")
                     End If
 
@@ -227,7 +227,7 @@ Private Sub mnBacaDataNominatif_click()
                     ElseIf (Not IsNull(access.Fields("NIB")) And (access.Fields("NIB") <> temp)) Then
                         temp = access.Fields("NIB")
                     End If
-                    If (Not IsNull(access.Fields(1))) Then
+                    If (Not IsNull(access.Fields(2))) Then
                         access.Fields("NIB Palsu") = access.Fields("NIB")
                     End If
 
@@ -243,7 +243,7 @@ Private Sub mnBacaDataNominatif_click()
                     ElseIf (Not IsNull(access.Fields("NIB")) And (access.Fields("NIB") <> temp)) Then
                         temp = access.Fields("NIB")
                     End If
-                    If (Not IsNull(access.Fields(1))) Then
+                    If (Not IsNull(access.Fields(2))) Then
                         access.Fields("NIB Palsu") = access.Fields("NIB")
                     End If
 
@@ -254,7 +254,7 @@ Private Sub mnBacaDataNominatif_click()
                     ElseIf (Not IsNull(access.Fields("NIB")) And (access.Fields("NIB") <> temp)) Then
                         temp = access.Fields("NIB")
                     End If
-                    If (Not IsNull(access.Fields(1))) Then
+                    If (Not IsNull(access.Fields(2))) Then
                         access.Fields("NIB Palsu") = access.Fields("NIB")
                     End If
 
@@ -270,7 +270,7 @@ Private Sub mnBacaDataNominatif_click()
                     ElseIf (Not IsNull(access.Fields("NIB")) And (access.Fields("NIB") <> temp)) Then
                         temp = access.Fields("NIB")
                     End If
-                    If (Not IsNull(access.Fields(1))) Then
+                    If (Not IsNull(access.Fields(2))) Then
                         access.Fields("NIB Palsu") = access.Fields("NIB")
                     End If
 
@@ -283,7 +283,7 @@ Private Sub mnBacaDataNominatif_click()
                     ElseIf (Not IsNull(access.Fields("NIB")) And (access.Fields("NIB") <> temp)) Then
                         temp = access.Fields("NIB")
                     End If
-                    If (Not IsNull(access.Fields(1))) Then
+                    If (Not IsNull(access.Fields(2))) Then
                         access.Fields("NIB Palsu") = access.Fields("NIB")
                     End If
 
@@ -296,7 +296,7 @@ Private Sub mnBacaDataNominatif_click()
                     ElseIf (Not IsNull(access.Fields("NIB")) And (access.Fields("NIB") <> temp)) Then
                         temp = access.Fields("NIB")
                     End If
-                    If (Not IsNull(access.Fields(1))) Then
+                    If (Not IsNull(access.Fields(2))) Then
                         access.Fields("NIB Palsu") = access.Fields("NIB")
                     End If
 
@@ -319,7 +319,14 @@ Private Sub mnBacaDataNominatif_click()
             excel.MoveNext
             access.MoveNext
         Next
+        access.MoveFirst
 
+        For i = 1 To access.RecordCount
+
+            access.Fields(1) = access.Fields(0)
+            access.Update
+            access.MoveNext
+        Next
         MsgBox "Transfered"
         excel.Close
         access.Close
