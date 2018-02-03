@@ -551,10 +551,6 @@ If Not RSDN.EOF And Not RSDN.BOF Then
 End If
 End Sub
 
-Private Sub List6_Click()
-
-End Sub
-
 Private Sub List6_DragDrop(Source As Control, X As Single, Y As Single)
     ListRowMove Source, mintDragIndex, ListRowCalc(Source, Y)
 
