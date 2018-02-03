@@ -20,6 +20,7 @@ Begin VB.MDIForm MainForm
    End
    Begin VB.Menu mnFile 
       Caption         =   "&File"
+      WindowList      =   -1  'True
       Begin VB.Menu mnOpen 
          Caption         =   "&Open"
       End

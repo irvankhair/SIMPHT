@@ -17,6 +17,232 @@ Begin VB.Form DaftarNominatif
    ScaleWidth      =   15930
    Visible         =   0   'False
    WindowState     =   2  'Maximized
+   Begin VB.CommandButton Command3 
+      Caption         =   "Atur Tampilan Tabel"
+      BeginProperty Font 
+         Name            =   "Calibri"
+         Size            =   14.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   495
+      Left            =   1680
+      TabIndex        =   21
+      Top             =   2040
+      Width           =   2535
+   End
+   Begin VB.PictureBox Tampilan 
+      BackColor       =   &H00E0E0E0&
+      Height          =   7155
+      Left            =   120
+      ScaleHeight     =   7095
+      ScaleWidth      =   7635
+      TabIndex        =   5
+      Top             =   2760
+      Visible         =   0   'False
+      Width           =   7695
+      Begin VB.ListBox ListPeralihan 
+         Appearance      =   0  'Flat
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   4590
+         Left            =   2280
+         MultiSelect     =   1  'Simple
+         TabIndex        =   18
+         Top             =   6600
+         Visible         =   0   'False
+         Width           =   2175
+      End
+      Begin VB.CommandButton Command10 
+         Height          =   375
+         Left            =   5640
+         Picture         =   "Form1.frx":0000
+         Style           =   1  'Graphical
+         TabIndex        =   17
+         Top             =   2040
+         Visible         =   0   'False
+         Width           =   375
+      End
+      Begin VB.CommandButton Command9 
+         Height          =   375
+         Left            =   5640
+         Picture         =   "Form1.frx":0342
+         Style           =   1  'Graphical
+         TabIndex        =   16
+         Top             =   2520
+         Visible         =   0   'False
+         Width           =   375
+      End
+      Begin VB.CommandButton Command8 
+         Height          =   375
+         Left            =   5640
+         Picture         =   "Form1.frx":0684
+         Style           =   1  'Graphical
+         TabIndex        =   15
+         Top             =   3000
+         Visible         =   0   'False
+         Width           =   375
+      End
+      Begin VB.CommandButton Command6 
+         Height          =   375
+         Left            =   5640
+         Picture         =   "Form1.frx":09C6
+         Style           =   1  'Graphical
+         TabIndex        =   14
+         Top             =   1560
+         Visible         =   0   'False
+         Width           =   375
+      End
+      Begin VB.CommandButton Command4 
+         BackColor       =   &H00E0E0E0&
+         Caption         =   "&Batal"
+         Height          =   375
+         Left            =   3390
+         Style           =   1  'Graphical
+         TabIndex        =   13
+         Top             =   3360
+         Width           =   855
+      End
+      Begin VB.CommandButton Command18 
+         BackColor       =   &H00E0E0E0&
+         Caption         =   "&Simpan"
+         Height          =   375
+         Left            =   3390
+         Style           =   1  'Graphical
+         TabIndex        =   12
+         Top             =   2400
+         Width           =   855
+      End
+      Begin VB.ListBox List5 
+         Appearance      =   0  'Flat
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   12
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   6330
+         Left            =   120
+         MultiSelect     =   1  'Simple
+         TabIndex        =   11
+         Top             =   360
+         Width           =   3135
+      End
+      Begin VB.CommandButton Command14 
+         Appearance      =   0  'Flat
+         Height          =   390
+         Left            =   3600
+         Picture         =   "Form1.frx":0D08
+         Style           =   1  'Graphical
+         TabIndex        =   10
+         Top             =   4560
+         Width           =   420
+      End
+      Begin VB.CommandButton Command13 
+         Appearance      =   0  'Flat
+         Height          =   390
+         Left            =   3600
+         Picture         =   "Form1.frx":140A
+         Style           =   1  'Graphical
+         TabIndex        =   9
+         Top             =   3960
+         Width           =   420
+      End
+      Begin VB.CommandButton Command12 
+         Appearance      =   0  'Flat
+         Height          =   390
+         Left            =   3600
+         Picture         =   "Form1.frx":1B0C
+         Style           =   1  'Graphical
+         TabIndex        =   8
+         Top             =   1800
+         Width           =   420
+      End
+      Begin VB.CommandButton Command19 
+         Appearance      =   0  'Flat
+         BackColor       =   &H0000C0C0&
+         Height          =   390
+         Left            =   3600
+         Picture         =   "Form1.frx":220E
+         Style           =   1  'Graphical
+         TabIndex        =   7
+         Top             =   1200
+         Width           =   420
+      End
+      Begin VB.ListBox List6 
+         Appearance      =   0  'Flat
+         DragIcon        =   "Form1.frx":2912
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   12
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   6030
+         ItemData        =   "Form1.frx":9164
+         Left            =   4440
+         List            =   "Form1.frx":9166
+         MultiSelect     =   1  'Simple
+         TabIndex        =   6
+         ToolTipText     =   "Geser data dengan drag  dan dropp"
+         Top             =   360
+         Width           =   3135
+      End
+      Begin VB.Label Label41 
+         BackColor       =   &H00E0E0E0&
+         Caption         =   "Daftar Kolom Tersedia"
+         BeginProperty Font 
+            Name            =   "Calibri"
+            Size            =   12
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000000&
+         Height          =   375
+         Left            =   600
+         TabIndex        =   20
+         Top             =   0
+         Width           =   2175
+      End
+      Begin VB.Label Label5 
+         BackColor       =   &H00E0E0E0&
+         Caption         =   "Urutan Kolom Yang Tampil"
+         BeginProperty Font 
+            Name            =   "Calibri"
+            Size            =   12
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000000&
+         Height          =   375
+         Left            =   4680
+         TabIndex        =   19
+         Top             =   0
+         Width           =   2655
+      End
+   End
    Begin MSComDlg.CommonDialog CommonDialog1 
       Left            =   10560
       Top             =   2160
@@ -36,17 +262,18 @@ Begin VB.Form DaftarNominatif
          Strikethrough   =   0   'False
       EndProperty
       Height          =   495
-      Left            =   3840
+      Left            =   6480
       TabIndex        =   4
       Top             =   2040
+      Visible         =   0   'False
       Width           =   2895
    End
    Begin VB.CommandButton Transfer 
       Caption         =   "Transfer Ke Excell"
       Height          =   495
-      Left            =   1680
+      Left            =   6480
       TabIndex        =   3
-      Top             =   2040
+      Top             =   1440
       Visible         =   0   'False
       Width           =   1935
    End
@@ -237,6 +464,30 @@ db.CursorLocation = adUseClient
 
 End Sub
 
+Private Sub Command3_Click()
+Dim i As Integer
+Dim db As ADODB.Connection
+'Tampilan.Top = txtNama.Top
+'Tampilan.Left = txtNama.Left
+    Set db = New ADODB.Connection
+    db.Open "PROVIDER=Microsoft.Jet.OLEDB.4.0;Data Source=" & pROJECTPATH & ";Jet OLEDB:Database Password=globalisasi;Persist Security Info=False"
+    db.CursorLocation = adUseClient
+    Set rskolom = New ADODB.Recordset
+    rskolom.Open "select * from [kostum tabel] where [nama tabel]='Daftar Nominatif'", db, adOpenDynamic, adLockOptimistic
+    List5.Clear
+    List6.Clear
+    While Not rskolom.EOF
+        'X = rsKolom![indeks kolom]
+        If rskolom!tampil = True Then
+            List6.AddItem "" & rskolom!isi
+        Else
+            List5.AddItem rskolom!isi
+        End If
+    rskolom.MoveNext
+    Wend
+    Tampilan.Visible = True
+End Sub
+
 Private Sub Form_Load()
 Dim db As ADODB.Connection
  Set db = New ADODB.Connection
@@ -283,10 +534,40 @@ End Sub
 
 Private Sub grdNominatif_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 If Button = 2 Then
-PopupMenu EditBaris
+    If Not RSDN.EOF And Not RSDN.BOF Then
+        NIBTerpilih = "" & RSDN!idnib
+        PopupMenu EditBaris
+    End If
 End If
 End Sub
 
+Private Sub HapusBaris_Click()
+If Not RSDN.EOF And Not RSDN.BOF Then
+    X = MsgBox("Yakin akan menghapus kompionen bidang pada NIB : " & NIBTerpilih, vbYesNo, "Konfirmasi Hapus Baris Pada Bidang")
+    If X = vbYes Then
+        RSDN.Delete
+        RSDN.MoveNext
+    End If
+End If
+End Sub
+
+Private Sub List6_Click()
+
+End Sub
+
+Private Sub List6_DragDrop(Source As Control, X As Single, Y As Single)
+    ListRowMove Source, mintDragIndex, ListRowCalc(Source, Y)
+
+End Sub
+
+Private Sub List6_DragOver(Source As Control, X As Single, Y As Single, State As Integer)
+    List6.ListIndex = ListRowCalc(List6, Y)
+
+End Sub
+Private Sub List6_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+mintDragIndex = ListRowCalc(List6, Y)
+    List6.Drag
+End Sub
 Private Sub Sisip_Click()
 Dim urutSebelum As String
 Dim posisi As String
@@ -296,6 +577,7 @@ If Not RSDN.EOF = True And Not RSDN.BOF = True Then
     urutSebelum = RSDN!urutid
     RSDN.AddNew
     RSDN!urutid = urutSebelum + 0.1
+    RSDN!idnib = NIBTerpilih
     RSDN.Update
     RSDN.Requery
     RSDN.Move posisi
@@ -350,7 +632,7 @@ Sub cekNIB(ByRef temp As String, ByRef nib As Variant)
         temp = nib
     End If
 End Sub
->>>>>>> d3d07549d5308c63fd676dc3c8bf461ab7c97286
+'>>>>>>> d3d07549d5308c63fd676dc3c8bf461ab7c97286
 
 Private Sub Transfer_Click()
 
