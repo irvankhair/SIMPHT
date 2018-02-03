@@ -1,6 +1,7 @@
 VERSION 5.00
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "comdlg32.ocx"
 Begin VB.MDIForm MainForm 
+   Appearance      =   0  'Flat
    BackColor       =   &H8000000C&
    Caption         =   "SIMPHT"
    ClientHeight    =   3135
@@ -19,6 +20,7 @@ Begin VB.MDIForm MainForm
    End
    Begin VB.Menu mnFile 
       Caption         =   "&File"
+      WindowList      =   -1  'True
       Begin VB.Menu mnOpen 
          Caption         =   "&Open"
       End
@@ -43,11 +45,14 @@ Begin VB.MDIForm MainForm
    End
    Begin VB.Menu mnEdit 
       Caption         =   "&Edit"
+      Begin VB.Menu mnDaftarNominatif 
+         Caption         =   "&Daftar Nominatif"
+      End
       Begin VB.Menu mnDataFisik 
-         Caption         =   "&Data Fisik"
+         Caption         =   "Data &Fisik"
       End
       Begin VB.Menu mnDataNonfisik 
-         Caption         =   "&Data Nonfisik"
+         Caption         =   "Data &Nonfisik"
       End
    End
    Begin VB.Menu mnSetting 
@@ -62,7 +67,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-Dim excelPath As String
+
 Public Function importExcel() As ADODB.Recordset
 
     Dim dbStruk As ADODB.Connection
@@ -94,11 +99,8 @@ Public Function konekAccess() As ADODB.Recordset
     Set konekAccess = rstRecordSet
     
 End Function
-Private Sub mnExit_Click()
-End
-End Sub
 
-Private Sub mnOpen_Click()
+Private Sub mnBacaDataNominatif_Click()
 CommonDialog1.Filter = "Excel 2003 (*.xls)|*.xls|Excel 2007 (*.xlsx)|*.xlsx"
 CommonDialog1.ShowOpen
     excelPath = CommonDialog1.FileName
@@ -110,12 +112,61 @@ CommonDialog1.ShowOpen
     'MsgBox "Silahkan jalankan ulang kembali!"
     'End
     'GoTo mulai
-x = MsgBox("Apakah Anda akan mengambil data nominatif dari file " & exelpath, vbYesNo, "Konfirmasi Input Data Nominatif")
-    If x = vbYes Then
+X = MsgBox("Apakah Anda akan mengambil data nominatif dari file " & CommonDialog1.FileTitle, vbYesNo, "Konfirmasi Input Data Nominatif")
+    If X = vbYes Then
         CommonDialog1.Filter = "Acces 2003 (*.mdb)|*.mdb"
         CommonDialog1.ShowSave
         FileCopy App.Path & "\master.mdb", CommonDialog1.FileName
+        
+    Dim excel As New ADODB.Recordset
+    Dim access As New ADODB.Recordset
+    
+    Dim i, j As Integer
+    Set excel = importExcel
+    Set access = konekAccess
+    
+    Dim temp As String
+   
+    temp = excel.Fields("nis")
+    For i = 1 To 602
+        With access
+            .AddNew
+            For j = 1 To 21
+                .Fields(j) = excel.Fields(j - 1)
+            Next
+        End With
+        If IsNull(access.Fields("nis")) Then
+            access.Fields("nis") = temp
+        ElseIf (Not IsNull(access.Fields("nis")) And (access.Fields("nis") <> temp)) Then
+            temp = access.Fields("nis")
+        End If
+        access.Update
+        excel.MoveNext
+        access.MoveNext
+    Next
+
+    MsgBox "Transfered"
+    excel.Close
+    access.Close
     End If
         
 End Sub
 
+
+Private Sub mnDaftarNominatif_Click()
+DaftarNominatif.Show
+End Sub
+
+Private Sub mnExit_Click()
+End
+End Sub
+
+Private Sub mnOpen_Click()
+CommonDialog1.Filter = "Acces 2003 (*.mdb)|*.mdb"
+CommonDialog1.ShowOpen
+pROJECTPATH = CommonDialog1.FileName
+NamaProjek = Left(CommonDialog1.FileTitle, Len(CommonDialog1.FileTitle) - 4)
+DaftarNominatif.Label1 = NamaProjek
+
+DaftarNominatif.Show
+End Sub
