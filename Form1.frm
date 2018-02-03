@@ -15,7 +15,6 @@ Begin VB.Form DaftarNominatif
    Moveable        =   0   'False
    ScaleHeight     =   8220
    ScaleWidth      =   15930
-   Visible         =   0   'False
    WindowState     =   2  'Maximized
    Begin VB.CommandButton Command3 
       Caption         =   "Atur Tampilan Tabel"
@@ -410,8 +409,8 @@ Attribute VB_Exposed = False
 
 Private Function RapihkanGrid()
 grdNominatif.Columns("id").Visible = False
-grdNominatif.Columns("urutid").Visible = False
-grdNominatif.Columns("idnib").Visible = False
+'grdNominatif.Columns("urutid").Visible = False
+'grdNominatif.Columns("idnib").Visible = False
 
 
 Dim i As Integer
@@ -425,17 +424,17 @@ Dim db As ADODB.Connection
     db.CursorLocation = adUseClient
       Set rskolom = New ADODB.Recordset
    
-     rskolom.Open "select * from [kostum tabel] where [nama tabel]='Daftar Nominatif' ", db, adOpenDynamic, adLockOptimistic
+'     rskolom.Open "select * from [kostum tabel] where [nama tabel]='Daftar Nominatif' ", db, adOpenDynamic, adLockOptimistic
       
 
-For i = 0 To grdNominatif.Columns.Count - 1
-    rskolom.MoveFirst
-    rskolom.Find "isi='" & grdNominatif.Columns(i).Caption & "'"
-    If Not rskolom.EOF Then
-        grdNominatif.Columns(i).Width = rskolom![lebar kolom]
+'For i = 0 To grdNominatif.Columns.Count - 1
+ '   rskolom.MoveFirst
+  '  rskolom.Find "isi='" & grdNominatif.Columns(i).Caption & "'"
+   ' If Not rskolom.EOF Then
+    '    grdNominatif.Columns(i).Width = rskolom![lebar kolom]
     
-    End If
-Next i
+    'End If
+'Next i
 End Function
 
 Private Sub Command2_Click()
@@ -494,7 +493,7 @@ Dim db As ADODB.Connection
  db.Open "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & pROJECTPATH & ";Persist Security Info=False;Jet OLEDB:Database " ';pwd=globalisasi"
 db.CursorLocation = adUseClient
 Set RSDN = New ADODB.Recordset
-RSDN.Open "SELECT * FROM [DAFTAR NOMINATIF] order by urutid", db, adOpenDynamic, adLockOptimistic
+RSDN.Open "SELECT * FROM [DAFTAR NOMINATIF] order by id", db, adOpenDynamic, adLockOptimistic
 
 Set DaftarNominatif.grdNominatif.DataSource = RSDN
 DaftarNominatif.grdNominatif.ReBind
@@ -549,10 +548,6 @@ If Not RSDN.EOF And Not RSDN.BOF Then
         RSDN.MoveNext
     End If
 End If
-End Sub
-
-Private Sub List6_Click()
-
 End Sub
 
 Private Sub List6_DragDrop(Source As Control, X As Single, Y As Single)
@@ -618,7 +613,7 @@ Public Function konekAccess() As ADODB.Recordset
         .LockType = adLockOptimistic
     End With
 
-    conConnection.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & App.Path & "\" & "gian.mdb;Mode=Read|Write"
+    conConnection.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & App.Path & "\" & "Master.mdb;Mode=Read|Write"
     conConnection.Open
     rstRecordSet.Open "Select * from Daftar_Nominatif", conConnection, adOpenStatic, adLockOptimistic
     Set konekAccess = rstRecordSet

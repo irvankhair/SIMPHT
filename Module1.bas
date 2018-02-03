@@ -4,6 +4,7 @@ Public excelPath As String
 Public pROJECTPATH As String
 Public RSDN As ADODB.Recordset
 Public NamaProjek As String
+Public namaMdb As String
 'koding untuk scroll grid
 Public MyProperty As Object
 Public Const MK_CONTROL = &H8
