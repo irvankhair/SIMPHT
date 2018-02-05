@@ -103,10 +103,6 @@ Public Function konekAccess() As ADODB.Recordset
 
 End Function
 
-Private Sub MDIForm_Load()
-
-End Sub
-
 Private Sub mnBacaDataNominatif_click()
     CommonDialog1.Filter = "Excel 2003 (*.xls)|*.xls|Excel 2007 (*.xlsx)|*.xlsx"
     CommonDialog1.ShowOpen
@@ -120,12 +116,13 @@ Private Sub mnBacaDataNominatif_click()
     'MsgBox "Silahkan jalankan ulang kembali!"
     'End
     'GoTo mulai
-    X = MsgBox("Apakah Anda akan mengambil data nominatif dari file " & CommonDialog1.FileTitle, vbYesNo, "Konfirmasi Input Data Nominatif")
-    If X = vbYes Then
+    x = MsgBox("Apakah Anda akan mengambil data nominatif dari file " & CommonDialog1.FileTitle, vbYesNo, "Konfirmasi Input Data Nominatif")
+    If x = vbYes Then
         CommonDialog1.Filter = "Acces 2003 (*.mdb)|*.mdb"
         CommonDialog1.ShowSave
         FileCopy App.Path & "\master.mdb", CommonDialog1.FileName
         namaMdb = CommonDialog1.FileName
+        Transfer.Show
         Dim excel As New ADODB.Recordset
         Dim access As New ADODB.Recordset
 
@@ -146,170 +143,170 @@ Private Sub mnBacaDataNominatif_click()
                 .Fields("Index Benda Lain yang Berkaitan") = excel.Fields("Index Benda Lain yang Berkaitan")
                 .Fields("Jenis Benda Lain yang Berkaitan") = excel.Fields("Jenis Benda Lain yang Berkaitan")
                 .Fields("Jumlah Benda Lain yang Berkaitan") = excel.Fields("Jumlah Benda Lain yang Berkaitan")
-            If ((excel.Fields(18) <> 0) And (excel.Fields(19) <> 0) And (excel.Fields(20) <> 0)) Then
-                .Fields("Ukuran Jenis Tanaman") = "Besar"
-                .Fields("Jumlah tanaman") = excel.Fields(18)
-                .Fields("jenis tanaman") = excel.Fields(17)
-                If IsNull(access.Fields("idNIB")) Then
-                    access.Fields("idNIB") = temp
-                ElseIf (Not IsNull(access.Fields("idNIB")) And (access.Fields("idNIB") <> temp)) Then
-                    temp = access.Fields("idNIB")
-                End If
-                If (Not IsNull(access.Fields(2))) Then
-                    access.Fields("NIB") = access.Fields("idNIB")
-                End If
+                If ((excel.Fields(18) <> 0) And (excel.Fields(19) <> 0) And (excel.Fields(20) <> 0)) Then
+                    .Fields("Ukuran Jenis Tanaman") = "Besar"
+                    .Fields("Jumlah tanaman") = excel.Fields(18)
+                    .Fields("jenis tanaman") = excel.Fields(17)
+                    If IsNull(access.Fields("idNIB")) Then
+                        access.Fields("idNIB") = temp
+                    ElseIf (Not IsNull(access.Fields("idNIB")) And (access.Fields("idNIB") <> temp)) Then
+                        temp = access.Fields("idNIB")
+                    End If
+                    If (Not IsNull(access.Fields(2))) Then
+                        access.Fields("NIB") = access.Fields("idNIB")
+                    End If
 
-                .MoveNext
-                .AddNew
-                If IsNull(access.Fields("idNIB")) Then
-                    access.Fields("idNIB") = temp
-                ElseIf (Not IsNull(access.Fields("idNIB")) And (access.Fields("idNIB") <> temp)) Then
-                    temp = access.Fields("idNIB")
-                End If
-                If (Not IsNull(access.Fields(2))) Then
-                    access.Fields("NIB") = access.Fields("idNIB")
-                End If
+                    .MoveNext
+                    .AddNew
+                    If IsNull(access.Fields("idNIB")) Then
+                        access.Fields("idNIB") = temp
+                    ElseIf (Not IsNull(access.Fields("idNIB")) And (access.Fields("idNIB") <> temp)) Then
+                        temp = access.Fields("idNIB")
+                    End If
+                    If (Not IsNull(access.Fields(2))) Then
+                        access.Fields("NIB") = access.Fields("idNIB")
+                    End If
 
 
-                .Fields("Ukuran Jenis Tanaman") = "Sedang"
-                .Fields("Jumlah tanaman") = excel.Fields(19)
-                .Fields("jenis tanaman") = excel.Fields(17)
-                .MoveNext
-                .AddNew
-                If IsNull(access.Fields("idNIB")) Then
-                    access.Fields("idNIB") = temp
-                ElseIf (Not IsNull(access.Fields("idNIB")) And (access.Fields("idNIB") <> temp)) Then
-                    temp = access.Fields("idNIB")
-                End If
-                If (Not IsNull(access.Fields(2))) Then
-                    access.Fields("NIB") = access.Fields("idNIB")
-                End If
+                    .Fields("Ukuran Jenis Tanaman") = "Sedang"
+                    .Fields("Jumlah tanaman") = excel.Fields(19)
+                    .Fields("jenis tanaman") = excel.Fields(17)
+                    .MoveNext
+                    .AddNew
+                    If IsNull(access.Fields("idNIB")) Then
+                        access.Fields("idNIB") = temp
+                    ElseIf (Not IsNull(access.Fields("idNIB")) And (access.Fields("idNIB") <> temp)) Then
+                        temp = access.Fields("idNIB")
+                    End If
+                    If (Not IsNull(access.Fields(2))) Then
+                        access.Fields("NIB") = access.Fields("idNIB")
+                    End If
 
-                .Fields("Ukuran Jenis Tanaman") = "Kecil"
-                .Fields("Jumlah tanaman") = excel.Fields(20)
-                .Fields("jenis tanaman") = excel.Fields(17)
-            ElseIf ((excel.Fields(18) <> 0) And (excel.Fields(19) <> 0)) Then
-                .Fields("Ukuran Jenis Tanaman") = "Besar"
-                .Fields("Jumlah tanaman") = excel.Fields(18)
-                .Fields("jenis tanaman") = excel.Fields(17)
-                If IsNull(access.Fields("idNIB")) Then
-                    access.Fields("idNIB") = temp
-                ElseIf (Not IsNull(access.Fields("idNIB")) And (access.Fields("idNIB") <> temp)) Then
-                    temp = access.Fields("idNIB")
+                    .Fields("Ukuran Jenis Tanaman") = "Kecil"
+                    .Fields("Jumlah tanaman") = excel.Fields(20)
+                    .Fields("jenis tanaman") = excel.Fields(17)
+                ElseIf ((excel.Fields(18) <> 0) And (excel.Fields(19) <> 0)) Then
+                    .Fields("Ukuran Jenis Tanaman") = "Besar"
+                    .Fields("Jumlah tanaman") = excel.Fields(18)
+                    .Fields("jenis tanaman") = excel.Fields(17)
+                    If IsNull(access.Fields("idNIB")) Then
+                        access.Fields("idNIB") = temp
+                    ElseIf (Not IsNull(access.Fields("idNIB")) And (access.Fields("idNIB") <> temp)) Then
+                        temp = access.Fields("idNIB")
+
+                    End If
+                    If (Not IsNull(access.Fields(2))) Then
+                        access.Fields("NIB") = access.Fields("idNIB")
+                    End If
+
+                    .MoveNext
+                    .AddNew
+                    If IsNull(access.Fields("idNIB")) Then
+                        access.Fields("idNIB") = temp
+                    ElseIf (Not IsNull(access.Fields("idNIB")) And (access.Fields("idNIB") <> temp)) Then
+                        temp = access.Fields("idNIB")
+                    End If
+                    If (Not IsNull(access.Fields(2))) Then
+                        access.Fields("NIB") = access.Fields("idNIB")
+                    End If
+
+                    .Fields("Ukuran Jenis Tanaman") = "Sedang"
+                    .Fields("Jumlah tanaman") = excel.Fields(19)
+                    .Fields("jenis tanaman") = excel.Fields(17)
+                ElseIf ((excel.Fields(19) <> 0) And (excel.Fields(20) <> 0)) Then
+                    .Fields("Ukuran Jenis Tanaman") = "Sedang"
+                    .Fields("Jumlah tanaman") = excel.Fields(19)
+                    .Fields("jenis tanaman") = excel.Fields(17)
+                    If IsNull(access.Fields("idNIB")) Then
+                        access.Fields("idNIB") = temp
+                    ElseIf (Not IsNull(access.Fields("idNIB")) And (access.Fields("idNIB") <> temp)) Then
+                        temp = access.Fields("idNIB")
+                    End If
+                    If (Not IsNull(access.Fields(2))) Then
+                        access.Fields("NIB") = access.Fields("idNIB")
+                    End If
+
+                    .MoveNext
+                    .AddNew
+                    If IsNull(access.Fields("idNIB")) Then
+                        access.Fields("idNIB") = temp
+                    ElseIf (Not IsNull(access.Fields("idNIB")) And (access.Fields("idNIB") <> temp)) Then
+                        temp = access.Fields("idNIB")
+                    End If
+                    If (Not IsNull(access.Fields(2))) Then
+                        access.Fields("NIB") = access.Fields("idNIB")
+                    End If
+
+                    .Fields("Ukuran Jenis Tanaman") = "Kecil"
+                    .Fields("Jumlah tanaman") = excel.Fields(20)
+                    .Fields("jenis tanaman") = excel.Fields(17)
+                ElseIf ((excel.Fields(18) <> 0) And (excel.Fields(20) <> 0)) Then
+                    .Fields("Ukuran Jenis Tanaman") = "Besar"
+                    .Fields("Jumlah tanaman") = excel.Fields(18)
+                    .Fields("jenis tanaman") = excel.Fields(17)
+                    If IsNull(access.Fields("idNIB")) Then
+                        access.Fields("idNIB") = temp
+                    ElseIf (Not IsNull(access.Fields("idNIB")) And (access.Fields("idNIB") <> temp)) Then
+                        temp = access.Fields("idNIB")
+                    End If
+                    If (Not IsNull(access.Fields(2))) Then
+                        access.Fields("NIB") = access.Fields("idNIB")
+                    End If
+
+                    .MoveNext
+                    .AddNew
+                    If IsNull(access.Fields("idNIB")) Then
+                        access.Fields("idNIB") = temp
+                    ElseIf (Not IsNull(access.Fields("idNIB")) And (access.Fields("idNIB") <> temp)) Then
+                        temp = access.Fields("idNIB")
+                    End If
+                    If (Not IsNull(access.Fields(2))) Then
+                        access.Fields("NIB") = access.Fields("idNIB")
+                    End If
+
+                    .Fields("Ukuran Jenis Tanaman") = "Kecil"
+                    .Fields("Jumlah tanaman") = excel.Fields(20)
+                    .Fields("jenis tanaman") = excel.Fields(17)
+                ElseIf (excel.Fields(18) <> 0) Then
+                    .Fields("Ukuran Jenis Tanaman") = "Besar"
+                    .Fields("Jumlah tanaman") = excel.Fields(18)
+                    .Fields("jenis tanaman") = excel.Fields(17)
+                    If IsNull(access.Fields("idNIB")) Then
+                        access.Fields("idNIB") = temp
+                    ElseIf (Not IsNull(access.Fields("idNIB")) And (access.Fields("idNIB") <> temp)) Then
+                        temp = access.Fields("idNIB")
+                    End If
+                    If (Not IsNull(access.Fields(2))) Then
+                        access.Fields("NIB") = access.Fields("idNIB")
+                    End If
+
+                ElseIf (excel.Fields(19) <> 0) Then
+                    .Fields("Ukuran Jenis Tanaman") = "Sedang"
+                    .Fields("Jumlah tanaman") = excel.Fields(19)
+                    .Fields("jenis tanaman") = excel.Fields(17)
+                    If IsNull(access.Fields("idNIB")) Then
+                        access.Fields("idNIB") = temp
+                    ElseIf (Not IsNull(access.Fields("idNIB")) And (access.Fields("idNIB") <> temp)) Then
+                        temp = access.Fields("idNIB")
+                    End If
+                    If (Not IsNull(access.Fields(2))) Then
+                        access.Fields("NIB") = access.Fields("idNIB")
+                    End If
+
+                ElseIf (excel.Fields(20) <> 0) Then
+                    .Fields("Ukuran Jenis Tanaman") = "Kecil"
+                    .Fields("Jumlah tanaman") = excel.Fields(20)
+                    .Fields("jenis tanaman") = excel.Fields(17)
+                    If IsNull(access.Fields("idNIB")) Then
+                        access.Fields("idNIB") = temp
+                    ElseIf (Not IsNull(access.Fields("idNIB")) And (access.Fields("idNIB") <> temp)) Then
+                        temp = access.Fields("idNIB")
+                    End If
+                    If (Not IsNull(access.Fields(2))) Then
+                        access.Fields("NIB") = access.Fields("idNIB")
+                    End If
 
                 End If
-                If (Not IsNull(access.Fields(2))) Then
-                    access.Fields("NIB") = access.Fields("idNIB")
-                End If
-
-                .MoveNext
-                .AddNew
-                If IsNull(access.Fields("idNIB")) Then
-                    access.Fields("idNIB") = temp
-                ElseIf (Not IsNull(access.Fields("idNIB")) And (access.Fields("idNIB") <> temp)) Then
-                    temp = access.Fields("idNIB")
-                End If
-                If (Not IsNull(access.Fields(2))) Then
-                    access.Fields("NIB") = access.Fields("idNIB")
-                End If
-
-                .Fields("Ukuran Jenis Tanaman") = "Sedang"
-                .Fields("Jumlah tanaman") = excel.Fields(19)
-                .Fields("jenis tanaman") = excel.Fields(17)
-            ElseIf ((excel.Fields(19) <> 0) And (excel.Fields(20) <> 0)) Then
-                .Fields("Ukuran Jenis Tanaman") = "Sedang"
-                .Fields("Jumlah tanaman") = excel.Fields(19)
-                .Fields("jenis tanaman") = excel.Fields(17)
-                If IsNull(access.Fields("idNIB")) Then
-                    access.Fields("idNIB") = temp
-                ElseIf (Not IsNull(access.Fields("idNIB")) And (access.Fields("idNIB") <> temp)) Then
-                    temp = access.Fields("idNIB")
-                End If
-                If (Not IsNull(access.Fields(2))) Then
-                    access.Fields("NIB") = access.Fields("idNIB")
-                End If
-
-                .MoveNext
-                .AddNew
-                If IsNull(access.Fields("idNIB")) Then
-                    access.Fields("idNIB") = temp
-                ElseIf (Not IsNull(access.Fields("idNIB")) And (access.Fields("idNIB") <> temp)) Then
-                    temp = access.Fields("idNIB")
-                End If
-                If (Not IsNull(access.Fields(2))) Then
-                    access.Fields("NIB") = access.Fields("idNIB")
-                End If
-
-                .Fields("Ukuran Jenis Tanaman") = "Kecil"
-                .Fields("Jumlah tanaman") = excel.Fields(20)
-                .Fields("jenis tanaman") = excel.Fields(17)
-            ElseIf ((excel.Fields(18) <> 0) And (excel.Fields(20) <> 0)) Then
-                .Fields("Ukuran Jenis Tanaman") = "Besar"
-                .Fields("Jumlah tanaman") = excel.Fields(18)
-                .Fields("jenis tanaman") = excel.Fields(17)
-                If IsNull(access.Fields("idNIB")) Then
-                    access.Fields("idNIB") = temp
-                ElseIf (Not IsNull(access.Fields("idNIB")) And (access.Fields("idNIB") <> temp)) Then
-                    temp = access.Fields("idNIB")
-                End If
-                If (Not IsNull(access.Fields(2))) Then
-                    access.Fields("NIB") = access.Fields("idNIB")
-                End If
-
-                .MoveNext
-                .AddNew
-                If IsNull(access.Fields("idNIB")) Then
-                    access.Fields("idNIB") = temp
-                ElseIf (Not IsNull(access.Fields("idNIB")) And (access.Fields("idNIB") <> temp)) Then
-                    temp = access.Fields("idNIB")
-                End If
-                If (Not IsNull(access.Fields(2))) Then
-                    access.Fields("NIB") = access.Fields("idNIB")
-                End If
-
-                .Fields("Ukuran Jenis Tanaman") = "Kecil"
-                .Fields("Jumlah tanaman") = excel.Fields(20)
-                .Fields("jenis tanaman") = excel.Fields(17)
-            ElseIf (excel.Fields(18) <> 0) Then
-                .Fields("Ukuran Jenis Tanaman") = "Besar"
-                .Fields("Jumlah tanaman") = excel.Fields(18)
-                .Fields("jenis tanaman") = excel.Fields(17)
-                If IsNull(access.Fields("idNIB")) Then
-                    access.Fields("idNIB") = temp
-                ElseIf (Not IsNull(access.Fields("idNIB")) And (access.Fields("idNIB") <> temp)) Then
-                    temp = access.Fields("idNIB")
-                End If
-                If (Not IsNull(access.Fields(2))) Then
-                    access.Fields("NIB") = access.Fields("idNIB")
-                End If
-
-            ElseIf (excel.Fields(19) <> 0) Then
-                .Fields("Ukuran Jenis Tanaman") = "Sedang"
-                .Fields("Jumlah tanaman") = excel.Fields(19)
-                .Fields("jenis tanaman") = excel.Fields(17)
-                If IsNull(access.Fields("idNIB")) Then
-                    access.Fields("idNIB") = temp
-                ElseIf (Not IsNull(access.Fields("idNIB")) And (access.Fields("idNIB") <> temp)) Then
-                    temp = access.Fields("idNIB")
-                End If
-                If (Not IsNull(access.Fields(2))) Then
-                    access.Fields("NIB") = access.Fields("idNIB")
-                End If
-
-            ElseIf (excel.Fields(20) <> 0) Then
-                .Fields("Ukuran Jenis Tanaman") = "Kecil"
-                .Fields("Jumlah tanaman") = excel.Fields(20)
-                .Fields("jenis tanaman") = excel.Fields(17)
-                If IsNull(access.Fields("idNIB")) Then
-                    access.Fields("idNIB") = temp
-                ElseIf (Not IsNull(access.Fields("idNIB")) And (access.Fields("idNIB") <> temp)) Then
-                    temp = access.Fields("idNIB")
-                End If
-                If (Not IsNull(access.Fields(2))) Then
-                    access.Fields("NIB") = access.Fields("idNIB")
-                End If
-
-            End If
             End With
             If IsNull(access.Fields("idNIB")) Then
                 access.Fields("idNIB") = temp
@@ -327,6 +324,12 @@ Private Sub mnBacaDataNominatif_click()
 
             excel.MoveNext
             access.MoveNext
+            If Transfer.ProgressBar1.Value < 100 Then
+                Transfer.ProgressBar1.Value = ((i / excel.RecordCount) * 100)
+            ElseIf (i >= excel.RecordCount) Then
+                Unload Transfer
+            End If
+
         Next
         access.MoveFirst
 
@@ -336,14 +339,15 @@ Private Sub mnBacaDataNominatif_click()
             access.Update
             access.MoveNext
         Next
+        Unload Transfer
         MsgBox "Transfered"
         excel.Close
         access.Close
     End If
-        Set excel = Nothing
-        Set access = Nothing
-        tmp = Empty
-        excelPath = Empty
+    Set excel = Nothing
+    Set access = Nothing
+    tmp = Empty
+    excelPath = Empty
 End Sub
 
 
@@ -374,5 +378,7 @@ Private Sub tanaH_Click()
 End Sub
 
 Private Sub mntanaH_Click()
-Tanah.Show
+    Tanah.Show
 End Sub
+
+
