@@ -104,7 +104,7 @@ Public Function konekAccess() As ADODB.Recordset
 End Function
 
 Private Sub MDIForm_Load()
-Form1.Show
+
 End Sub
 
 Private Sub mnBacaDataNominatif_click()
