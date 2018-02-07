@@ -911,7 +911,7 @@ Dim db As ADODB.Connection
 
         Set rsZona = New ADODB.Recordset
         rsZona.Open "SELECT *  from [zona tanah] ORDER BY NOMOR", db, adOpenDynamic, adLockOptimistic  '"SELECT * FROM [DAFTAR NOMINATIF] order by UrutId"
-        grdHarga.Columns("ID").Visible = False
+        'grdHarga.Columns("ID").Visible = False
 
         Set GRDzona.DataSource = rsZona
         GRDzona.ReBind
