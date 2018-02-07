@@ -52,6 +52,9 @@ Begin VB.MDIForm MainForm
          Begin VB.Menu mntanaH 
             Caption         =   "&Tanah"
          End
+         Begin VB.Menu mNbangunan 
+            Caption         =   "&Bangunan"
+         End
       End
       Begin VB.Menu mnDataNonfisik 
          Caption         =   "Data &Nonfisik"
@@ -116,8 +119,8 @@ Private Sub mnBacaDataNominatif_click()
     'MsgBox "Silahkan jalankan ulang kembali!"
     'End
     'GoTo mulai
-    x = MsgBox("Apakah Anda akan mengambil data nominatif dari file " & CommonDialog1.FileTitle, vbYesNo, "Konfirmasi Input Data Nominatif")
-    If x = vbYes Then
+    X = MsgBox("Apakah Anda akan mengambil data nominatif dari file " & CommonDialog1.FileTitle, vbYesNo, "Konfirmasi Input Data Nominatif")
+    If X = vbYes Then
         CommonDialog1.Filter = "Acces 2003 (*.mdb)|*.mdb"
         CommonDialog1.ShowSave
         FileCopy App.Path & "\master.mdb", CommonDialog1.FileName
@@ -350,6 +353,10 @@ Private Sub mnBacaDataNominatif_click()
     excelPath = Empty
 End Sub
 
+
+Private Sub mNbangunan_Click()
+Bangunan.Show
+End Sub
 
 Private Sub mnDaftarNominatif_Click()
     DaftarNominatif.Show

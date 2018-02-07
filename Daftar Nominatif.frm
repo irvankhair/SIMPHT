@@ -659,6 +659,7 @@ Dim Sumber As String
         rsKolom.Open "select * from [kostum tabel] where [nama tabel]='Daftar Nominatif' ", db, adOpenDynamic, adLockOptimistic
         Sumber = rsKolom!Source
         Set RSDN = New ADODB.Recordset
+        'RSDN.Open "SELECT * FROM [DAFTAR NOMINATIF] order by UrutId", db, adOpenDynamic, adLockOptimistic
         RSDN.Open Sumber, db, adOpenDynamic, adLockOptimistic  '"SELECT * FROM [DAFTAR NOMINATIF] order by UrutId"
 
         Set DaftarNominatif.grdNominatif.DataSource = RSDN
@@ -812,6 +813,7 @@ Private Sub Command1_Click()
 '    Dim excel As New ADODB.Recordset
 '    Set excel = importExcel
 '    MsgBox excel.RecordCount
+'Command2_Click
 RSDN.Requery
 
 End Sub
