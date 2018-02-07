@@ -2,7 +2,7 @@ Attribute VB_Name = "Module1"
 Public NIBTerpilih As String
 Public excelPath As String
 Public pROJECTPATH As String
-Public RSDN As ADODB.Recordset
+Public RSDN As New ADODB.Recordset
 Public NamaProjek As String
 Public namaMdb As String
 'koding untuk scroll grid
