@@ -143,6 +143,9 @@ Private Sub mnBacaDataNominatif_click()
                     .Fields(j) = excel.Fields(j - 2)
 
                 Next
+                If (Not IsNull(access.Fields("nomor urut"))) Then
+                    access.Fields("Pemilik") = access.Fields("Identitas")
+                End If
                 .Fields("Index Benda Lain yang Berkaitan") = excel.Fields("Index Benda Lain yang Berkaitan")
                 .Fields("Jenis Benda Lain yang Berkaitan") = excel.Fields("Jenis Benda Lain yang Berkaitan")
                 .Fields("Jumlah Benda Lain yang Berkaitan") = excel.Fields("Jumlah Benda Lain yang Berkaitan")
@@ -319,7 +322,7 @@ Private Sub mnBacaDataNominatif_click()
             End If
 
             'Call cekNIB(temp, access.Fields("idNIB"))
-            If (Not IsNull(access.Fields(1))) Then
+            If (Not IsNull(access.Fields(2))) Then
                 access.Fields("NIB") = access.Fields("idNIB")
             End If
 
@@ -335,9 +338,14 @@ Private Sub mnBacaDataNominatif_click()
 
         Next
         access.MoveFirst
-
+        temp = access.Fields("Identitas")
         For i = 1 To access.RecordCount
+            If IsNull(access.Fields("nomor urut")) Then
+                access.Fields("Pemilik") = temp
+            ElseIf (Not IsNull(access.Fields("nomor urut")) And (access.Fields("nomor urut") <> temp)) Then
+                temp = access.Fields("Identitas")
 
+            End If
             access.Fields(1) = access.Fields(0)
             access.Update
             access.MoveNext
@@ -355,11 +363,15 @@ End Sub
 
 
 Private Sub mNbangunan_Click()
-Bangunan.Show
+    Bangunan.Show
 End Sub
 
 Private Sub mnDaftarNominatif_Click()
-    DaftarNominatif.Show
+    If (RSDN.State = 0) Then
+        MsgBox "Anda Belum membuka file Project"
+    Else
+        DaftarNominatif.Show
+    End If
 End Sub
 
 Private Sub mnExit_Click()

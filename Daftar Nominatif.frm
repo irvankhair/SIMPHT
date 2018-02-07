@@ -416,10 +416,10 @@ Attribute VB_Exposed = False
 
 Dim posisi As String
 Private Declare Function SendMessage Lib "user32" Alias _
-"SendMessageA" (ByVal hwnd As Long, ByVal wMsg As Long, _
-ByVal wParam As Long, lParam As Long) As Long
+                                     "SendMessageA" (ByVal hwnd As Long, ByVal wMsg As Long, _
+                                                     ByVal wParam As Long, lParam As Long) As Long
 
-Private mintDragIndex       As Integer
+Private mintDragIndex As Integer
 
 
 Private Function RapihkanGrid()
@@ -435,57 +435,57 @@ Private Function RapihkanGrid()
     db.CursorLocation = adUseClient
     Set rsKolom = New ADODB.Recordset
 
-         rsKolom.Open "select * from [kostum tabel] where [nama tabel]='Daftar Nominatif' ", db, adOpenDynamic, adLockOptimistic
+    rsKolom.Open "select * from [kostum tabel] where [nama tabel]='Daftar Nominatif' ", db, adOpenDynamic, adLockOptimistic
 
 
     For i = 0 To grdNominatif.Columns.Count - 1
-       rsKolom.MoveFirst
-      rsKolom.Find "isi='" & grdNominatif.Columns(i).Caption & "'"
-     If Not rsKolom.EOF Then
-        grdNominatif.Columns(i).Width = rsKolom![lebar kolom]
+        rsKolom.MoveFirst
+        rsKolom.Find "isi='" & grdNominatif.Columns(i).Caption & "'"
+        If Not rsKolom.EOF Then
+            grdNominatif.Columns(i).Width = rsKolom![lebar kolom]
 
-    End If
+        End If
     Next i
 End Function
 
 Private Sub Command12_Click()
-Dim i As Integer
-For i = 0 To List5.ListCount - 1
-List6.AddItem List5.List(i)
-Next i
-'bulanLap = Format(CDate(List6.List(0)), "mmmm yyyy")
-List5.Clear
+    Dim i As Integer
+    For i = 0 To List5.ListCount - 1
+        List6.AddItem List5.List(i)
+    Next i
+    'bulanLap = Format(CDate(List6.List(0)), "mmmm yyyy")
+    List5.Clear
 End Sub
 
 Private Sub Command13_Click()
-Dim i As Integer
-'If Not List6 = "Nama" Then
+    Dim i As Integer
+    'If Not List6 = "Nama" Then
 pertama:
-For i = 0 To List6.ListCount - 1
-If List6.Selected(i) Then
-List5.AddItem List6.List(i)
-List6.RemoveItem (i)
-GoTo pertama
+    For i = 0 To List6.ListCount - 1
+        If List6.Selected(i) Then
+            List5.AddItem List6.List(i)
+            List6.RemoveItem (i)
+            GoTo pertama
 
-End If
+        End If
 
-Next i
-'End If
+    Next i
+    'End If
 End Sub
 
 Private Sub Command14_Click()
-Dim i As Integer
-For i = 0 To List6.ListCount - 1
-List5.AddItem List6.List(i)
-Next i
-List6.Clear
-'List6.AddItem "Nama Obat"
+    Dim i As Integer
+    For i = 0 To List6.ListCount - 1
+        List5.AddItem List6.List(i)
+    Next i
+    List6.Clear
+    'List6.AddItem "Nama Obat"
 End Sub
 
 Private Sub Command18_Click()
-Dim i As Integer
-Dim db As ADODB.Connection
-Dim Sumber As String
+    Dim i As Integer
+    Dim db As ADODB.Connection
+    Dim Sumber As String
     Set db = New ADODB.Connection
     db.Open "PROVIDER=Microsoft.Jet.OLEDB.4.0;Data Source=" & pROJECTPATH & ";Jet OLEDB:Database Password=globalisasi;Persist Security Info=False"
     db.CursorLocation = adUseClient
@@ -493,33 +493,33 @@ Dim Sumber As String
 mulai:
     rsKolom.Open "select * from [kostum tabel] where [nama tabel]='Daftar Nominatif' order by [indeks kolom]", db, adOpenDynamic, adLockOptimistic
     If rsKolom.RecordCount < List5.ListCount + List6.ListCount Then
-    For i = 1 To List5.ListCount + List6.ListCount - rsKolom.RecordCount
-    rsKolom.AddNew
-        rsKolom![nama tabel] = "Daftar Nominatif"
-        rsKolom![indeks kolom] = rsKolom.RecordCount
-        rsKolom![lebar kolom] = 1170
-        'rskolom!isi=
-        rsKolom.Update
-        
-    Next i
-    rsKolom.Requery
-    rsKolom.MoveFirst
+        For i = 1 To List5.ListCount + List6.ListCount - rsKolom.RecordCount
+            rsKolom.AddNew
+            rsKolom![nama tabel] = "Daftar Nominatif"
+            rsKolom![indeks kolom] = rsKolom.RecordCount
+            rsKolom![lebar kolom] = 1170
+            'rskolom!isi=
+            rsKolom.Update
+
+        Next i
+        rsKolom.Requery
+        rsKolom.MoveFirst
     End If
     'List5.Clear
     'List6.Clear
 
     '
     For i = 0 To List6.ListCount - 1
-    rsKolom!isi = List6.List(i)
-    rsKolom!tampil = True
-    rsKolom.MoveNext
+        rsKolom!isi = List6.List(i)
+        rsKolom!tampil = True
+        rsKolom.MoveNext
     Next i
     If Not List5.ListCount = 0 Then
-    For i = 0 To List5.ListCount - 1
-    rsKolom!isi = List5.List(i)
-    rsKolom!tampil = False
-    rsKolom.MoveNext
-    Next i
+        For i = 0 To List5.ListCount - 1
+            rsKolom!isi = List5.List(i)
+            rsKolom!tampil = False
+            rsKolom.MoveNext
+        Next i
     End If
     rsKolom.MoveFirst
     Sumber = ""
@@ -529,18 +529,18 @@ mulai:
     Sumber = Sumber & "[" & List6.List(List6.ListCount - 1) & "]"
     rsKolom!Source = "select " & Sumber & " from [Daftar Nominatif] order by urutid"
     rsKolom.Update
-'    rsKolom.Update
+    '    rsKolom.Update
     Tampilan.Visible = False
     Set RSDN = New ADODB.Recordset
     'MsgBox rsKolom!Source
-    
+
     Sumber = rsKolom!Source
-        RSDN.Open Sumber, db, adOpenDynamic, adLockOptimistic  '"SELECT * FROM [DAFTAR NOMINATIF] order by UrutId"
+    RSDN.Open Sumber, db, adOpenDynamic, adLockOptimistic  '"SELECT * FROM [DAFTAR NOMINATIF] order by UrutId"
 
-        Set DaftarNominatif.grdNominatif.DataSource = RSDN
-        DaftarNominatif.grdNominatif.ReBind
+    Set DaftarNominatif.grdNominatif.DataSource = RSDN
+    DaftarNominatif.grdNominatif.ReBind
 
-        RapihkanGrid
+    RapihkanGrid
     'While Not rsKolom.EOF
     '    X = rsKolom![indeks kolom]
     '    If rsKolom!tampil = True Then
@@ -552,36 +552,36 @@ mulai:
     'Wend
     'Tampilan.Visible = True
     'rsKolom.Requery
-'RapihkanGrid
+    'RapihkanGrid
 
-Exit Sub
+    Exit Sub
 Adaeror:
-InputBox "t", "t", Err.Number
-If Err.Number = 3021 Then
-rsKolom.AddNew
-rsKolom![nama tabel] = "Daftar Nominatif"
-rsKolom![indeks kolom] = rsKolom.RecordCount
-rsKolom![lebar kolom] = 1170
-'rskolom!isi=
-rsKolom.Update
-rsKolom.Close
-GoTo mulai
-End If
+    InputBox "t", "t", Err.Number
+    If Err.Number = 3021 Then
+        rsKolom.AddNew
+        rsKolom![nama tabel] = "Daftar Nominatif"
+        rsKolom![indeks kolom] = rsKolom.RecordCount
+        rsKolom![lebar kolom] = 1170
+        'rskolom!isi=
+        rsKolom.Update
+        rsKolom.Close
+        GoTo mulai
+    End If
 
 End Sub
 
 Private Sub Command19_Click()
-Dim i As Integer
+    Dim i As Integer
 pertama:
-For i = 0 To List5.ListCount - 1
-If List5.Selected(i) Then
-List6.AddItem List5.List(i)
-List5.RemoveItem (i)
-GoTo pertama
+    For i = 0 To List5.ListCount - 1
+        If List5.Selected(i) Then
+            List6.AddItem List5.List(i)
+            List5.RemoveItem (i)
+            GoTo pertama
 
-End If
+        End If
 
-Next i
+    Next i
 End Sub
 
 Private Sub Command2_Click()
@@ -635,41 +635,47 @@ Private Sub Command3_Click()
 End Sub
 
 Private Sub Command4_Click()
-Tampilan.Visible = False
+    Tampilan.Visible = False
 
 End Sub
 
 Private Sub EditIsi_Click()
-If Not RSDN.EOF Then
-    grdNominatif.Splits(0).MarqueeStyle = dbgFloatingEditor
-    grdNominatif.Splits(0).Locked = False
-End If
+    If Not RSDN.EOF Then
+        grdNominatif.Splits(0).MarqueeStyle = dbgFloatingEditor
+        grdNominatif.Splits(0).Locked = False
+    End If
 End Sub
 
 Private Sub Form_Load()
-Dim i As Integer
-Dim db As ADODB.Connection
-Dim rsKolom As ADODB.Recordset
-Dim Sumber As String
+    
+    Dim i As Integer
+    Dim db As ADODB.Connection
+    Dim rsKolom As ADODB.Recordset
+    Dim Sumber As String
     Set db = New ADODB.Connection
-      Set rsKolom = New ADODB.Recordset
+    Set rsKolom = New ADODB.Recordset
+    Set RSDN = New ADODB.Recordset
+    
+    If (IsNull(pROJECTPATH)) Then
+        
+    Else
         db.Open "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & pROJECTPATH & ";Persist Security Info=False;Jet OLEDB:Database "    ';pwd=globalisasi"
         db.CursorLocation = adUseClient
-   
+
         rsKolom.Open "select * from [kostum tabel] where [nama tabel]='Daftar Nominatif' ", db, adOpenDynamic, adLockOptimistic
         Sumber = rsKolom!Source
-        Set RSDN = New ADODB.Recordset
         'RSDN.Open "SELECT * FROM [DAFTAR NOMINATIF] order by UrutId", db, adOpenDynamic, adLockOptimistic
         RSDN.Open Sumber, db, adOpenDynamic, adLockOptimistic  '"SELECT * FROM [DAFTAR NOMINATIF] order by UrutId"
-
+        
         Set DaftarNominatif.grdNominatif.DataSource = RSDN
         DaftarNominatif.grdNominatif.ReBind
 
         RapihkanGrid
-
+        
         Set MyProperty = DaftarNominatif.grdNominatif   'nama datagrid yang inigin di scroll dengan mouse
         WheelHook grdNominatif
-  
+    End If
+
 End Sub
 
 Private Sub Form_Resize()
@@ -711,12 +717,12 @@ Private Sub grdNominatif_MouseDown(Button As Integer, Shift As Integer, X As Sin
 End Sub
 
 Private Sub grdNominatif_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
-If Not LastRow = "" Then
-'MsgBox LastRow
-grdNominatif.Splits(0).Locked = True
-grdNominatif.Splits(0).MarqueeStyle = dbgHighlightRowRaiseCell
+    If Not LastRow = "" Then
+        'MsgBox LastRow
+        grdNominatif.Splits(0).Locked = True
+        grdNominatif.Splits(0).MarqueeStyle = dbgHighlightRowRaiseCell
 
-End If
+    End If
 
 End Sub
 
@@ -745,23 +751,23 @@ Private Sub List6_MouseDown(Button As Integer, Shift As Integer, X As Single, Y 
     List6.Drag
 End Sub
 'untuk dragdropp list -----------------------------------------------------------------------------
-Public Function ListRowCalc(pobjLB As ListBox, ByVal Y As Single) As Integer '-----------------------------------------------------------------------------
-           
+Public Function ListRowCalc(pobjLB As ListBox, ByVal Y As Single) As Integer    '-----------------------------------------------------------------------------
+
     Const LB_GETITEMHEIGHT = &H1A1
-    
-    Dim intItemHeight   As Integer
-    Dim intRow          As Integer
-    
+
+    Dim intItemHeight As Integer
+    Dim intRow As Integer
+
     intItemHeight = SendMessage(pobjLB.hwnd, LB_GETITEMHEIGHT, 0, 0)
-    
+
     intRow = ((Y / Screen.TwipsPerPixelY) \ intItemHeight) + pobjLB.TopIndex
-    
+
     If intRow < pobjLB.ListCount - 1 Then
         ListRowCalc = intRow
     Else
         ListRowCalc = pobjLB.ListCount - 1
     End If
-                 
+
 End Function
 
 'untuk dragdropp list-----------------------------------------------------------------------------
@@ -769,14 +775,14 @@ Public Sub ListRowMove(pobjLB As ListBox, _
                        ByVal pintOldRow As Integer, _
                        ByVal pintNewRow As Integer)
 '-----------------------------------------------------------------------------
-                       
-    Dim strSavedItem    As String
-    Dim intX            As Integer
+
+    Dim strSavedItem As String
+    Dim intX As Integer
 
     If pintOldRow = pintNewRow Then Exit Sub
-    
+
     strSavedItem = pobjLB.List(pintOldRow)
-    
+
     If pintOldRow > pintNewRow Then
         For intX = pintOldRow To pintNewRow + 1 Step -1
             pobjLB.List(intX) = pobjLB.List(intX - 1)
@@ -786,13 +792,13 @@ Public Sub ListRowMove(pobjLB As ListBox, _
             pobjLB.List(intX) = pobjLB.List(intX + 1)
         Next intX
     End If
-    
+
     pobjLB.List(pintNewRow) = strSavedItem
 
 End Sub
 Private Sub Sisip_Click()
     Dim urutSebelum As String
-    
+
     If Not RSDN.EOF = True And Not RSDN.BOF = True Then
         posisi = RSDN.AbsolutePosition
         RSDN.MovePrevious
@@ -814,7 +820,7 @@ Private Sub Command1_Click()
 '    Set excel = importExcel
 '    MsgBox excel.RecordCount
 'Command2_Click
-RSDN.Requery
+    RSDN.Requery
 
 End Sub
 
