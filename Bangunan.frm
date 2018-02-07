@@ -17,11 +17,11 @@ Begin VB.Form Bangunan
    Begin VB.PictureBox Tampilan 
       BackColor       =   &H00E0E0E0&
       Height          =   7155
-      Left            =   5760
+      Left            =   240
       ScaleHeight     =   7095
       ScaleWidth      =   5595
       TabIndex        =   13
-      Top             =   1800
+      Top             =   2400
       Visible         =   0   'False
       Width           =   5655
       Begin VB.ListBox ListPeralihan 
@@ -235,7 +235,7 @@ Begin VB.Form Bangunan
       Top             =   5160
       Width           =   17295
       Begin VB.CommandButton Command22 
-         Caption         =   "&Terapkan Kalkulasi NPW TANAH"
+         Caption         =   "&Terapkan Kalkulasi NPW Bangunan"
          BeginProperty Font 
             Name            =   "Calibri"
             Size            =   14.25
@@ -246,10 +246,10 @@ Begin VB.Form Bangunan
             Strikethrough   =   0   'False
          EndProperty
          Height          =   495
-         Left            =   10440
+         Left            =   10080
          TabIndex        =   35
          Top             =   4440
-         Width           =   3855
+         Width           =   4215
       End
       Begin VB.CommandButton Command5 
          Caption         =   "&Edit"
@@ -752,11 +752,16 @@ Dim rsDaftarNIB As ADODB.Recordset
                     rsBangunan!nomor = rsDaftarNIB![urutid]
                     rsBangunan!nib = rsDaftarNIB!idnib
                     rsBangunan!identitas = rsDaftarNIB!Pemilik
+                    rsBangunan![Jenis bangunan] = rsDaftarNIB![Jenis bangunan]
+                    rsBangunan![Jumlah Jenis bangunan] = rsDaftarNIB![Jumlah Jenis bangunan]
+                    rsBangunan![Luas bangunan] = rsDaftarNIB![Luas bangunan]
+                    
                 rsBangunan.Update
                 rsDaftarNIB.MoveNext
             Wend
         Next i
         Tampilan.Visible = False
+        GRDBangunan.ReBind
 End Sub
 
 Private Sub Command19_Click()
@@ -787,7 +792,7 @@ Frame1.Visible = False
 End Sub
 
 Private Sub Command22_Click()
-X = MsgBox("Apakah Anda yakin untuk melakukan proses kalkulasi NPW tanah dengan harga pada zona yang telah ditetapkan?", vbYesNo, "Konfirmasi Kalkulasi NPW Tanah")
+X = MsgBox("Apakah Anda yakin untuk melakukan proses kalkulasi NPW bangunan dengan harga pada klasifikasi yang telah ditetapkan?", vbYesNo, "Konfirmasi Kalkulasi NPW Tanah")
 If X = vbYes Then
     rsBangunan.Filter = "harga > 0"
     rsBangunan.MoveFirst
@@ -868,7 +873,7 @@ Private Sub Command9_Click()
         rsDaftarNIB.MoveNext
     Wend
     rsDaftarNIB.Close
-    rsDaftarNIB.Open "SELECT * from bangunan where nib is not null", db, adOpenDynamic, adLockOptimistic
+    rsDaftarNIB.Open "SELECT nib from bangunan where nib is not null group by nib", db, adOpenDynamic, adLockOptimistic
     While Not rsDaftarNIB.EOF
         
         List6.AddItem rsDaftarNIB!nib
@@ -935,9 +940,9 @@ Frame1.Left = 0
 End Sub
 
 Private Sub grdbangunan_AfterColEdit(ByVal ColIndex As Integer)
-If GRDBangunan.Col = GRDBangunan.Columns("Zona Tanah").ColIndex Then
+If GRDBangunan.Col = GRDBangunan.Columns("Klasifikasi").ColIndex Then
     rsHarga.MoveFirst
-    rsHarga.Find "Nomor ='" & GRDBangunan.Columns("Zona Tanah").Value & "'"
+    rsHarga.Find "Nomor ='" & GRDBangunan.Columns("Klasifikasi").Value & "'"
     If Not rsHarga.EOF Then
         GRDBangunan.Columns("Harga").Value = rsHarga!harga
         'Sendkeys "{down}"
