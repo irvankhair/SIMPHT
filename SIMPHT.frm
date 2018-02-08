@@ -1,5 +1,6 @@
 VERSION 5.00
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "comdlg32.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "mscomctl.ocx"
 Begin VB.MDIForm MainForm 
    BackColor       =   &H00FFFFFF&
    Caption         =   "SIMPHT"
@@ -10,6 +11,65 @@ Begin VB.MDIForm MainForm
    LinkTopic       =   "MDIForm1"
    StartUpPosition =   1  'CenterOwner
    WindowState     =   2  'Maximized
+   Begin MSComctlLib.ImageList ImageList1 
+      Left            =   960
+      Top             =   4080
+      _ExtentX        =   1005
+      _ExtentY        =   1005
+      BackColor       =   0
+      ImageWidth      =   16
+      ImageHeight     =   16
+      MaskColor       =   16777215
+      UseMaskColor    =   0   'False
+      _Version        =   393216
+      BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
+         NumListImages   =   11
+         BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "SIMPHT.frx":0000
+            Key             =   "s_Key1"
+         EndProperty
+         BeginProperty ListImage2 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "SIMPHT.frx":049A
+            Key             =   "s_Key2"
+         EndProperty
+         BeginProperty ListImage3 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "SIMPHT.frx":0934
+            Key             =   "s_Key3"
+         EndProperty
+         BeginProperty ListImage4 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "SIMPHT.frx":0DCE
+            Key             =   "s_Key4"
+         EndProperty
+         BeginProperty ListImage5 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "SIMPHT.frx":1268
+            Key             =   "s_Key5"
+         EndProperty
+         BeginProperty ListImage6 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "SIMPHT.frx":1702
+            Key             =   "s_Key6"
+         EndProperty
+         BeginProperty ListImage7 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "SIMPHT.frx":1B9C
+            Key             =   "s_Key7"
+         EndProperty
+         BeginProperty ListImage8 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "SIMPHT.frx":2036
+            Key             =   "s_Key8"
+         EndProperty
+         BeginProperty ListImage9 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "SIMPHT.frx":24D0
+            Key             =   "s_Key9"
+         EndProperty
+         BeginProperty ListImage10 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "SIMPHT.frx":296A
+            Key             =   "s_Key10"
+         EndProperty
+         BeginProperty ListImage11 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "SIMPHT.frx":2E04
+            Key             =   "s_Key11"
+         EndProperty
+      EndProperty
+   End
    Begin MSComDlg.CommonDialog CommonDialog1 
       Left            =   0
       Top             =   0
@@ -19,44 +79,58 @@ Begin VB.MDIForm MainForm
    End
    Begin VB.Menu mnFile 
       Caption         =   "&File"
+      Tag             =   "&File|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=-1)"
       WindowList      =   -1  'True
       Begin VB.Menu mnOpen 
          Caption         =   "&Open"
+         Tag             =   "&Open|#s_Key7|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
       End
       Begin VB.Menu mnSave 
          Caption         =   "&Save"
+         Tag             =   "&Save|#s_Key10|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
       End
       Begin VB.Menu mnEksport 
          Caption         =   "&Eksport"
+         Tag             =   "&Eksport|#s_Key4|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
       End
       Begin VB.Menu mnPrint 
          Caption         =   "&Print"
+         Tag             =   "&Print|#s_Key8|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
       End
       Begin VB.Menu mnExit 
          Caption         =   "&Exit"
+         Tag             =   "&Exit|#s_Key3|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
       End
    End
    Begin VB.Menu mnInsert 
       Caption         =   "&Insert"
+      Tag             =   "&Insert|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
       Begin VB.Menu mnBacaDataNominatif 
          Caption         =   "&Baca Data Nominatif"
+         Tag             =   "&Baca Data Nominatif|#s_Key2|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
       End
    End
    Begin VB.Menu mnEdit 
       Caption         =   "&Edit"
+      Tag             =   "&Edit|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
       Begin VB.Menu mnDaftarNominatif 
          Caption         =   "&Daftar Nominatif"
+         Tag             =   "&Daftar Nominatif|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
       End
       Begin VB.Menu mnResume 
          Caption         =   "&Resume"
+         Tag             =   "&Resume|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
       End
       Begin VB.Menu mnDataFisik 
          Caption         =   "Data &Fisik"
+         Tag             =   "Data &Fisik|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
          Begin VB.Menu mntanaH 
             Caption         =   "&Tanah"
+            Tag             =   "&Tanah|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
          End
          Begin VB.Menu mNbangunan 
             Caption         =   "&Bangunan"
+            Tag             =   "&Bangunan|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
          End
          Begin VB.Menu MnTanaman 
             Caption         =   "&Tanaman"
@@ -64,13 +138,33 @@ Begin VB.MDIForm MainForm
       End
       Begin VB.Menu mnDataNonfisik 
          Caption         =   "Data &Nonfisik"
+         Tag             =   "Data &Nonfisik|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
       End
    End
    Begin VB.Menu mnSetting 
       Caption         =   "&Setting"
+      Tag             =   "&Setting|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
    End
    Begin VB.Menu mnReport 
       Caption         =   "&Report"
+      Tag             =   "&Report|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
+   End
+   Begin VB.Menu mnEditBaris 
+      Caption         =   "Edit Baris"
+      Tag             =   "Edit Baris|(Checked=0)(Enabled=-1)(Visible=0)(WindowList=0)"
+      Visible         =   0   'False
+      Begin VB.Menu EditBaris 
+         Caption         =   "Edit"
+         Tag             =   "Edit|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
+      End
+      Begin VB.Menu SisipBaris 
+         Caption         =   "Sisipkan"
+         Tag             =   "Sisipkan|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
+      End
+      Begin VB.Menu Hapusbaris 
+         Caption         =   "Hapus Baris"
+         Tag             =   "Hapus Baris|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
+      End
    End
 End
 Attribute VB_Name = "MainForm"
@@ -78,6 +172,8 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Private WithEvents MenuEvents As CEvents
+Attribute MenuEvents.VB_VarHelpID = -1
 
 Public Function importExcel() As ADODB.Recordset
 
@@ -403,7 +499,7 @@ Private Sub tanaH_Click()
 End Sub
 
 Private Sub mnResume_Click()
-ResumeNilai.Show
+    ResumeNilai.Show
 End Sub
 
 Private Sub mntanaH_Click()
@@ -411,6 +507,82 @@ Private Sub mntanaH_Click()
 End Sub
 
 
+
 Private Sub MnTanaman_Click()
 Tanaman.Show
+
+
+Private Sub MenuEvents_MenuHelp(ByVal MenuText As String, ByVal MenuHelp As String, ByVal Enabled As Boolean)
+    If gbSubClassMenu Then
+        '/ this event show Decription menu-item to a StatusBar control
+        '/ customize for your project, if you need this.
+        '/ Note: MenuText contain the menu Caption.
+        '/       MenuHelp contain the Description string.
+        '/ example: sbStatusBar.Panels(1).text = MenuHelp
+        '/          lblMenuHelp.Caption = MenuHelp
+    End If
+End Sub
+Public Sub SubClassMenuXP()
+
+'/ this code is made by MenuCreator add-in
+
+'/ prepare the caption for subclassing. Warning! Don't remove this comment!!!
+    mnFile.Caption = "&File"
+    mnOpen.Caption = "&Open|#s_Key7"
+    mnSave.Caption = "&Save|#s_Key10"
+    mnEksport.Caption = "&Eksport|#s_Key4"
+    mnPrint.Caption = "&Print|#s_Key8"
+    mnExit.Caption = "&Exit|#s_Key3"
+    mnInsert.Caption = "&Insert"
+    mnBacaDataNominatif.Caption = "&Baca Data Nominatif|#s_Key2"
+    mnEdit.Caption = "&Edit"
+    mnDaftarNominatif.Caption = "&Daftar Nominatif"
+    mnResume.Caption = "&Resume"
+    mnDataFisik.Caption = "Data &Fisik"
+    mntanaH.Caption = "&Tanah"
+    mNbangunan.Caption = "&Bangunan"
+    mnDataNonfisik.Caption = "Data &Nonfisik"
+    mnSetting.Caption = "&Setting"
+    mnReport.Caption = "&Report"
+    mnEditBaris.Caption = "Edit Baris"
+    EditBaris.Caption = "Edit"
+    SisipBaris.Caption = "Sisipkan"
+    Hapusbaris.Caption = "Hapus Baris"
+
+
+    '/ Subclassing menu. Warning! Don't remove this comment!!!
+
+    Set MenuEvents = New CEvents
+    Set objMenuEx = New cMenuEx
+    Call objMenuEx.Install(Me.hwnd, App.Path & "\" & Me.Name, ImageList1, 2, MenuEvents)
+
+End Sub
+
+Public Sub MenuDesigner()
+'/ Open Menu Designer tool
+    objMenuEx.MenuDesigner Me.hwnd
+End Sub
+
+Private Sub MDIForm_Load()
+'/ This MDIForm_Load is made by MenuCreator
+
+'/ If gbSubClassMenu is False, the menu is not subclassed
+    gbSubClassMenu = True
+
+    If gbSubClassMenu Then SubClassMenuXP
+
+End Sub
+
+Private Sub MDIForm_UnLoad(Cancel As Integer)
+'/ This MDIForm_UnLoad is made by MenuCreator
+
+    If gbSubClassMenu Then
+        '/ prevent error if the menu is not subclassed
+        On Error Resume Next
+        '/ release object
+        Call objMenuEx.Uninstall(Me.hwnd, ImageList1, MenuEvents)
+        Set MenuEvents = Nothing
+        Set objMenuEx = Nothing
+    End If
+
 End Sub
