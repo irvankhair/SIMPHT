@@ -11,8 +11,8 @@ Begin VB.Form Bangunan
    ClientWidth     =   14220
    LinkTopic       =   "Form1"
    MDIChild        =   -1  'True
-   ScaleHeight     =   9195
-   ScaleWidth      =   14220
+   ScaleHeight     =   11535
+   ScaleWidth      =   19080
    WindowState     =   2  'Maximized
    Begin VB.PictureBox Tampilan 
       BackColor       =   &H00E0E0E0&
@@ -246,7 +246,7 @@ Begin VB.Form Bangunan
             Strikethrough   =   0   'False
          EndProperty
          Height          =   495
-         Left            =   10080
+         Left            =   10200
          TabIndex        =   35
          Top             =   4440
          Width           =   4215
@@ -751,7 +751,7 @@ Dim rsDaftarNIB As ADODB.Recordset
                     rsBangunan!idbangunan = rsDaftarNIB!id
                     rsBangunan!nomor = rsDaftarNIB![urutid]
                     rsBangunan!nib = rsDaftarNIB!idnib
-                    rsBangunan!identitas = rsDaftarNIB!PEMILIK
+                    rsBangunan!identitas = rsDaftarNIB!pemilik
                     rsBangunan![Jenis bangunan] = rsDaftarNIB![Jenis bangunan]
                     rsBangunan![jumlah jenis bangunan] = rsDaftarNIB![jumlah jenis bangunan]
                     rsBangunan![Luas Bangunan] = rsDaftarNIB![Luas Bangunan]
@@ -801,15 +801,17 @@ If X = vbYes Then
     rsBangunan.MoveFirst
     Dim db As ADODB.Connection
     Dim RSDN As ADODB.Recordset
+    Dim rsKalkulasi As ADODB.Recordset
     Dim Sumber As String
     Set db = New ADODB.Connection
       Set RSDN = New ADODB.Recordset
+      Set rsKalkulasi = New ADODB.Recordset
         db.Open "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & pROJECTPATH & ";Persist Security Info=False;Jet OLEDB:Database "    ';pwd=globalisasi"
         db.CursorLocation = adUseClient
    
         RSDN.Open "select id,idnib,[Jumlah Jenis Bangunan],[Luas Bangunan],[Nilai Bangunan per meter persegi],penyusutan,[jumlah nilai bangunan],[nilai pasar bangunan] from [daftar nominatif] where [jenis bangunan] is not null ", db, adOpenDynamic, adLockOptimistic
         If Not RSDN.EOF Then
-        
+'kalkulasi tahap 1 jumlah tiap bangunan dengan penyusutan
             While Not rsBangunan.EOF
                 RSDN.MoveFirst
                 RSDN.Find "id='" & rsBangunan!idbangunan & "'"
@@ -849,7 +851,22 @@ If X = vbYes Then
             
             
             
-'kalkulasi nilai pasar bangunan
+'kalkulasi tahap 2 nilai pasar bangunan
+            rsBangunan.MoveFirst
+            While Not rsBangunan.EOF
+                RSDN.Close
+                rsKalkulasi.Open "select sum([jumlah nilai bangunan]) from [daftar nominatif] where idnib='" & rsBangunan!nib & " ' and pemilik='" & rsBangunan!identitas & "' group by idnib", db, adOpenDynamic, adLockOptimistic
+                RSDN.Open "select id,urutid,[Nilai pasar bangunan] from [daftar nominatif] where idnib='" & rsBangunan!nib & " ' and pemilik='" & rsBangunan!identitas & "' order by urutid"
+                If Not RSDN.EOF Then
+                    RSDN![nilai pasar bangunan] = rsKalkulasi.Fields(0)
+                    RSDN.Update
+                'MsgBox rsBangunan!identitas
+                'MsgBox RSDN.Fields(0)
+                'RSDN.Close
+                End If
+                rsKalkulasi.Close
+                rsBangunan.MoveNext
+            Wend
         End If
         
         'Sumber = rsKolom!Source

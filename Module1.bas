@@ -1,4 +1,6 @@
 Attribute VB_Name = "Module1"
+Public LaporanTerpilih As String
+
 Public NIBTerpilih As String
 Public excelPath As String
 Public pROJECTPATH As String

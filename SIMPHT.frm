@@ -58,6 +58,9 @@ Begin VB.MDIForm MainForm
          Begin VB.Menu mNbangunan 
             Caption         =   "&Bangunan"
          End
+         Begin VB.Menu MnTanaman 
+            Caption         =   "&Tanaman"
+         End
       End
       Begin VB.Menu mnDataNonfisik 
          Caption         =   "Data &Nonfisik"
@@ -68,19 +71,6 @@ Begin VB.MDIForm MainForm
    End
    Begin VB.Menu mnReport 
       Caption         =   "&Report"
-   End
-   Begin VB.Menu mnEditBaris 
-      Caption         =   "Edit Baris"
-      Visible         =   0   'False
-      Begin VB.Menu EditBaris 
-         Caption         =   "Edit"
-      End
-      Begin VB.Menu SisipBaris 
-         Caption         =   "Sisipkan"
-      End
-      Begin VB.Menu Hapusbaris 
-         Caption         =   "Hapus Baris"
-      End
    End
 End
 Attribute VB_Name = "MainForm"
@@ -421,3 +411,6 @@ Private Sub mntanaH_Click()
 End Sub
 
 
+Private Sub MnTanaman_Click()
+Tanaman.Show
+End Sub
