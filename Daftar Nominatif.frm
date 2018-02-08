@@ -16,6 +16,27 @@ Begin VB.Form DaftarNominatif
    ScaleHeight     =   8220
    ScaleWidth      =   15930
    WindowState     =   2  'Maximized
+   Begin VB.ListBox List1 
+      Appearance      =   0  'Flat
+      BackColor       =   &H80000004&
+      BeginProperty Font 
+         Name            =   "Calibri"
+         Size            =   14.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   1065
+      ItemData        =   "Daftar Nominatif.frx":0000
+      Left            =   4920
+      List            =   "Daftar Nominatif.frx":000D
+      TabIndex        =   22
+      Top             =   1440
+      Visible         =   0   'False
+      Width           =   1095
+   End
    Begin VB.CommandButton Command3 
       Caption         =   "Atur Tampilan Tabel"
       BeginProperty Font 
@@ -65,7 +86,7 @@ Begin VB.Form DaftarNominatif
       Begin VB.CommandButton Command10 
          Height          =   375
          Left            =   5640
-         Picture         =   "Daftar Nominatif.frx":0000
+         Picture         =   "Daftar Nominatif.frx":0025
          Style           =   1  'Graphical
          TabIndex        =   17
          Top             =   2040
@@ -75,7 +96,7 @@ Begin VB.Form DaftarNominatif
       Begin VB.CommandButton Command9 
          Height          =   375
          Left            =   5640
-         Picture         =   "Daftar Nominatif.frx":0342
+         Picture         =   "Daftar Nominatif.frx":0367
          Style           =   1  'Graphical
          TabIndex        =   16
          Top             =   2520
@@ -85,7 +106,7 @@ Begin VB.Form DaftarNominatif
       Begin VB.CommandButton Command8 
          Height          =   375
          Left            =   5640
-         Picture         =   "Daftar Nominatif.frx":0684
+         Picture         =   "Daftar Nominatif.frx":06A9
          Style           =   1  'Graphical
          TabIndex        =   15
          Top             =   3000
@@ -95,7 +116,7 @@ Begin VB.Form DaftarNominatif
       Begin VB.CommandButton Command6 
          Height          =   375
          Left            =   5640
-         Picture         =   "Daftar Nominatif.frx":09C6
+         Picture         =   "Daftar Nominatif.frx":09EB
          Style           =   1  'Graphical
          TabIndex        =   14
          Top             =   1560
@@ -144,7 +165,7 @@ Begin VB.Form DaftarNominatif
          Appearance      =   0  'Flat
          Height          =   390
          Left            =   3600
-         Picture         =   "Daftar Nominatif.frx":0D08
+         Picture         =   "Daftar Nominatif.frx":0D2D
          Style           =   1  'Graphical
          TabIndex        =   10
          Top             =   4560
@@ -154,7 +175,7 @@ Begin VB.Form DaftarNominatif
          Appearance      =   0  'Flat
          Height          =   390
          Left            =   3600
-         Picture         =   "Daftar Nominatif.frx":140A
+         Picture         =   "Daftar Nominatif.frx":142F
          Style           =   1  'Graphical
          TabIndex        =   9
          Top             =   3960
@@ -164,7 +185,7 @@ Begin VB.Form DaftarNominatif
          Appearance      =   0  'Flat
          Height          =   390
          Left            =   3600
-         Picture         =   "Daftar Nominatif.frx":1B0C
+         Picture         =   "Daftar Nominatif.frx":1B31
          Style           =   1  'Graphical
          TabIndex        =   8
          Top             =   1800
@@ -175,7 +196,7 @@ Begin VB.Form DaftarNominatif
          BackColor       =   &H0000C0C0&
          Height          =   390
          Left            =   3600
-         Picture         =   "Daftar Nominatif.frx":220E
+         Picture         =   "Daftar Nominatif.frx":2233
          Style           =   1  'Graphical
          TabIndex        =   7
          Top             =   1200
@@ -183,7 +204,7 @@ Begin VB.Form DaftarNominatif
       End
       Begin VB.ListBox List6 
          Appearance      =   0  'Flat
-         DragIcon        =   "Daftar Nominatif.frx":2912
+         DragIcon        =   "Daftar Nominatif.frx":2937
          BeginProperty Font 
             Name            =   "MS Sans Serif"
             Size            =   12
@@ -194,9 +215,9 @@ Begin VB.Form DaftarNominatif
             Strikethrough   =   0   'False
          EndProperty
          Height          =   6030
-         ItemData        =   "Daftar Nominatif.frx":9164
+         ItemData        =   "Daftar Nominatif.frx":9189
          Left            =   4440
-         List            =   "Daftar Nominatif.frx":9166
+         List            =   "Daftar Nominatif.frx":918B
          MultiSelect     =   1  'Simple
          TabIndex        =   6
          ToolTipText     =   "Geser data dengan drag  dan dropp"
@@ -389,20 +410,6 @@ Begin VB.Form DaftarNominatif
       Top             =   120
       Width           =   6255
    End
-   Begin VB.Menu EditBaris 
-      Caption         =   "Edit Baris"
-      Visible         =   0   'False
-      WindowList      =   -1  'True
-      Begin VB.Menu EditIsi 
-         Caption         =   "Edit"
-      End
-      Begin VB.Menu Sisip 
-         Caption         =   "Sisipkan"
-      End
-      Begin VB.Menu HapusBaris 
-         Caption         =   "Hapus"
-      End
-   End
 End
 Attribute VB_Name = "DaftarNominatif"
 Attribute VB_GlobalNameSpace = False
@@ -414,12 +421,27 @@ Attribute VB_Exposed = False
 'Option Explicit
 
 
+
+'untuk mouse list
+Private mintDragIndex As Integer
+
 Dim posisi As String
 Private Declare Function SendMessage Lib "user32" Alias _
                                      "SendMessageA" (ByVal hwnd As Long, ByVal wMsg As Long, _
                                                      ByVal wParam As Long, lParam As Long) As Long
+Private Const LB_SETCURSEL = &H186
+Private Const LB_GETCURSEL = &H188
+Private Type POINTAPI
+    X As Long
+    Y As Long
+End Type
 
-Private mintDragIndex As Integer
+Private Declare Function ClientToScreen Lib "user32" _
+(ByVal hwnd As Long, lpPoint As POINTAPI) As Long
+
+Private Declare Function LBItemFromPt Lib "COMCTL32.DLL" _
+(ByVal hLB As Long, ByVal ptX As Long, ByVal ptY As Long, _
+ByVal bAutoScroll As Long) As Long
 
 
 Private Function RapihkanGrid()
@@ -645,6 +667,26 @@ Private Sub EditIsi_Click()
         grdNominatif.Splits(0).Locked = False
     End If
 End Sub
+Public Sub pindah(ByVal lbhwnd As Long, _
+ByVal X As Single, ByVal Y As Single)
+'untuk select otomatis saat meuse ke list
+
+Dim ItemIndex As Long
+Dim AtThisPoint As POINTAPI
+AtThisPoint.X = X \ Screen.TwipsPerPixelX
+AtThisPoint.Y = Y \ Screen.TwipsPerPixelY
+Call ClientToScreen(lbhwnd, AtThisPoint)
+ItemIndex = LBItemFromPt(lbhwnd, AtThisPoint.X, _
+   AtThisPoint.Y, False)
+If ItemIndex <> SendMessage(lbhwnd, LB_GETCURSEL, 0, 0) Then
+    Call SendMessage(lbhwnd, LB_SETCURSEL, ItemIndex, 0)
+End If
+
+End Sub
+
+Private Sub Form_Click()
+List1.Visible = False
+End Sub
 
 Private Sub Form_Load()
     
@@ -692,6 +734,10 @@ Private Sub Form_Resize()
 End Sub
 
 
+Private Sub grdNominatif_Click()
+'List1.Visible = False
+End Sub
+
 Private Sub grdNominatif_ColResize(ByVal ColIndex As Integer, Cancel As Integer)
     Dim db As ADODB.Connection
     Set db = New ADODB.Connection
@@ -707,11 +753,15 @@ Private Sub grdNominatif_ColResize(ByVal ColIndex As Integer, Cancel As Integer)
     End If
 End Sub
 
-Private Sub grdNominatif_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    If Button = 2 Then
+Private Sub grdNominatif_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
+If Button = 2 Then
         If Not RSDN.EOF And Not RSDN.BOF Then
             NIBTerpilih = "" & RSDN!nib
-            PopupMenu EditBaris
+            'PopupMenu MainForm.mnEditBaris
+            List1.Visible = True
+            List1.Top = Y + grdNominatif.Top
+            List1.Left = X
+            
         End If
     End If
 End Sub
@@ -723,6 +773,7 @@ Private Sub grdNominatif_RowColChange(LastRow As Variant, ByVal LastCol As Integ
         grdNominatif.Splits(0).MarqueeStyle = dbgHighlightRowRaiseCell
 
     End If
+    List1.Visible = False
 
 End Sub
 
@@ -737,6 +788,72 @@ Private Sub HapusBaris_Click()
 
 End Sub
 
+Private Sub List1_Click()
+If List1.text = "Edit" Then
+    EditIsi_Click
+    List1.Visible = False
+ElseIf List1.text = "Sisip" Then
+    Sisip_Click
+    List1.Visible = False
+ElseIf List1.text = "Hapus" Then
+    HapusBaris_Click
+    List1.Visible = False
+End If
+
+End Sub
+
+Private Sub List1_LostFocus()
+List1.Visible = False
+End Sub
+
+Private Sub List1_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+pindah List1.hwnd, X, Y
+End Sub
+'untuk dragdropp list -----------------------------------------------------------------------------
+Public Function ListRowCalc(pobjLB As ListBox, ByVal Y As Single) As Integer '-----------------------------------------------------------------------------
+           
+    Const LB_GETITEMHEIGHT = &H1A1
+    
+    Dim intItemHeight   As Integer
+    Dim intRow          As Integer
+    
+    intItemHeight = SendMessage(pobjLB.hwnd, LB_GETITEMHEIGHT, 0, 0)
+    
+    intRow = ((Y / Screen.TwipsPerPixelY) \ intItemHeight) + pobjLB.TopIndex
+    
+    If intRow < pobjLB.ListCount - 1 Then
+        ListRowCalc = intRow
+    Else
+        ListRowCalc = pobjLB.ListCount - 1
+    End If
+                 
+End Function
+'untuk dragdropp list-----------------------------------------------------------------------------
+Public Sub ListRowMove(pobjLB As ListBox, _
+                       ByVal pintOldRow As Integer, _
+                       ByVal pintNewRow As Integer)
+'-----------------------------------------------------------------------------
+                       
+    Dim strSavedItem    As String
+    Dim intX            As Integer
+
+    If pintOldRow = pintNewRow Then Exit Sub
+    
+    strSavedItem = pobjLB.List(pintOldRow)
+    
+    If pintOldRow > pintNewRow Then
+        For intX = pintOldRow To pintNewRow + 1 Step -1
+            pobjLB.List(intX) = pobjLB.List(intX - 1)
+        Next intX
+    Else
+        For intX = pintOldRow To pintNewRow - 1
+            pobjLB.List(intX) = pobjLB.List(intX + 1)
+        Next intX
+    End If
+    
+    pobjLB.List(pintNewRow) = strSavedItem
+
+End Sub
 Private Sub List6_DragDrop(Source As Control, X As Single, Y As Single)
     ListRowMove Source, mintDragIndex, ListRowCalc(Source, Y)
 
@@ -750,52 +867,9 @@ Private Sub List6_MouseDown(Button As Integer, Shift As Integer, X As Single, Y 
     mintDragIndex = ListRowCalc(List6, Y)
     List6.Drag
 End Sub
-'untuk dragdropp list -----------------------------------------------------------------------------
-Public Function ListRowCalc(pobjLB As ListBox, ByVal Y As Single) As Integer    '-----------------------------------------------------------------------------
 
-    Const LB_GETITEMHEIGHT = &H1A1
 
-    Dim intItemHeight As Integer
-    Dim intRow As Integer
 
-    intItemHeight = SendMessage(pobjLB.hwnd, LB_GETITEMHEIGHT, 0, 0)
-
-    intRow = ((Y / Screen.TwipsPerPixelY) \ intItemHeight) + pobjLB.TopIndex
-
-    If intRow < pobjLB.ListCount - 1 Then
-        ListRowCalc = intRow
-    Else
-        ListRowCalc = pobjLB.ListCount - 1
-    End If
-
-End Function
-
-'untuk dragdropp list-----------------------------------------------------------------------------
-Public Sub ListRowMove(pobjLB As ListBox, _
-                       ByVal pintOldRow As Integer, _
-                       ByVal pintNewRow As Integer)
-'-----------------------------------------------------------------------------
-
-    Dim strSavedItem As String
-    Dim intX As Integer
-
-    If pintOldRow = pintNewRow Then Exit Sub
-
-    strSavedItem = pobjLB.List(pintOldRow)
-
-    If pintOldRow > pintNewRow Then
-        For intX = pintOldRow To pintNewRow + 1 Step -1
-            pobjLB.List(intX) = pobjLB.List(intX - 1)
-        Next intX
-    Else
-        For intX = pintOldRow To pintNewRow - 1
-            pobjLB.List(intX) = pobjLB.List(intX + 1)
-        Next intX
-    End If
-
-    pobjLB.List(pintNewRow) = strSavedItem
-
-End Sub
 Private Sub Sisip_Click()
     Dim urutSebelum As String
 

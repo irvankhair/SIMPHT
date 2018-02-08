@@ -66,6 +66,19 @@ Begin VB.MDIForm MainForm
    Begin VB.Menu mnReport 
       Caption         =   "&Report"
    End
+   Begin VB.Menu mnEditBaris 
+      Caption         =   "Edit Baris"
+      Visible         =   0   'False
+      Begin VB.Menu EditBaris 
+         Caption         =   "Edit"
+      End
+      Begin VB.Menu SisipBaris 
+         Caption         =   "Sisipkan"
+      End
+      Begin VB.Menu Hapusbaris 
+         Caption         =   "Hapus Baris"
+      End
+   End
 End
 Attribute VB_Name = "MainForm"
 Attribute VB_GlobalNameSpace = False

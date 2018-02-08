@@ -11,17 +11,17 @@ Begin VB.Form Tanah
    ClientWidth     =   14220
    LinkTopic       =   "Form1"
    MDIChild        =   -1  'True
-   ScaleHeight     =   9195
-   ScaleWidth      =   14220
+   ScaleHeight     =   11535
+   ScaleWidth      =   19080
    WindowState     =   2  'Maximized
    Begin VB.PictureBox Tampilan 
       BackColor       =   &H00E0E0E0&
       Height          =   7155
-      Left            =   5760
+      Left            =   240
       ScaleHeight     =   7095
       ScaleWidth      =   5595
       TabIndex        =   13
-      Top             =   1800
+      Top             =   2400
       Visible         =   0   'False
       Width           =   5655
       Begin VB.ListBox ListPeralihan 
@@ -853,8 +853,10 @@ Private Sub Command9_Click()
     'Set rsZona = New ADODB.Recordset
     'rsZona.Open "select * from [Zona Tanah] ", db, adOpenDynamic, adLockOptimistic
     Set rsDaftarNIB = New ADODB.Recordset
-    rsDaftarNIB.Open "SELECT [Daftar NIB].[id],[Daftar NIB].[nomor urut], [Daftar NIB].idNIB, [Daftar NIB].Identitas FROM [Daftar NIB] LEFT JOIN [Zona Tanah] ON [Daftar NIB].[nomor urut] = [Zona Tanah].[ID] WHERE ((([Zona Tanah].ID) Is Null));", db, adOpenDynamic, adLockOptimistic
-        
+    'rsDaftarNIB.Open "SELECT [Daftar NIB].[id],[Daftar NIB].[nomor urut], [Daftar NIB].idNIB, [Daftar NIB].Identitas FROM [Daftar NIB] LEFT JOIN [Zona Tanah] ON [Daftar NIB].[nomor urut] = [Zona Tanah].[ID] WHERE ((([Zona Tanah].ID) Is Null));", db, adOpenDynamic, adLockOptimistic
+    rsDaftarNIB.Open "SELECT [Daftar NIB].[nomor urut], [Daftar NIB].idNIB, [Daftar NIB].Identitas, [Daftar NIB].id FROM [Daftar NIB] LEFT JOIN [Zona Tanah] ON [Daftar NIB].[idNIB] = [Zona Tanah].[NIB] WHERE ((([Zona Tanah].NIB) Is Null));", db, adOpenDynamic, adLockOptimistic
+     
+   
     
     List5.Clear
     List6.Clear
