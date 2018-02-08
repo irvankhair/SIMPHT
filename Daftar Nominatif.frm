@@ -282,10 +282,9 @@ Begin VB.Form DaftarNominatif
          Strikethrough   =   0   'False
       EndProperty
       Height          =   495
-      Left            =   6480
+      Left            =   4440
       TabIndex        =   4
       Top             =   2040
-      Visible         =   0   'False
       Width           =   2895
    End
    Begin VB.CommandButton Transfer 
@@ -607,26 +606,32 @@ pertama:
 End Sub
 
 Private Sub Command2_Click()
+     Dim rsSemua As ADODB.Recordset
     Dim rsKolom As ADODB.Recordset
     Dim db As ADODB.Connection
     Set db = New ADODB.Connection
     db.Open "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & pROJECTPATH & ";Persist Security Info=False;Jet OLEDB:Database "    ';pwd=globalisasi"
     db.CursorLocation = adUseClient
+    Set rsSemua = New ADODB.Recordset
+    rsSemua.Open "select * from [Daftar Nominatif] ", db, adOpenDynamic, adLockOptimistic
+    
     Set rsKolom = New ADODB.Recordset
     rsKolom.Open "select * from [kostum tabel] where [nama tabel]='Daftar Nominatif'", db, adOpenDynamic, adLockOptimistic
     While Not rsKolom.EOF
         rsKolom.Delete
         rsKolom.MoveNext
     Wend
-    For i = 0 To grdNominatif.Columns.Count - 1
+    For i = 0 To rsSemua.Fields.Count - 1
         rsKolom.AddNew
         rsKolom![nama tabel] = "Daftar Nominatif"
-        rsKolom![indeks kolom] = grdNominatif.Columns(i).ColIndex
-        rsKolom!isi = grdNominatif.Columns(i).Caption
-        rsKolom![lebar kolom] = grdNominatif.Columns(i).Width
-        rsKolom!tipe = RSDN.Fields(i).Type
+        rsKolom![indeks kolom] = i
+        rsKolom!isi = rsSemua.Fields(i).Name
+        rsKolom![lebar kolom] = 1000 'rsSemua.Fields(i).
+        rsKolom!tipe = rsSemua.Fields(i).Type
         rsKolom.Update
     Next i
+
+
 
 
 
@@ -872,14 +877,23 @@ End Sub
 
 Private Sub Sisip_Click()
     Dim urutSebelum As String
-
+    Dim nAMApEMILIK As String
     If Not RSDN.EOF = True And Not RSDN.BOF = True Then
         posisi = RSDN.AbsolutePosition
+        
         RSDN.MovePrevious
-        urutSebelum = RSDN!urutid
+        If RSDN.BOF Then
+            RSDN.Move 1
+            urutSebelum = RSDN!urutid - 0.2
+        Else
+            urutSebelum = RSDN!urutid
+        End If
+        nAMApEMILIK = "" & RSDN!PEMILIK
+        
         RSDN.AddNew
         RSDN!urutid = urutSebelum + 0.1
         RSDN!nib = NIBTerpilih
+        RSDN!PEMILIK = nAMApEMILIK
         RSDN.Update
         RSDN.Requery
         RSDN.Move posisi - 1

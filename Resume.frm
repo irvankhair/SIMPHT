@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "msdatgrd.ocx"
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "comdlg32.ocx"
-Begin VB.Form Resume 
+Begin VB.Form ResumeNilai 
    Appearance      =   0  'Flat
    BackColor       =   &H80000005&
    Caption         =   "Daftar Nominatif"
@@ -16,6 +16,27 @@ Begin VB.Form Resume
    ScaleHeight     =   8220
    ScaleWidth      =   15930
    WindowState     =   2  'Maximized
+   Begin VB.ListBox List1 
+      Appearance      =   0  'Flat
+      BackColor       =   &H80000004&
+      BeginProperty Font 
+         Name            =   "Calibri"
+         Size            =   14.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   1065
+      ItemData        =   "Resume.frx":0000
+      Left            =   4920
+      List            =   "Resume.frx":000D
+      TabIndex        =   22
+      Top             =   1440
+      Visible         =   0   'False
+      Width           =   1095
+   End
    Begin VB.CommandButton Command3 
       Caption         =   "Atur Tampilan Tabel"
       BeginProperty Font 
@@ -36,11 +57,11 @@ Begin VB.Form Resume
    Begin VB.PictureBox Tampilan 
       BackColor       =   &H00E0E0E0&
       Height          =   7155
-      Left            =   9840
+      Left            =   8760
       ScaleHeight     =   7095
       ScaleWidth      =   7635
       TabIndex        =   5
-      Top             =   6720
+      Top             =   3000
       Visible         =   0   'False
       Width           =   7695
       Begin VB.ListBox ListPeralihan 
@@ -65,7 +86,7 @@ Begin VB.Form Resume
       Begin VB.CommandButton Command10 
          Height          =   375
          Left            =   5640
-         Picture         =   "Resume.frx":0000
+         Picture         =   "Resume.frx":0025
          Style           =   1  'Graphical
          TabIndex        =   17
          Top             =   2040
@@ -75,7 +96,7 @@ Begin VB.Form Resume
       Begin VB.CommandButton Command9 
          Height          =   375
          Left            =   5640
-         Picture         =   "Resume.frx":0342
+         Picture         =   "Resume.frx":0367
          Style           =   1  'Graphical
          TabIndex        =   16
          Top             =   2520
@@ -85,7 +106,7 @@ Begin VB.Form Resume
       Begin VB.CommandButton Command8 
          Height          =   375
          Left            =   5640
-         Picture         =   "Resume.frx":0684
+         Picture         =   "Resume.frx":06A9
          Style           =   1  'Graphical
          TabIndex        =   15
          Top             =   3000
@@ -95,7 +116,7 @@ Begin VB.Form Resume
       Begin VB.CommandButton Command6 
          Height          =   375
          Left            =   5640
-         Picture         =   "Resume.frx":09C6
+         Picture         =   "Resume.frx":09EB
          Style           =   1  'Graphical
          TabIndex        =   14
          Top             =   1560
@@ -144,7 +165,7 @@ Begin VB.Form Resume
          Appearance      =   0  'Flat
          Height          =   390
          Left            =   3600
-         Picture         =   "Resume.frx":0D08
+         Picture         =   "Resume.frx":0D2D
          Style           =   1  'Graphical
          TabIndex        =   10
          Top             =   4560
@@ -154,7 +175,7 @@ Begin VB.Form Resume
          Appearance      =   0  'Flat
          Height          =   390
          Left            =   3600
-         Picture         =   "Resume.frx":140A
+         Picture         =   "Resume.frx":142F
          Style           =   1  'Graphical
          TabIndex        =   9
          Top             =   3960
@@ -164,7 +185,7 @@ Begin VB.Form Resume
          Appearance      =   0  'Flat
          Height          =   390
          Left            =   3600
-         Picture         =   "Resume.frx":1B0C
+         Picture         =   "Resume.frx":1B31
          Style           =   1  'Graphical
          TabIndex        =   8
          Top             =   1800
@@ -175,7 +196,7 @@ Begin VB.Form Resume
          BackColor       =   &H0000C0C0&
          Height          =   390
          Left            =   3600
-         Picture         =   "Resume.frx":220E
+         Picture         =   "Resume.frx":2233
          Style           =   1  'Graphical
          TabIndex        =   7
          Top             =   1200
@@ -183,7 +204,7 @@ Begin VB.Form Resume
       End
       Begin VB.ListBox List6 
          Appearance      =   0  'Flat
-         DragIcon        =   "Resume.frx":2912
+         DragIcon        =   "Resume.frx":2937
          BeginProperty Font 
             Name            =   "MS Sans Serif"
             Size            =   12
@@ -194,9 +215,9 @@ Begin VB.Form Resume
             Strikethrough   =   0   'False
          EndProperty
          Height          =   6030
-         ItemData        =   "Resume.frx":9164
+         ItemData        =   "Resume.frx":9189
          Left            =   4440
-         List            =   "Resume.frx":9166
+         List            =   "Resume.frx":918B
          MultiSelect     =   1  'Simple
          TabIndex        =   6
          ToolTipText     =   "Geser data dengan drag  dan dropp"
@@ -261,10 +282,9 @@ Begin VB.Form Resume
          Strikethrough   =   0   'False
       EndProperty
       Height          =   495
-      Left            =   6480
+      Left            =   4320
       TabIndex        =   4
       Top             =   2040
-      Visible         =   0   'False
       Width           =   2895
    End
    Begin VB.CommandButton Transfer 
@@ -377,7 +397,7 @@ Begin VB.Form Resume
       ForeColor       =   &H80000008&
       Height          =   855
       Left            =   0
-      TabIndex        =   22
+      TabIndex        =   23
       Top             =   0
       Width           =   6255
    End
@@ -405,27 +425,13 @@ Begin VB.Form Resume
       EndProperty
       ForeColor       =   &H80000008&
       Height          =   855
-      Left            =   0
+      Left            =   120
       TabIndex        =   0
-      Top             =   600
+      Top             =   720
       Width           =   6255
    End
-   Begin VB.Menu EditBaris 
-      Caption         =   "Edit Baris"
-      Visible         =   0   'False
-      WindowList      =   -1  'True
-      Begin VB.Menu EditIsi 
-         Caption         =   "Edit"
-      End
-      Begin VB.Menu Sisip 
-         Caption         =   "Sisipkan"
-      End
-      Begin VB.Menu HapusBaris 
-         Caption         =   "Hapus"
-      End
-   End
 End
-Attribute VB_Name = "Resume"
+Attribute VB_Name = "ResumeNilai"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
@@ -435,15 +441,31 @@ Attribute VB_Exposed = False
 'Option Explicit
 
 
+
+'untuk mouse list
+Private mintDragIndex As Integer
+
 Dim posisi As String
 Private Declare Function SendMessage Lib "user32" Alias _
-"SendMessageA" (ByVal hwnd As Long, ByVal wMsg As Long, _
-ByVal wParam As Long, lParam As Long) As Long
+                                     "SendMessageA" (ByVal hwnd As Long, ByVal wMsg As Long, _
+                                                     ByVal wParam As Long, lParam As Long) As Long
+Private Const LB_SETCURSEL = &H186
+Private Const LB_GETCURSEL = &H188
+Private Type POINTAPI
+    X As Long
+    Y As Long
+End Type
 
-Private mintDragIndex       As Integer
+Private Declare Function ClientToScreen Lib "user32" _
+(ByVal hwnd As Long, lpPoint As POINTAPI) As Long
+
+Private Declare Function LBItemFromPt Lib "COMCTL32.DLL" _
+(ByVal hLB As Long, ByVal ptX As Long, ByVal ptY As Long, _
+ByVal bAutoScroll As Long) As Long
 
 
 Private Function RapihkanGrid()
+'    MsgBox grdNominatif.Columns(1).Caption
     grdNominatif.Columns("id").Visible = False
     grdNominatif.Columns("urutid").Visible = False
     grdNominatif.Columns("idNIB").Visible = False
@@ -456,91 +478,91 @@ Private Function RapihkanGrid()
     db.CursorLocation = adUseClient
     Set rsKolom = New ADODB.Recordset
 
-         rsKolom.Open "select * from [kostum tabel] where [nama tabel]='Daftar Nominatif' ", db, adOpenDynamic, adLockOptimistic
+    rsKolom.Open "select * from [kostum tabel] where [nama tabel]='Daftar Resume' ", db, adOpenDynamic, adLockOptimistic
 
 
     For i = 0 To grdNominatif.Columns.Count - 1
-       rsKolom.MoveFirst
-      rsKolom.Find "isi='" & grdNominatif.Columns(i).Caption & "'"
-     If Not rsKolom.EOF Then
-        grdNominatif.Columns(i).Width = rsKolom![lebar kolom]
+        rsKolom.MoveFirst
+        rsKolom.Find "isi='" & grdNominatif.Columns(i).Caption & "'"
+        If Not rsKolom.EOF Then
+            grdNominatif.Columns(i).Width = rsKolom![lebar kolom]
 
-    End If
+        End If
     Next i
 End Function
 
 Private Sub Command12_Click()
-Dim i As Integer
-For i = 0 To List5.ListCount - 1
-List6.AddItem List5.List(i)
-Next i
-'bulanLap = Format(CDate(List6.List(0)), "mmmm yyyy")
-List5.Clear
+    Dim i As Integer
+    For i = 0 To List5.ListCount - 1
+        List6.AddItem List5.List(i)
+    Next i
+    'bulanLap = Format(CDate(List6.List(0)), "mmmm yyyy")
+    List5.Clear
 End Sub
 
 Private Sub Command13_Click()
-Dim i As Integer
-'If Not List6 = "Nama" Then
+    Dim i As Integer
+    'If Not List6 = "Nama" Then
 pertama:
-For i = 0 To List6.ListCount - 1
-If List6.Selected(i) Then
-List5.AddItem List6.List(i)
-List6.RemoveItem (i)
-GoTo pertama
+    For i = 0 To List6.ListCount - 1
+        If List6.Selected(i) Then
+            List5.AddItem List6.List(i)
+            List6.RemoveItem (i)
+            GoTo pertama
 
-End If
+        End If
 
-Next i
-'End If
+    Next i
+    'End If
 End Sub
 
 Private Sub Command14_Click()
-Dim i As Integer
-For i = 0 To List6.ListCount - 1
-List5.AddItem List6.List(i)
-Next i
-List6.Clear
-'List6.AddItem "Nama Obat"
+    Dim i As Integer
+    For i = 0 To List6.ListCount - 1
+        List5.AddItem List6.List(i)
+    Next i
+    List6.Clear
+    'List6.AddItem "Nama Obat"
 End Sub
 
 Private Sub Command18_Click()
-Dim i As Integer
-Dim db As ADODB.Connection
-Dim Sumber As String
+    Dim i As Integer
+    Dim db As ADODB.Connection
+    Dim Sumber As String
     Set db = New ADODB.Connection
     db.Open "PROVIDER=Microsoft.Jet.OLEDB.4.0;Data Source=" & pROJECTPATH & ";Jet OLEDB:Database Password=globalisasi;Persist Security Info=False"
     db.CursorLocation = adUseClient
     Set rsKolom = New ADODB.Recordset
 mulai:
-    rsKolom.Open "select * from [kostum tabel] where [nama tabel]='Daftar Nominatif' order by [indeks kolom]", db, adOpenDynamic, adLockOptimistic
+    rsKolom.Open "select * from [kostum tabel] where [nama tabel]='Daftar Resume' order by [indeks kolom]", db, adOpenDynamic, adLockOptimistic
     If rsKolom.RecordCount < List5.ListCount + List6.ListCount Then
-    For i = 1 To List5.ListCount + List6.ListCount - rsKolom.RecordCount
-    rsKolom.AddNew
-        rsKolom![nama tabel] = "Daftar Nominatif"
-        rsKolom![indeks kolom] = rsKolom.RecordCount
-        rsKolom![lebar kolom] = 1170
-        'rskolom!isi=
-        rsKolom.Update
-        
-    Next i
-    rsKolom.Requery
-    rsKolom.MoveFirst
+        For i = 1 To List5.ListCount + List6.ListCount - rsKolom.RecordCount
+            rsKolom.AddNew
+            rsKolom![nama tabel] = "Daftar Resume"
+            rsKolom![indeks kolom] = rsKolom.RecordCount
+            rsKolom![lebar kolom] = 1170
+            'rskolom!isi=
+            rsKolom.Update
+
+        Next i
+        rsKolom.Requery
+        rsKolom.MoveFirst
     End If
     'List5.Clear
     'List6.Clear
 
     '
     For i = 0 To List6.ListCount - 1
-    rsKolom!isi = List6.List(i)
-    rsKolom!tampil = True
-    rsKolom.MoveNext
+        rsKolom!isi = List6.List(i)
+        rsKolom!tampil = True
+        rsKolom.MoveNext
     Next i
     If Not List5.ListCount = 0 Then
-    For i = 0 To List5.ListCount - 1
-    rsKolom!isi = List5.List(i)
-    rsKolom!tampil = False
-    rsKolom.MoveNext
-    Next i
+        For i = 0 To List5.ListCount - 1
+            rsKolom!isi = List5.List(i)
+            rsKolom!tampil = False
+            rsKolom.MoveNext
+        Next i
     End If
     rsKolom.MoveFirst
     Sumber = ""
@@ -550,18 +572,18 @@ mulai:
     Sumber = Sumber & "[" & List6.List(List6.ListCount - 1) & "]"
     rsKolom!Source = "select " & Sumber & " from [Daftar Nominatif] order by urutid"
     rsKolom.Update
-'    rsKolom.Update
+    '    rsKolom.Update
     Tampilan.Visible = False
     Set RSDN = New ADODB.Recordset
     'MsgBox rsKolom!Source
-    
+
     Sumber = rsKolom!Source
-        RSDN.Open Sumber, db, adOpenDynamic, adLockOptimistic  '"SELECT * FROM [DAFTAR NOMINATIF] order by UrutId"
+    RSDN.Open Sumber, db, adOpenDynamic, adLockOptimistic  '"SELECT * FROM [DAFTAR NOMINATIF] order by UrutId"
 
-        Set DaftarNominatif.grdNominatif.DataSource = RSDN
-        DaftarNominatif.grdNominatif.ReBind
+    Set grdNominatif.DataSource = RSDN
+    grdNominatif.ReBind
 
-        RapihkanGrid
+    RapihkanGrid
     'While Not rsKolom.EOF
     '    X = rsKolom![indeks kolom]
     '    If rsKolom!tampil = True Then
@@ -573,57 +595,61 @@ mulai:
     'Wend
     'Tampilan.Visible = True
     'rsKolom.Requery
-'RapihkanGrid
+    'RapihkanGrid
 
-Exit Sub
+    Exit Sub
 Adaeror:
-InputBox "t", "t", Err.Number
-If Err.Number = 3021 Then
-rsKolom.AddNew
-rsKolom![nama tabel] = "Daftar Nominatif"
-rsKolom![indeks kolom] = rsKolom.RecordCount
-rsKolom![lebar kolom] = 1170
-'rskolom!isi=
-rsKolom.Update
-rsKolom.Close
-GoTo mulai
-End If
+    InputBox "t", "t", Err.Number
+    If Err.Number = 3021 Then
+        rsKolom.AddNew
+        rsKolom![nama tabel] = "Daftar Nominatif"
+        rsKolom![indeks kolom] = rsKolom.RecordCount
+        rsKolom![lebar kolom] = 1170
+        'rskolom!isi=
+        rsKolom.Update
+        rsKolom.Close
+        GoTo mulai
+    End If
 
 End Sub
 
 Private Sub Command19_Click()
-Dim i As Integer
+    Dim i As Integer
 pertama:
-For i = 0 To List5.ListCount - 1
-If List5.Selected(i) Then
-List6.AddItem List5.List(i)
-List5.RemoveItem (i)
-GoTo pertama
+    For i = 0 To List5.ListCount - 1
+        If List5.Selected(i) Then
+            List6.AddItem List5.List(i)
+            List5.RemoveItem (i)
+            GoTo pertama
 
-End If
+        End If
 
-Next i
+    Next i
 End Sub
 
 Private Sub Command2_Click()
+    Dim rsSemua As ADODB.Recordset
     Dim rsKolom As ADODB.Recordset
     Dim db As ADODB.Connection
     Set db = New ADODB.Connection
     db.Open "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & pROJECTPATH & ";Persist Security Info=False;Jet OLEDB:Database "    ';pwd=globalisasi"
     db.CursorLocation = adUseClient
+    Set rsSemua = New ADODB.Recordset
+    rsSemua.Open "select * from [Daftar Nominatif] ", db, adOpenDynamic, adLockOptimistic
+    
     Set rsKolom = New ADODB.Recordset
     rsKolom.Open "select * from [kostum tabel] where [nama tabel]='Daftar Nominatif'", db, adOpenDynamic, adLockOptimistic
     While Not rsKolom.EOF
         rsKolom.Delete
         rsKolom.MoveNext
     Wend
-    For i = 0 To grdNominatif.Columns.Count - 1
+    For i = 0 To rsSemua.Fields.Count - 1
         rsKolom.AddNew
-        rsKolom![nama tabel] = "Daftar Nominatif"
-        rsKolom![indeks kolom] = grdNominatif.Columns(i).ColIndex
-        rsKolom!isi = grdNominatif.Columns(i).Caption
-        rsKolom![lebar kolom] = grdNominatif.Columns(i).Width
-        rsKolom!tipe = RSDN.Fields(i).Type
+        rsKolom![nama tabel] = "Daftar Resume"
+        rsKolom![indeks kolom] = i
+        rsKolom!isi = rsSemua.Fields(i).Name
+        rsKolom![lebar kolom] = 1000 'rsSemua.Fields(i).ActualSize
+        rsKolom!tipe = rsSemua.Fields(i).Type
         rsKolom.Update
     Next i
 
@@ -640,7 +666,7 @@ Private Sub Command3_Click()
     db.Open "PROVIDER=Microsoft.Jet.OLEDB.4.0;Data Source=" & pROJECTPATH & ";Jet OLEDB:Database Password=globalisasi;Persist Security Info=False"
     db.CursorLocation = adUseClient
     Set rsKolom = New ADODB.Recordset
-    rsKolom.Open "select * from [kostum tabel] where [nama tabel]='Daftar Nominatif'", db, adOpenDynamic, adLockOptimistic
+    rsKolom.Open "select * from [kostum tabel] where [nama tabel]='Daftar Resume'", db, adOpenDynamic, adLockOptimistic
     List5.Clear
     List6.Clear
     While Not rsKolom.EOF
@@ -656,40 +682,68 @@ Private Sub Command3_Click()
 End Sub
 
 Private Sub Command4_Click()
-Tampilan.Visible = False
+    Tampilan.Visible = False
 
 End Sub
 
 Private Sub EditIsi_Click()
-If Not RSDN.EOF Then
-    grdNominatif.Splits(0).MarqueeStyle = dbgFloatingEditor
-    grdNominatif.Splits(0).Locked = False
+    If Not RSDN.EOF Then
+        grdNominatif.Splits(0).MarqueeStyle = dbgFloatingEditor
+        grdNominatif.Splits(0).Locked = False
+    End If
+End Sub
+Public Sub pindah(ByVal lbhwnd As Long, _
+ByVal X As Single, ByVal Y As Single)
+'untuk select otomatis saat meuse ke list
+
+Dim ItemIndex As Long
+Dim AtThisPoint As POINTAPI
+AtThisPoint.X = X \ Screen.TwipsPerPixelX
+AtThisPoint.Y = Y \ Screen.TwipsPerPixelY
+Call ClientToScreen(lbhwnd, AtThisPoint)
+ItemIndex = LBItemFromPt(lbhwnd, AtThisPoint.X, _
+   AtThisPoint.Y, False)
+If ItemIndex <> SendMessage(lbhwnd, LB_GETCURSEL, 0, 0) Then
+    Call SendMessage(lbhwnd, LB_SETCURSEL, ItemIndex, 0)
 End If
+
+End Sub
+
+Private Sub Form_Click()
+List1.Visible = False
 End Sub
 
 Private Sub Form_Load()
-Dim i As Integer
-Dim db As ADODB.Connection
-Dim rsKolom As ADODB.Recordset
-Dim Sumber As String
+    
+    Dim i As Integer
+    Dim db As ADODB.Connection
+    Dim rsKolom As ADODB.Recordset
+    Dim Sumber As String
     Set db = New ADODB.Connection
-      Set rsKolom = New ADODB.Recordset
+    Set rsKolom = New ADODB.Recordset
+    Set RSDN = New ADODB.Recordset
+    
+    If (IsNull(pROJECTPATH)) Then
+        
+    Else
         db.Open "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & pROJECTPATH & ";Persist Security Info=False;Jet OLEDB:Database "    ';pwd=globalisasi"
         db.CursorLocation = adUseClient
-   
-        rsKolom.Open "select * from [kostum tabel] where [nama tabel]='Daftar Nominatif' ", db, adOpenDynamic, adLockOptimistic
-        Sumber = rsKolom!Source
-        Set RSDN = New ADODB.Recordset
-        RSDN.Open Sumber, db, adOpenDynamic, adLockOptimistic  '"SELECT * FROM [DAFTAR NOMINATIF] order by UrutId"
 
-        Set DaftarNominatif.grdNominatif.DataSource = RSDN
-        DaftarNominatif.grdNominatif.ReBind
+        rsKolom.Open "select * from [kostum tabel] where [nama tabel]='Daftar Resume' ", db, adOpenDynamic, adLockOptimistic
+        Sumber = rsKolom!Source
+        'RSDN.Open "SELECT * FROM [DAFTAR NOMINATIF] order by UrutId", db, adOpenDynamic, adLockOptimistic
+        RSDN.Open Sumber, db, adOpenDynamic, adLockOptimistic  '"SELECT * FROM [DAFTAR NOMINATIF] order by UrutId"
+        'MsgBox Sumber
+        Set grdNominatif.DataSource = RSDN
+        grdNominatif.ReBind
+        
 
         RapihkanGrid
-
-        Set MyProperty = DaftarNominatif.grdNominatif   'nama datagrid yang inigin di scroll dengan mouse
+        
+        Set MyProperty = grdNominatif   'nama datagrid yang inigin di scroll dengan mouse
         WheelHook grdNominatif
-  
+    End If
+
 End Sub
 
 Private Sub Form_Resize()
@@ -706,13 +760,17 @@ Private Sub Form_Resize()
 End Sub
 
 
+Private Sub grdNominatif_Click()
+'List1.Visible = False
+End Sub
+
 Private Sub grdNominatif_ColResize(ByVal ColIndex As Integer, Cancel As Integer)
     Dim db As ADODB.Connection
     Set db = New ADODB.Connection
     db.Open "PROVIDER=Microsoft.Jet.OLEDB.4.0;Data Source=" & pROJECTPATH & ";Persist Security Info=False"
     db.CursorLocation = adUseClient
     Set rsKolom = New ADODB.Recordset
-    rsKolom.Open "select * from [kostum tabel] where [nama tabel]='Daftar Nominatif'", db, adOpenDynamic, adLockOptimistic
+    rsKolom.Open "select * from [kostum tabel] where [nama tabel]='Daftar Resume'", db, adOpenDynamic, adLockOptimistic
     rsKolom.Find "isi='" & grdNominatif.Columns(ColIndex).Caption & "'"
     If Not rsKolom.EOF Then
         rsKolom![lebar kolom] = grdNominatif.Columns(ColIndex).Width
@@ -721,22 +779,27 @@ Private Sub grdNominatif_ColResize(ByVal ColIndex As Integer, Cancel As Integer)
     End If
 End Sub
 
-Private Sub grdNominatif_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    If Button = 2 Then
+Private Sub grdNominatif_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
+If Button = 2 Then
         If Not RSDN.EOF And Not RSDN.BOF Then
             NIBTerpilih = "" & RSDN!nib
-            PopupMenu EditBaris
+            'PopupMenu MainForm.mnEditBaris
+            List1.Visible = True
+            List1.Top = Y + grdNominatif.Top
+            List1.Left = X
+            
         End If
     End If
 End Sub
 
 Private Sub grdNominatif_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
-If Not LastRow = "" Then
-'MsgBox LastRow
-grdNominatif.Splits(0).Locked = True
-grdNominatif.Splits(0).MarqueeStyle = dbgHighlightRowRaiseCell
+    If Not LastRow = "" Then
+        'MsgBox LastRow
+        grdNominatif.Splits(0).Locked = True
+        grdNominatif.Splits(0).MarqueeStyle = dbgHighlightRowRaiseCell
 
-End If
+    End If
+    List1.Visible = False
 
 End Sub
 
@@ -751,18 +814,26 @@ Private Sub HapusBaris_Click()
 
 End Sub
 
-Private Sub List6_DragDrop(Source As Control, X As Single, Y As Single)
-    ListRowMove Source, mintDragIndex, ListRowCalc(Source, Y)
+Private Sub List1_Click()
+If List1.text = "Edit" Then
+    EditIsi_Click
+    List1.Visible = False
+ElseIf List1.text = "Sisip" Then
+    Sisip_Click
+    List1.Visible = False
+ElseIf List1.text = "Hapus" Then
+    HapusBaris_Click
+    List1.Visible = False
+End If
 
 End Sub
 
-Private Sub List6_DragOver(Source As Control, X As Single, Y As Single, State As Integer)
-    List6.ListIndex = ListRowCalc(List6, Y)
-
+Private Sub List1_LostFocus()
+List1.Visible = False
 End Sub
-Private Sub List6_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    mintDragIndex = ListRowCalc(List6, Y)
-    List6.Drag
+
+Private Sub List1_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+pindah List1.hwnd, X, Y
 End Sub
 'untuk dragdropp list -----------------------------------------------------------------------------
 Public Function ListRowCalc(pobjLB As ListBox, ByVal Y As Single) As Integer '-----------------------------------------------------------------------------
@@ -783,7 +854,6 @@ Public Function ListRowCalc(pobjLB As ListBox, ByVal Y As Single) As Integer '--
     End If
                  
 End Function
-
 'untuk dragdropp list-----------------------------------------------------------------------------
 Public Sub ListRowMove(pobjLB As ListBox, _
                        ByVal pintOldRow As Integer, _
@@ -810,16 +880,41 @@ Public Sub ListRowMove(pobjLB As ListBox, _
     pobjLB.List(pintNewRow) = strSavedItem
 
 End Sub
+Private Sub List6_DragDrop(Source As Control, X As Single, Y As Single)
+    ListRowMove Source, mintDragIndex, ListRowCalc(Source, Y)
+
+End Sub
+
+Private Sub List6_DragOver(Source As Control, X As Single, Y As Single, State As Integer)
+    List6.ListIndex = ListRowCalc(List6, Y)
+
+End Sub
+Private Sub List6_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    mintDragIndex = ListRowCalc(List6, Y)
+    List6.Drag
+End Sub
+
+
+
 Private Sub Sisip_Click()
-    Dim urutSebelum As String
-    
+   Dim urutSebelum As String
+    Dim nAMApEMILIK As String
     If Not RSDN.EOF = True And Not RSDN.BOF = True Then
         posisi = RSDN.AbsolutePosition
+        
         RSDN.MovePrevious
-        urutSebelum = RSDN!urutid
+        If RSDN.BOF Then
+            RSDN.Move 1
+            urutSebelum = RSDN!urutid - 0.2
+        Else
+            urutSebelum = RSDN!urutid
+        End If
+        nAMApEMILIK = "" & RSDN!PEMILIK
+        
         RSDN.AddNew
         RSDN!urutid = urutSebelum + 0.1
         RSDN!nib = NIBTerpilih
+        RSDN!PEMILIK = nAMApEMILIK
         RSDN.Update
         RSDN.Requery
         RSDN.Move posisi - 1
@@ -833,7 +928,8 @@ Private Sub Command1_Click()
 '    Dim excel As New ADODB.Recordset
 '    Set excel = importExcel
 '    MsgBox excel.RecordCount
-RSDN.Requery
+'Command2_Click
+    RSDN.Requery
 
 End Sub
 

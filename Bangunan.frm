@@ -11,8 +11,8 @@ Begin VB.Form Bangunan
    ClientWidth     =   14220
    LinkTopic       =   "Form1"
    MDIChild        =   -1  'True
-   ScaleHeight     =   11535
-   ScaleWidth      =   19080
+   ScaleHeight     =   9195
+   ScaleWidth      =   14220
    WindowState     =   2  'Maximized
    Begin VB.PictureBox Tampilan 
       BackColor       =   &H00E0E0E0&
@@ -751,10 +751,10 @@ Dim rsDaftarNIB As ADODB.Recordset
                     rsBangunan!idbangunan = rsDaftarNIB!id
                     rsBangunan!nomor = rsDaftarNIB![urutid]
                     rsBangunan!nib = rsDaftarNIB!idnib
-                    rsBangunan!identitas = rsDaftarNIB!Pemilik
+                    rsBangunan!identitas = rsDaftarNIB!PEMILIK
                     rsBangunan![Jenis bangunan] = rsDaftarNIB![Jenis bangunan]
-                    rsBangunan![Jumlah Jenis bangunan] = rsDaftarNIB![Jumlah Jenis bangunan]
-                    rsBangunan![Luas bangunan] = rsDaftarNIB![Luas bangunan]
+                    rsBangunan![jumlah jenis bangunan] = rsDaftarNIB![jumlah jenis bangunan]
+                    rsBangunan![Luas Bangunan] = rsDaftarNIB![Luas Bangunan]
                     
                 rsBangunan.Update
                 rsDaftarNIB.MoveNext
@@ -792,6 +792,9 @@ Frame1.Visible = False
 End Sub
 
 Private Sub Command22_Click()
+Dim JumlahItem As Single
+Dim luasBangunan As Single
+Dim NilaiSusut As Single
 X = MsgBox("Apakah Anda yakin untuk melakukan proses kalkulasi NPW bangunan dengan harga pada klasifikasi yang telah ditetapkan?", vbYesNo, "Konfirmasi Kalkulasi NPW Tanah")
 If X = vbYes Then
     rsBangunan.Filter = "harga > 0"
@@ -804,24 +807,49 @@ If X = vbYes Then
         db.Open "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & pROJECTPATH & ";Persist Security Info=False;Jet OLEDB:Database "    ';pwd=globalisasi"
         db.CursorLocation = adUseClient
    
-        RSDN.Open "select id,nib,[Luas Hasil Ukur di Dalam Trase],[Nilai Tanah per Meter Persegi],[Nilai Pasar Tanah] from [daftar nominatif] where nib is not null ", db, adOpenDynamic, adLockOptimistic
+        RSDN.Open "select id,idnib,[Jumlah Jenis Bangunan],[Luas Bangunan],[Nilai Bangunan per meter persegi],penyusutan,[jumlah nilai bangunan],[nilai pasar bangunan] from [daftar nominatif] where [jenis bangunan] is not null ", db, adOpenDynamic, adLockOptimistic
         If Not RSDN.EOF Then
         
             While Not rsBangunan.EOF
                 RSDN.MoveFirst
-                RSDN.Find "nib='" & rsBangunan!nib & "'"
+                RSDN.Find "id='" & rsBangunan!idbangunan & "'"
                 If Not RSDN.EOF Then
-                    RSDN![Nilai Tanah per Meter Persegi] = rsBangunan!harga
-                    RSDN![Nilai Pasar Tanah] = rsBangunan!harga * RSDN![Luas Hasil Ukur di Dalam Trase]
+                    If IsNull(RSDN![jumlah jenis bangunan]) Then
+                        JumlahItem = 1
+                    Else
+                        JumlahItem = RSDN![jumlah jenis bangunan]
+                    End If
+                    If IsNull(RSDN![Luas Bangunan]) Then
+                        luasBangunan = 1
+                    Else
+                        luasBangunan = RSDN![Luas Bangunan]
+                    End If
+                    If IsNull(rsBangunan!penyusutan) Then
+                        NilaiSusut = 100
+                    Else
+                        NilaiSusut = rsBangunan!penyusutan
+                        RSDN!penyusutan = rsBangunan!penyusutan
+                    End If
+                    
+                    'MsgBox rsBangunan!harga & Chr(13) & JumlahItem & Chr(13) & luasbangunan & Chr(13) & NilaiSusut
+                    RSDN![Nilai Bangunan per meter persegi] = rsBangunan!harga '* JumlahItem * luasbangunan * NilaiSusut / 100
+                    RSDN![jumlah nilai bangunan] = rsBangunan!harga * JumlahItem * luasBangunan * NilaiSusut / 100
+                    
+                    'RSDN![Nilai Pasar Tanah] = rsBangunan!harga * RSDN![Luas Hasil Ukur di Dalam Trase]
                     RSDN.Update
                     
                     rsBangunan!keterangan = "NPW telah diupdate pada tanggal " & Format(Date, "dd-mm-yyyy")
+                    
                     
                 Else
                     rsBangunan!keterangan = "NIB tidak ditemukan pada database"
                 End If
                 rsBangunan.MoveNext
             Wend
+            
+            
+            
+'kalkulasi nilai pasar bangunan
         End If
         
         'Sumber = rsKolom!Source
@@ -835,8 +863,8 @@ If X = vbYes Then
        ' RapihkanGrid
 
        
-  
-    
+  rsBangunan.Filter = ""
+    rsBangunan.Requery
 End If
 
 End Sub
@@ -940,18 +968,35 @@ Frame1.Left = 0
 End Sub
 
 Private Sub grdbangunan_AfterColEdit(ByVal ColIndex As Integer)
+If GRDBangunan.Col = GRDBangunan.Columns("Penyusutan").ColIndex Then
+    'rsHarga.MoveFirst
+    'rsHarga.Find "Nomor ='" & GRDBangunan.Columns("Penyusutan").Value & "'"
+    'If Not rsHarga.EOF Then
+    '    GRDBangunan.Columns("Harga").Value = rsHarga!harga
+        'Sendkeys "{down}"
+        rsBangunan.MoveNext
+        GRDBangunan.Col = GRDBangunan.Col - 1
+    'Else
+    'MsgBox "Maaf nomor zona tersebut belum diidentifikasi, silahkan tambahkan pada daftar harga zona!", vbCritical
+    'GRDBangunan.SetFocus
+    'End If
+    Exit Sub
+End If
 If GRDBangunan.Col = GRDBangunan.Columns("Klasifikasi").ColIndex Then
     rsHarga.MoveFirst
     rsHarga.Find "Nomor ='" & GRDBangunan.Columns("Klasifikasi").Value & "'"
     If Not rsHarga.EOF Then
         GRDBangunan.Columns("Harga").Value = rsHarga!harga
+        GRDBangunan.Col = GRDBangunan.Col + 1
         'Sendkeys "{down}"
-        rsBangunan.MoveNext
+        'rsBangunan.MoveNext
     Else
     MsgBox "Maaf nomor zona tersebut belum diidentifikasi, silahkan tambahkan pada daftar harga zona!", vbCritical
     GRDBangunan.SetFocus
     End If
 End If
+
+
 End Sub
 
 Public Sub Sendkeys(text As Variant, Optional wait As Boolean = False)

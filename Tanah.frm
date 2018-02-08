@@ -828,7 +828,7 @@ If X = vbYes Then
        ' RapihkanGrid
 
        
-  
+  rsZona.Filter = "harga > 0"
     
 End If
 

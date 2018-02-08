@@ -47,6 +47,9 @@ Begin VB.MDIForm MainForm
       Begin VB.Menu mnDaftarNominatif 
          Caption         =   "&Daftar Nominatif"
       End
+      Begin VB.Menu mnResume 
+         Caption         =   "&Resume"
+      End
       Begin VB.Menu mnDataFisik 
          Caption         =   "Data &Fisik"
          Begin VB.Menu mntanaH 
@@ -407,6 +410,10 @@ End Sub
 
 Private Sub tanaH_Click()
 
+End Sub
+
+Private Sub mnResume_Click()
+ResumeNilai.Show
 End Sub
 
 Private Sub mntanaH_Click()
