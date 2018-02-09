@@ -12,3 +12,4 @@ Public objMenuEx As cMenuEx
 Public glMenuStyle As EnumStyleMenu '/ style for menuXP
 Public gbSubClassMenu As Boolean
 
+

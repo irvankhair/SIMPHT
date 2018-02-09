@@ -16,6 +16,23 @@ Begin VB.Form ResumeNilai
    ScaleHeight     =   8220
    ScaleWidth      =   15930
    WindowState     =   2  'Maximized
+   Begin VB.CommandButton TransferKEExcell 
+      Caption         =   "Transfer Ke Excell"
+      BeginProperty Font 
+         Name            =   "Calibri"
+         Size            =   14.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   495
+      Left            =   4440
+      TabIndex        =   24
+      Top             =   2040
+      Width           =   2535
+   End
    Begin VB.ListBox List1 
       Appearance      =   0  'Flat
       BackColor       =   &H80000004&
@@ -30,10 +47,10 @@ Begin VB.Form ResumeNilai
       EndProperty
       Height          =   1065
       ItemData        =   "Resume.frx":0000
-      Left            =   4920
+      Left            =   6960
       List            =   "Resume.frx":000D
       TabIndex        =   22
-      Top             =   1440
+      Top             =   480
       Visible         =   0   'False
       Width           =   1095
    End
@@ -282,17 +299,18 @@ Begin VB.Form ResumeNilai
          Strikethrough   =   0   'False
       EndProperty
       Height          =   495
-      Left            =   4320
+      Left            =   11040
       TabIndex        =   4
-      Top             =   2040
+      Top             =   600
+      Visible         =   0   'False
       Width           =   2895
    End
    Begin VB.CommandButton Transfer 
       Caption         =   "Transfer Ke Excell"
       Height          =   495
-      Left            =   6480
+      Left            =   11040
       TabIndex        =   3
-      Top             =   1440
+      Top             =   0
       Visible         =   0   'False
       Width           =   1935
    End
@@ -440,7 +458,17 @@ Attribute VB_Exposed = False
 'untuk dragdropp list
 'Option Explicit
 
+'untuk transfer ke excell
+Private Declare Function ShellEx Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hwnd As Long, ByVal lpOperation As String, ByVal lpFile As String, ByVal lpParameters As Any, ByVal lpDirectory As Any, ByVal nShowCmd As Long) As Long
 
+Private Declare Function GetTempPath Lib "kernel32" _
+         Alias "GetTempPathA" (ByVal nBufferLength As Long, _
+         ByVal lpBuffer As String) As Long
+
+      Private Declare Function GetTempFileName Lib "kernel32" _
+         Alias "GetTempFileNameA" (ByVal lpszPath As String, _
+         ByVal lpPrefixString As String, ByVal wUnique As Long, _
+         ByVal lpTempFileName As String) As Long
 
 'untuk mouse list
 Private mintDragIndex As Integer
@@ -587,9 +615,9 @@ mulai:
     'While Not rsKolom.EOF
     '    X = rsKolom![indeks kolom]
     '    If rsKolom!tampil = True Then
-    '        List6.AddItem rs.Fields(X).Name
+    '        List6.AddItem rsdn.Fields(X).Name
     '    Else
-    '        List5.AddItem rs.Fields(X).Name
+    '        List5.AddItem rsdn.Fields(X).Name
     '    End If
     'rsKolom.MoveNext
     'Wend
@@ -709,8 +737,150 @@ End If
 
 End Sub
 
+Private Sub TransferKEExcell_Click()
+              
+              
+              
+              
+              Dim NamaFileTemp As String
+               Dim oExcel As Object
+               Dim oBook As Object
+               Dim oSheet As Object
+               Dim sel As String
+               
+         
+         
+             NamaFileTemp = CreateTempFile("Pjn")
+               Set oExcel = CreateObject("Excel.Application")
+               Set oBook = oExcel.Workbooks.Add
+               Set oSheet = oBook.Worksheets(1)
+               oSheet.Range("A1:I1").Select
+'coding untuk membuat garis pada cell
+               'With oSheet.Selection
+                '.HorizontalAlignment = xlCenter
+                '.VerticalAlignment = xlBottom
+                '.WrapText = False
+                '.Orientation = 0
+                '.AddIndent = False
+                '.IndentLevel = 0
+                '.ShrinkToFit = False
+                '.ReadingOrder = xlContext
+                '.MergeCells = False
+                'End With
+                'oSheet.range("A1:I1").Merge
+                oSheet.Range("A1:I1").Select
+                
+                With oSheet.Range("A1:I1")
+                    .HorizontalAlignment = xlCenter
+                    .VerticalAlignment = xlCenter
+                    .WrapText = False
+                    .Orientation = 0
+                    .AddIndent = False
+                    .IndentLevel = 0
+                    .ShrinkToFit = False
+                    .ReadingOrder = xlContext
+                    .MergeCells = True
+                End With
+                'oSheet.Range("g3:I3").MergeCells = True
+                'oSheet.Range("g3:I3").WrapText = True
+                
+                oSheet.Range("a" & RSDN.RecordCount + 8).Value = "Pembuat Laporan"
+            oSheet.Range("a" & RSDN.RecordCount + 12).Value = "(……………………………)"
+            oSheet.Range("f" & RSDN.RecordCount + 8).Value = "Diperiksa Oleh"
+            oSheet.Range("f" & RSDN.RecordCount + 12).Value = "(……………………………)"
+            oSheet.Range("J" & RSDN.RecordCount + 8).Value = "Diterima Oleh"
+            oSheet.Range("J" & RSDN.RecordCount + 12).Value = "(……………………………)"
+            Range("a" & RSDN.RecordCount + 6 & ":K" & RSDN.RecordCount + 6).Borders(xlEdgeTop).LineStyle = xlContinuous
+            Range("a" & RSDN.RecordCount + 6 & ":K" & RSDN.RecordCount + 6).Borders(xlEdgeTop).Weight = xlThin
+            
+                
+                
+                oSheet.Range("a1").Value = "RESUME"
+                oSheet.Range("a4").Value = "Hari/tgl : " & Date
+                oSheet.Range("a3").Value = NamaProjek  '"Sumber : " & lblLokal.Caption
+                'oSheet.Range("g4").Value = "Kode Akses : " & txtKodeAkses.text
+                'oSheet.Range("g3").Value = "Tujuan : " & lblTujuan.Caption
+                Range("a5:K5").Borders(xlEdgeLeft).LineStyle = xlContinuous
+                Range("a5:K5").Borders(xlEdgeLeft).Weight = xlThin
+                Range("a5:K5").Borders(xlEdgeLeft).ColorIndex = 0
+                Range("a5:K5").Borders(xlEdgeLeft).TintAndShade = 0
+                Range("a5:K5").Borders(xlEdgeTop).LineStyle = xlContinuous
+                Range("a5:K5").Borders(xlEdgeTop).Weight = xlThin
+                Range("a5:K5").Borders(xlEdgeBottom).LineStyle = xlContinuous
+                Range("a5:K5").Borders(xlEdgeBottom).Weight = xlThin
+                Range("a5:K5").Borders(xlEdgeRight).LineStyle = xlContinuous
+                Range("a5:K5").Borders(xlEdgeRight).Weight = xlThin
+                'oSheet.Columns("c:c").ColumnWidth = 18
+                 'oSheet.Columns("d:d").ColumnWidth = 18
+                 
+'coding untuk mengatur kebar kolom
+                oSheet.Columns("e:e").ColumnWidth = 33
+             oSheet.Columns("f:f").ColumnWidth = 7.57
+             oSheet.Columns("g:g").ColumnWidth = 8.43
+             oSheet.Columns("i:i").ColumnWidth = 30
+            oSheet.Columns("a:a").ColumnWidth = 4
+            
+'pilih kolom mana yang mau di hide
+            'oSheet.Columns("a:a").Hidden = True
+            'oSheet.Columns("h:h").Hidden = True
+            ''oSheet.Columns("b:b").Hidden = True
+            'oSheet.Columns("c:c").Hidden = True
+            'oSheet.Columns("d:d").Hidden = True
+            'oSheet.Columns("J:J").Hidden = True
+            'oSheet.Columns("I:I").Hidden = True
+                
+                'Selection.EntireColumn.Hidden = True
+                oSheet.Rows("1:1").RowHeight = 30.75
+                'oSheet.range("A1:I1").Select
+               For i = 1 To RSDN.Fields.Count
+               oSheet.Cells(5, i) = RSDN.Fields(i - 1).Name
+               Next i
+'Transfer the data to Excel
+               
+               
+               oSheet.Range("A6").CopyFromRecordset RSDN
+               
+               
+               
+               If oExcel.Version > "11.0" Then
+               oBook.SaveAs NamaFileTemp & ".xlsx"
+               NamaFileTemp = NamaFileTemp & ".xlsx"
+               Else
+                  oBook.SaveAs NamaFileTemp & ".xls"
+                  NamaFileTemp = NamaFileTemp & ".xls"
+                End If
+               oExcel.Quit
+               X = ShellEx(Me.hwnd, "open", NamaFileTemp, "", "", 10)
+'               tandaSelesai.Visible = True
+ '              Shape1.Visible = True
+  '             If txtKodeAkses = Operator & Format(Now, "ddMMyyyyhhmm") Then
+   '            txtKodeAkses = Operator & Format(Now, "ddMMyyyyhhmm") + 1
+    ''           Else
+      '         txtKodeAkses = Operator & Format(Now, "ddMMyyyyhhmm")
+       '        End If
+               
+               
+
+       
+         
+End Sub
+
+Private Function CreateTempFile(sPrefix As String) As String
+         Dim sTmpPath As String * 512
+         Dim sTmpName As String * 576
+         Dim nRet As Long
+
+         nRet = GetTempPath(512, sTmpPath)
+         If (nRet > 0 And nRet < 512) Then
+            nRet = GetTempFileName(sTmpPath, sPrefix, 0, sTmpName)
+            If nRet <> 0 Then
+               CreateTempFile = Left$(sTmpName, _
+                  InStr(sTmpName, vbNullChar) - 1)
+            End If
+         End If
+End Function
 Private Sub Form_Click()
-List1.Visible = False
+'List1.Visible = False
 End Sub
 
 Private Sub Form_Load()
@@ -723,8 +893,8 @@ Private Sub Form_Load()
     Set rsKolom = New ADODB.Recordset
     Set RSDN = New ADODB.Recordset
     
-    If (IsNull(pROJECTPATH)) Then
-        
+    If pROJECTPATH = "" Then
+        MsgBox "Maaf belum ada file projeck yang dipilih......!", vbInformation
     Else
         db.Open "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & pROJECTPATH & ";Persist Security Info=False;Jet OLEDB:Database "    ';pwd=globalisasi"
         db.CursorLocation = adUseClient
@@ -774,7 +944,7 @@ Private Sub grdNominatif_ColResize(ByVal ColIndex As Integer, Cancel As Integer)
     rsKolom.Find "isi='" & grdNominatif.Columns(ColIndex).Caption & "'"
     If Not rsKolom.EOF Then
         rsKolom![lebar kolom] = grdNominatif.Columns(ColIndex).Width
-        'rskolom!tipe = rs.Fields(0).Type
+        'rskolom!tipe = rsdn.Fields(0).Type
         rsKolom.Update
     End If
 End Sub
@@ -909,12 +1079,12 @@ Private Sub Sisip_Click()
         Else
             urutSebelum = RSDN!urutid
         End If
-        nAMApEMILIK = "" & RSDN!PEMILIK
+        nAMApEMILIK = "" & RSDN!pemilik
         
         RSDN.AddNew
         RSDN!urutid = urutSebelum + 0.1
         RSDN!nib = NIBTerpilih
-        RSDN!PEMILIK = nAMApEMILIK
+        RSDN!pemilik = nAMApEMILIK
         RSDN.Update
         RSDN.Requery
         RSDN.Move posisi - 1
