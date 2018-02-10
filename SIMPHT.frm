@@ -474,6 +474,7 @@ Private Sub mnDaftarNominatif_Click()
         MsgBox "Anda Belum membuka file Project"
     Else
         Unload DaftarNominatif
+        DaftarNominatif.Label1 = NamaProjek
         DaftarNominatif.Show
     End If
 End Sub
@@ -503,6 +504,7 @@ End Sub
 
 Private Sub mnResume_Click()
     Unload ResumeNilai
+    ResumeNilai.Label1 = NamaProjek
     ResumeNilai.Show
 End Sub
 

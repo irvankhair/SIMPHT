@@ -314,7 +314,7 @@ Begin VB.Form ResumeNilai
       Visible         =   0   'False
       Width           =   1935
    End
-   Begin VB.CommandButton Command1 
+   Begin VB.CommandButton Refresh 
       Caption         =   "Refress"
       BeginProperty Font 
          Name            =   "Calibri"
@@ -735,6 +735,11 @@ Public Sub pindah(ByVal lbhwnd As Long, _
         Call SendMessage(lbhwnd, LB_SETCURSEL, ItemIndex, 0)
     End If
 
+End Sub
+
+Private Sub Refresh_Click()
+    RSDN.Requery
+    RapihkanGrid
 End Sub
 
 Private Sub TransferKEExcell_Click()
