@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "comdlg32.ocx"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "mscomctl.ocx"
 Begin VB.MDIForm MainForm 
    BackColor       =   &H00FFFFFF&
    Caption         =   "SIMPHT"
@@ -228,33 +228,33 @@ Private Sub mnBacaDataNominatif_click()
         FileCopy App.Path & "\master.mdb", CommonDialog1.FileName
         namaMdb = CommonDialog1.FileName
         Transfer.Show
-        Dim excel As New ADODB.Recordset
+        Dim Excel As New ADODB.Recordset
         Dim access As New ADODB.Recordset
 
         Dim i, j As Integer
-        Set excel = importExcel
+        Set Excel = importExcel
         Set access = konekAccess
 
         Dim temp As String
 
-        temp = excel.Fields("NIB")
-        For i = 1 To excel.RecordCount
+        temp = Excel.Fields("NIB")
+        For i = 1 To Excel.RecordCount
             With access
                 .AddNew
                 For j = 2 To 19
-                    .Fields(j) = excel.Fields(j - 2)
+                    .Fields(j) = Excel.Fields(j - 2)
 
                 Next
                 If (Not IsNull(access.Fields("nomor urut"))) Then
                     access.Fields("Pemilik") = access.Fields("Identitas")
                 End If
-                .Fields("Index Benda Lain yang Berkaitan") = excel.Fields("Index Benda Lain yang Berkaitan")
-                .Fields("Jenis Benda Lain yang Berkaitan") = excel.Fields("Jenis Benda Lain yang Berkaitan")
-                .Fields("Jumlah Benda Lain yang Berkaitan") = excel.Fields("Jumlah Benda Lain yang Berkaitan")
-                If ((excel.Fields(18) <> 0) And (excel.Fields(19) <> 0) And (excel.Fields(20) <> 0)) Then
+                .Fields("Index Benda Lain yang Berkaitan") = Excel.Fields("Index Benda Lain yang Berkaitan")
+                .Fields("Jenis Benda Lain yang Berkaitan") = Excel.Fields("Jenis Benda Lain yang Berkaitan")
+                .Fields("Jumlah Benda Lain yang Berkaitan") = Excel.Fields("Jumlah Benda Lain yang Berkaitan")
+                If ((Excel.Fields(18) <> 0) And (Excel.Fields(19) <> 0) And (Excel.Fields(20) <> 0)) Then
                     .Fields("Ukuran Jenis Tanaman") = "Besar"
-                    .Fields("Jumlah tanaman") = excel.Fields(18)
-                    .Fields("jenis tanaman") = excel.Fields(17)
+                    .Fields("Jumlah tanaman") = Excel.Fields(18)
+                    .Fields("jenis tanaman") = Excel.Fields(17)
                     If IsNull(access.Fields("idNIB")) Then
                         access.Fields("idNIB") = temp
                     ElseIf (Not IsNull(access.Fields("idNIB")) And (access.Fields("idNIB") <> temp)) Then
@@ -277,8 +277,8 @@ Private Sub mnBacaDataNominatif_click()
 
 
                     .Fields("Ukuran Jenis Tanaman") = "Sedang"
-                    .Fields("Jumlah tanaman") = excel.Fields(19)
-                    .Fields("jenis tanaman") = excel.Fields(17)
+                    .Fields("Jumlah tanaman") = Excel.Fields(19)
+                    .Fields("jenis tanaman") = Excel.Fields(17)
                     .MoveNext
                     .AddNew
                     If IsNull(access.Fields("idNIB")) Then
@@ -291,12 +291,12 @@ Private Sub mnBacaDataNominatif_click()
                     End If
 
                     .Fields("Ukuran Jenis Tanaman") = "Kecil"
-                    .Fields("Jumlah tanaman") = excel.Fields(20)
-                    .Fields("jenis tanaman") = excel.Fields(17)
-                ElseIf ((excel.Fields(18) <> 0) And (excel.Fields(19) <> 0)) Then
+                    .Fields("Jumlah tanaman") = Excel.Fields(20)
+                    .Fields("jenis tanaman") = Excel.Fields(17)
+                ElseIf ((Excel.Fields(18) <> 0) And (Excel.Fields(19) <> 0)) Then
                     .Fields("Ukuran Jenis Tanaman") = "Besar"
-                    .Fields("Jumlah tanaman") = excel.Fields(18)
-                    .Fields("jenis tanaman") = excel.Fields(17)
+                    .Fields("Jumlah tanaman") = Excel.Fields(18)
+                    .Fields("jenis tanaman") = Excel.Fields(17)
                     If IsNull(access.Fields("idNIB")) Then
                         access.Fields("idNIB") = temp
                     ElseIf (Not IsNull(access.Fields("idNIB")) And (access.Fields("idNIB") <> temp)) Then
@@ -319,12 +319,12 @@ Private Sub mnBacaDataNominatif_click()
                     End If
 
                     .Fields("Ukuran Jenis Tanaman") = "Sedang"
-                    .Fields("Jumlah tanaman") = excel.Fields(19)
-                    .Fields("jenis tanaman") = excel.Fields(17)
-                ElseIf ((excel.Fields(19) <> 0) And (excel.Fields(20) <> 0)) Then
+                    .Fields("Jumlah tanaman") = Excel.Fields(19)
+                    .Fields("jenis tanaman") = Excel.Fields(17)
+                ElseIf ((Excel.Fields(19) <> 0) And (Excel.Fields(20) <> 0)) Then
                     .Fields("Ukuran Jenis Tanaman") = "Sedang"
-                    .Fields("Jumlah tanaman") = excel.Fields(19)
-                    .Fields("jenis tanaman") = excel.Fields(17)
+                    .Fields("Jumlah tanaman") = Excel.Fields(19)
+                    .Fields("jenis tanaman") = Excel.Fields(17)
                     If IsNull(access.Fields("idNIB")) Then
                         access.Fields("idNIB") = temp
                     ElseIf (Not IsNull(access.Fields("idNIB")) And (access.Fields("idNIB") <> temp)) Then
@@ -346,12 +346,12 @@ Private Sub mnBacaDataNominatif_click()
                     End If
 
                     .Fields("Ukuran Jenis Tanaman") = "Kecil"
-                    .Fields("Jumlah tanaman") = excel.Fields(20)
-                    .Fields("jenis tanaman") = excel.Fields(17)
-                ElseIf ((excel.Fields(18) <> 0) And (excel.Fields(20) <> 0)) Then
+                    .Fields("Jumlah tanaman") = Excel.Fields(20)
+                    .Fields("jenis tanaman") = Excel.Fields(17)
+                ElseIf ((Excel.Fields(18) <> 0) And (Excel.Fields(20) <> 0)) Then
                     .Fields("Ukuran Jenis Tanaman") = "Besar"
-                    .Fields("Jumlah tanaman") = excel.Fields(18)
-                    .Fields("jenis tanaman") = excel.Fields(17)
+                    .Fields("Jumlah tanaman") = Excel.Fields(18)
+                    .Fields("jenis tanaman") = Excel.Fields(17)
                     If IsNull(access.Fields("idNIB")) Then
                         access.Fields("idNIB") = temp
                     ElseIf (Not IsNull(access.Fields("idNIB")) And (access.Fields("idNIB") <> temp)) Then
@@ -373,12 +373,12 @@ Private Sub mnBacaDataNominatif_click()
                     End If
 
                     .Fields("Ukuran Jenis Tanaman") = "Kecil"
-                    .Fields("Jumlah tanaman") = excel.Fields(20)
-                    .Fields("jenis tanaman") = excel.Fields(17)
-                ElseIf (excel.Fields(18) <> 0) Then
+                    .Fields("Jumlah tanaman") = Excel.Fields(20)
+                    .Fields("jenis tanaman") = Excel.Fields(17)
+                ElseIf (Excel.Fields(18) <> 0) Then
                     .Fields("Ukuran Jenis Tanaman") = "Besar"
-                    .Fields("Jumlah tanaman") = excel.Fields(18)
-                    .Fields("jenis tanaman") = excel.Fields(17)
+                    .Fields("Jumlah tanaman") = Excel.Fields(18)
+                    .Fields("jenis tanaman") = Excel.Fields(17)
                     If IsNull(access.Fields("idNIB")) Then
                         access.Fields("idNIB") = temp
                     ElseIf (Not IsNull(access.Fields("idNIB")) And (access.Fields("idNIB") <> temp)) Then
@@ -388,10 +388,10 @@ Private Sub mnBacaDataNominatif_click()
                         access.Fields("NIB") = access.Fields("idNIB")
                     End If
 
-                ElseIf (excel.Fields(19) <> 0) Then
+                ElseIf (Excel.Fields(19) <> 0) Then
                     .Fields("Ukuran Jenis Tanaman") = "Sedang"
-                    .Fields("Jumlah tanaman") = excel.Fields(19)
-                    .Fields("jenis tanaman") = excel.Fields(17)
+                    .Fields("Jumlah tanaman") = Excel.Fields(19)
+                    .Fields("jenis tanaman") = Excel.Fields(17)
                     If IsNull(access.Fields("idNIB")) Then
                         access.Fields("idNIB") = temp
                     ElseIf (Not IsNull(access.Fields("idNIB")) And (access.Fields("idNIB") <> temp)) Then
@@ -401,10 +401,10 @@ Private Sub mnBacaDataNominatif_click()
                         access.Fields("NIB") = access.Fields("idNIB")
                     End If
 
-                ElseIf (excel.Fields(20) <> 0) Then
+                ElseIf (Excel.Fields(20) <> 0) Then
                     .Fields("Ukuran Jenis Tanaman") = "Kecil"
-                    .Fields("Jumlah tanaman") = excel.Fields(20)
-                    .Fields("jenis tanaman") = excel.Fields(17)
+                    .Fields("Jumlah tanaman") = Excel.Fields(20)
+                    .Fields("jenis tanaman") = Excel.Fields(17)
                     If IsNull(access.Fields("idNIB")) Then
                         access.Fields("idNIB") = temp
                     ElseIf (Not IsNull(access.Fields("idNIB")) And (access.Fields("idNIB") <> temp)) Then
@@ -430,11 +430,11 @@ Private Sub mnBacaDataNominatif_click()
 
             access.Update
 
-            excel.MoveNext
+            Excel.MoveNext
             access.MoveNext
             If Transfer.ProgressBar1.Value < 100 Then
-                Transfer.ProgressBar1.Value = ((i / excel.RecordCount) * 100)
-            ElseIf (i >= excel.RecordCount) Then
+                Transfer.ProgressBar1.Value = ((i / Excel.RecordCount) * 100)
+            ElseIf (i >= Excel.RecordCount) Then
                 Unload Transfer
             End If
 
@@ -454,10 +454,10 @@ Private Sub mnBacaDataNominatif_click()
         Next
         Unload Transfer
         MsgBox "Transfered"
-        excel.Close
+        Excel.Close
         access.Close
     End If
-    Set excel = Nothing
+    Set Excel = Nothing
     Set access = Nothing
     tmp = Empty
     excelPath = Empty
@@ -465,6 +465,7 @@ End Sub
 
 
 Private Sub mNbangunan_Click()
+    Unload Bangunan
     Bangunan.Show
 End Sub
 
@@ -472,12 +473,13 @@ Private Sub mnDaftarNominatif_Click()
     If (RSDN.State = 0) Then
         MsgBox "Anda Belum membuka file Project"
     Else
+        Unload DaftarNominatif
         DaftarNominatif.Show
     End If
 End Sub
 
 Private Sub mnExit_Click()
-Unload Me
+    Unload Me
     End
 End Sub
 
@@ -500,19 +502,22 @@ Private Sub tanaH_Click()
 End Sub
 
 Private Sub mnResume_Click()
+    Unload ResumeNilai
     ResumeNilai.Show
 End Sub
 
 Private Sub mntanaH_Click()
+    Unload Tanah
     Tanah.Show
 End Sub
 
 
 
 Private Sub MnTanaman_Click()
-Tanaman.Show
+    Unload Tanaman
+    Tanaman.Show
 
-
+End Sub
 Private Sub MenuEvents_MenuHelp(ByVal MenuText As String, ByVal MenuHelp As String, ByVal Enabled As Boolean)
     If gbSubClassMenu Then
         '/ this event show Decription menu-item to a StatusBar control
