@@ -16,6 +16,13 @@ Begin VB.Form ResumeNilai
    ScaleHeight     =   8220
    ScaleWidth      =   15930
    WindowState     =   2  'Maximized
+   Begin MSComDlg.CommonDialog saveToExcelDialog 
+      Left            =   4440
+      Top             =   3120
+      _ExtentX        =   847
+      _ExtentY        =   847
+      _Version        =   393216
+   End
    Begin VB.CommandButton TransferKEExcell 
       Caption         =   "Transfer Ke Excell"
       BeginProperty Font 
@@ -454,11 +461,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-'<<<<<<< HEAD
-'untuk dragdropp list
-'Option Explicit
 
-'untuk transfer ke excell
 Private Declare Function ShellEx Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hwnd As Long, ByVal lpOperation As String, ByVal lpFile As String, ByVal lpParameters As Any, ByVal lpDirectory As Any, ByVal nShowCmd As Long) As Long
 
 Private Declare Function GetTempPath Lib "kernel32" _
@@ -743,128 +746,94 @@ Private Sub Refresh_Click()
 End Sub
 
 Private Sub TransferKEExcell_Click()
+    saveToExcelDialog.Filter = "Excel 2003 (*.xlsx)|*.xlsx"
+    saveToExcelDialog.ShowSave
+    FileCopy App.Path & "\Temp.xlsx", saveToExcelDialog.FileName
+    exportExcel = saveToExcelDialog.FileName
 
+    Dim excelApp As Excel.Application
+    Dim excelWB As Excel.Workbook
+    Dim excelWS As Excel.Worksheet
+    Set excelApp = CreateObject("Excel.Application")
+    Dim i As Integer
+    Dim j As Integer
 
+    Dim conConnection As New ADODB.Connection
+    Dim cmdCommand As New ADODB.Command
+    Dim rstRecordSet As New ADODB.Recordset
 
-
-    Dim NamaFileTemp As String
-    Dim oExcel As Object
-    Dim oBook As Object
-    Dim oSheet As Object
-    Dim sel As String
-
-
-
-    NamaFileTemp = CreateTempFile("Pjn")
-    Set oExcel = CreateObject("Excel.Application")
-    Set oBook = oExcel.Workbooks.Add
-    Set oSheet = oBook.Worksheets(1)
-    oSheet.Range("A1:I1").Select
-    'coding untuk membuat garis pada cell
-    'With oSheet.Selection
-    '.HorizontalAlignment = xlCenter
-    '.VerticalAlignment = xlBottom
-    '.WrapText = False
-    '.Orientation = 0
-    '.AddIndent = False
-    '.IndentLevel = 0
-    '.ShrinkToFit = False
-    '.ReadingOrder = xlContext
-    '.MergeCells = False
-    'End With
-    'oSheet.range("A1:I1").Merge
-    oSheet.Range("A1:I1").Select
-
-    With oSheet.Range("A1:I1")
-        .HorizontalAlignment = xlCenter
-        .VerticalAlignment = xlCenter
-        .WrapText = False
-        .Orientation = 0
-        .AddIndent = False
-        .IndentLevel = 0
-        .ShrinkToFit = False
-        .ReadingOrder = xlContext
-        .MergeCells = True
+    With rstRecordSet
+        .CursorType = adOpenStatic
+        .CursorLocation = adUseClient
+        .LockType = adLockOptimistic
     End With
-    'oSheet.Range("g3:I3").MergeCells = True
-    'oSheet.Range("g3:I3").WrapText = True
 
-    oSheet.Range("a" & RSDN.RecordCount + 8).Value = "Pembuat Laporan"
-    oSheet.Range("a" & RSDN.RecordCount + 12).Value = "(……………………………)"
-    oSheet.Range("f" & RSDN.RecordCount + 8).Value = "Diperiksa Oleh"
-    oSheet.Range("f" & RSDN.RecordCount + 12).Value = "(……………………………)"
-    oSheet.Range("J" & RSDN.RecordCount + 8).Value = "Diterima Oleh"
-    oSheet.Range("J" & RSDN.RecordCount + 12).Value = "(……………………………)"
-    Range("a" & RSDN.RecordCount + 6 & ":K" & RSDN.RecordCount + 6).Borders(xlEdgeTop).LineStyle = xlContinuous
-    Range("a" & RSDN.RecordCount + 6 & ":K" & RSDN.RecordCount + 6).Borders(xlEdgeTop).Weight = xlThin
+    conConnection.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & pROJECTPATH & ";"
+    conConnection.Open
+    rstRecordSet.Open "Select * from [daftar nominatif]", conConnection, adOpenStatic, adLockOptimistic
 
+    excelApp.Visible = False
+    excelApp.Workbooks.Open exportExcel
+    Set excelWB = excelApp.Workbooks(1)
+    Set excelWS = excelWB.Worksheets(1)
+    'MsgBox RSDN.Fields("nomor urut")
+    excelWS.Activate
+    'excelWS.Cells(16, 2) = 3
+    excelWS.Cells(2, 2) = NamaProjek
+    'MsgBox excelWS.Cells(16, 2)
+    For i = 16 To rstRecordSet.RecordCount
+        excelWS.Cells(i, 2) = rstRecordSet.Fields("nomor urut")
+        excelWS.Cells(i, 3) = rstRecordSet.Fields("Index Identitas")
+        excelWS.Cells(i, 4) = rstRecordSet.Fields("Identitas")
+        excelWS.Cells(i, 7) = rstRecordSet.Fields("NIB")
+        excelWS.Cells(i, 10) = rstRecordSet.Fields("Luas Hasil Ukur di Dalam Trase")
+        'excelWS.Cells(i, 12) = rstRecordSet.Fields("Surat Tanda Bukti")
+        'excelWS.Cells(i, 13) = rstRecordSet.Fields("Status Ruang Atas Bawah")
+        'excelWS.Cells(i, 14) = rstRecordSet.Fields("Luas Atas Bawah")
+        ' For j = 12 To 35
+        '    excelWS.Cells(i, j + 3) = rstRecordSet.Fields(j)
+        'Next
+        excelWS.Cells(i, 15) = rstRecordSet.Fields("Indexs Jenis Bangunan")
+        excelWS.Cells(i, 16) = rstRecordSet.Fields("jenis bangunan")
+        excelWS.Cells(i, 17) = rstRecordSet.Fields("Jumlah Jenis Bangunan")
+        excelWS.Cells(i, 18) = rstRecordSet.Fields("Luas bangunan")
+        excelWS.Cells(i, 19) = rstRecordSet.Fields("index tanaman")
+        excelWS.Cells(i, 20) = rstRecordSet.Fields("Jenis Musim Tanaman")
+        excelWS.Cells(i, 21) = rstRecordSet.Fields("Jumlah Jenis Musim Tanaman")
+        excelWS.Cells(i, 22) = rstRecordSet.Fields("nomor tanaman")
+        excelWS.Cells(i, 23) = rstRecordSet.Fields("jenis tanaman")
+        excelWS.Cells(i, 24) = rstRecordSet.Fields("Ukuran Jenis Tanaman")
+        excelWS.Cells(i, 25) = rstRecordSet.Fields("Jumlah tanaman")
+        excelWS.Cells(i, 26) = rstRecordSet.Fields("Index Benda Lain yang Berkaitan")
+        excelWS.Cells(i, 27) = rstRecordSet.Fields("Jenis Benda Lain yang Berkaitan")
+        excelWS.Cells(i, 28) = rstRecordSet.Fields("Jumlah Benda Lain yang Berkaitan")
 
-
-    oSheet.Range("a1").Value = "RESUME"
-    oSheet.Range("a4").Value = "Hari/tgl : " & Date
-    oSheet.Range("a3").Value = NamaProjek  '"Sumber : " & lblLokal.Caption
-    'oSheet.Range("g4").Value = "Kode Akses : " & txtKodeAkses.text
-    'oSheet.Range("g3").Value = "Tujuan : " & lblTujuan.Caption
-    Range("a5:K5").Borders(xlEdgeLeft).LineStyle = xlContinuous
-    Range("a5:K5").Borders(xlEdgeLeft).Weight = xlThin
-    Range("a5:K5").Borders(xlEdgeLeft).ColorIndex = 0
-    Range("a5:K5").Borders(xlEdgeLeft).TintAndShade = 0
-    Range("a5:K5").Borders(xlEdgeTop).LineStyle = xlContinuous
-    Range("a5:K5").Borders(xlEdgeTop).Weight = xlThin
-    Range("a5:K5").Borders(xlEdgeBottom).LineStyle = xlContinuous
-    Range("a5:K5").Borders(xlEdgeBottom).Weight = xlThin
-    Range("a5:K5").Borders(xlEdgeRight).LineStyle = xlContinuous
-    Range("a5:K5").Borders(xlEdgeRight).Weight = xlThin
-    'oSheet.Columns("c:c").ColumnWidth = 18
-    'oSheet.Columns("d:d").ColumnWidth = 18
-
-    'coding untuk mengatur kebar kolom
-    oSheet.Columns("e:e").ColumnWidth = 33
-    oSheet.Columns("f:f").ColumnWidth = 7.57
-    oSheet.Columns("g:g").ColumnWidth = 8.43
-    oSheet.Columns("i:i").ColumnWidth = 30
-    oSheet.Columns("a:a").ColumnWidth = 4
-
-    'pilih kolom mana yang mau di hide
-    'oSheet.Columns("a:a").Hidden = True
-    'oSheet.Columns("h:h").Hidden = True
-    ''oSheet.Columns("b:b").Hidden = True
-    'oSheet.Columns("c:c").Hidden = True
-    'oSheet.Columns("d:d").Hidden = True
-    'oSheet.Columns("J:J").Hidden = True
-    'oSheet.Columns("I:I").Hidden = True
-
-    'Selection.EntireColumn.Hidden = True
-    oSheet.Rows("1:1").RowHeight = 30.75
-    'oSheet.range("A1:I1").Select
-    For i = 1 To RSDN.Fields.Count
-        oSheet.Cells(5, i) = RSDN.Fields(i - 1).Name
-    Next i
-    'Transfer the data to Excel
-
-
-    oSheet.Range("A6").CopyFromRecordset RSDN
-
-
-
-    If oExcel.Version > "11.0" Then
-        oBook.SaveAs NamaFileTemp & ".xlsx"
-        NamaFileTemp = NamaFileTemp & ".xlsx"
-    Else
-        oBook.SaveAs NamaFileTemp & ".xls"
-        NamaFileTemp = NamaFileTemp & ".xls"
-    End If
-    oExcel.Quit
-    X = ShellEx(Me.hwnd, "open", NamaFileTemp, "", "", 10)
-    '               tandaSelesai.Visible = True
-    '              Shape1.Visible = True
-    '             If txtKodeAkses = Operator & Format(Now, "ddMMyyyyhhmm") Then
-    '            txtKodeAkses = Operator & Format(Now, "ddMMyyyyhhmm") + 1
-    ''           Else
-    '         txtKodeAkses = Operator & Format(Now, "ddMMyyyyhhmm")
-    '        End If
-
-
+        excelWS.Cells(i, 33) = rstRecordSet.Fields("Nilai Tanah per Meter Persegi")
+        excelWS.Cells(i, 34) = rstRecordSet.Fields("Nilai Pasar Tanah")
+        excelWS.Cells(i, 35) = rstRecordSet.Fields("Nilai Bangunan per Meter Persegi")
+        excelWS.Cells(i, 36) = rstRecordSet.Fields("Jumlah Nilai Bangunan")
+        excelWS.Cells(i, 37) = rstRecordSet.Fields("Nilai Tanaman per Meter Persegi")
+        excelWS.Cells(i, 38) = rstRecordSet.Fields("Jumlah Nilai Tanaman")
+        excelWS.Cells(i, 39) = rstRecordSet.Fields("Nilai Pasar Tanaman")
+        excelWS.Cells(i, 40) = rstRecordSet.Fields("Total Nilai Fisik")
+        excelWS.Cells(i, 41) = rstRecordSet.Fields("Kerugian Usaha")
+        excelWS.Cells(i, 42) = rstRecordSet.Fields("Solatium")
+        excelWS.Cells(i, 43) = rstRecordSet.Fields("Pindah")
+        excelWS.Cells(i, 44) = rstRecordSet.Fields("Pajak")
+        excelWS.Cells(i, 45) = rstRecordSet.Fields("Masa Tunggu")
+        excelWS.Cells(i, 46) = rstRecordSet.Fields("Total Nilai Non Fisik")
+        excelWS.Cells(i, 47) = rstRecordSet.Fields("Grand Total Penggantian Wajar")
+        rstRecordSet.MoveNext
+    Next
+    excelWB.Save
+    rstRecordSet.Close
+    conConnection.Close
+    excelWB.Close
+    excelApp.Quit
+    Set excelApp = Nothing
+    Set excelWB = Nothing
+    Set excelWS = Nothing
+    MsgBox "Selsai"
 
 
 
