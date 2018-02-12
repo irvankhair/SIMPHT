@@ -296,7 +296,7 @@ Begin VB.Form DaftarNominatif
       Visible         =   0   'False
       Width           =   1935
    End
-   Begin VB.CommandButton Command1 
+   Begin VB.CommandButton Refresh 
       Caption         =   "Refress"
       BeginProperty Font 
          Name            =   "Calibri"
@@ -436,11 +436,11 @@ Private Type POINTAPI
 End Type
 
 Private Declare Function ClientToScreen Lib "user32" _
-(ByVal hwnd As Long, lpPoint As POINTAPI) As Long
+                                        (ByVal hwnd As Long, lpPoint As POINTAPI) As Long
 
 Private Declare Function LBItemFromPt Lib "COMCTL32.DLL" _
-(ByVal hLB As Long, ByVal ptX As Long, ByVal ptY As Long, _
-ByVal bAutoScroll As Long) As Long
+                                      (ByVal hLB As Long, ByVal ptX As Long, ByVal ptY As Long, _
+                                       ByVal bAutoScroll As Long) As Long
 
 
 Private Function RapihkanGrid()
@@ -606,7 +606,7 @@ pertama:
 End Sub
 
 Private Sub Command2_Click()
-     Dim rsSemua As ADODB.Recordset
+    Dim rsSemua As ADODB.Recordset
     Dim rsKolom As ADODB.Recordset
     Dim db As ADODB.Connection
     Set db = New ADODB.Connection
@@ -614,7 +614,7 @@ Private Sub Command2_Click()
     db.CursorLocation = adUseClient
     Set rsSemua = New ADODB.Recordset
     rsSemua.Open "select * from [Daftar Nominatif] ", db, adOpenDynamic, adLockOptimistic
-    
+
     Set rsKolom = New ADODB.Recordset
     rsKolom.Open "select * from [kostum tabel] where [nama tabel]='Daftar Nominatif'", db, adOpenDynamic, adLockOptimistic
     While Not rsKolom.EOF
@@ -626,7 +626,7 @@ Private Sub Command2_Click()
         rsKolom![nama tabel] = "Daftar Nominatif"
         rsKolom![indeks kolom] = i
         rsKolom!isi = rsSemua.Fields(i).Name
-        rsKolom![lebar kolom] = 1000 'rsSemua.Fields(i).
+        rsKolom![lebar kolom] = 1000    'rsSemua.Fields(i).
         rsKolom!tipe = rsSemua.Fields(i).Type
         rsKolom.Update
     Next i
@@ -673,28 +673,28 @@ Private Sub EditIsi_Click()
     End If
 End Sub
 Public Sub pindah(ByVal lbhwnd As Long, _
-ByVal X As Single, ByVal Y As Single)
+                  ByVal X As Single, ByVal Y As Single)
 'untuk select otomatis saat meuse ke list
 
-Dim ItemIndex As Long
-Dim AtThisPoint As POINTAPI
-AtThisPoint.X = X \ Screen.TwipsPerPixelX
-AtThisPoint.Y = Y \ Screen.TwipsPerPixelY
-Call ClientToScreen(lbhwnd, AtThisPoint)
-ItemIndex = LBItemFromPt(lbhwnd, AtThisPoint.X, _
-   AtThisPoint.Y, False)
-If ItemIndex <> SendMessage(lbhwnd, LB_GETCURSEL, 0, 0) Then
-    Call SendMessage(lbhwnd, LB_SETCURSEL, ItemIndex, 0)
-End If
+    Dim ItemIndex As Long
+    Dim AtThisPoint As POINTAPI
+    AtThisPoint.X = X \ Screen.TwipsPerPixelX
+    AtThisPoint.Y = Y \ Screen.TwipsPerPixelY
+    Call ClientToScreen(lbhwnd, AtThisPoint)
+    ItemIndex = LBItemFromPt(lbhwnd, AtThisPoint.X, _
+                             AtThisPoint.Y, False)
+    If ItemIndex <> SendMessage(lbhwnd, LB_GETCURSEL, 0, 0) Then
+        Call SendMessage(lbhwnd, LB_SETCURSEL, ItemIndex, 0)
+    End If
 
 End Sub
 
 Private Sub Form_Click()
-List1.Visible = False
+    List1.Visible = False
 End Sub
 
 Private Sub Form_Load()
-    
+
     Dim i As Integer
     Dim db As ADODB.Connection
     Dim rsKolom As ADODB.Recordset
@@ -702,9 +702,9 @@ Private Sub Form_Load()
     Set db = New ADODB.Connection
     Set rsKolom = New ADODB.Recordset
     Set RSDN = New ADODB.Recordset
-    
+
     If (IsNull(pROJECTPATH)) Then
-        
+
     Else
         db.Open "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & pROJECTPATH & ";Persist Security Info=False;Jet OLEDB:Database "    ';pwd=globalisasi"
         db.CursorLocation = adUseClient
@@ -713,12 +713,12 @@ Private Sub Form_Load()
         Sumber = rsKolom!Source
         'RSDN.Open "SELECT * FROM [DAFTAR NOMINATIF] order by UrutId", db, adOpenDynamic, adLockOptimistic
         RSDN.Open Sumber, db, adOpenDynamic, adLockOptimistic  '"SELECT * FROM [DAFTAR NOMINATIF] order by UrutId"
-        
+
         Set DaftarNominatif.grdNominatif.DataSource = RSDN
         DaftarNominatif.grdNominatif.ReBind
 
         RapihkanGrid
-        
+
         Set MyProperty = DaftarNominatif.grdNominatif   'nama datagrid yang inigin di scroll dengan mouse
         WheelHook grdNominatif
     End If
@@ -759,14 +759,14 @@ Private Sub grdNominatif_ColResize(ByVal ColIndex As Integer, Cancel As Integer)
 End Sub
 
 Private Sub grdNominatif_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
-If Button = 2 Then
+    If Button = 2 Then
         If Not RSDN.EOF And Not RSDN.BOF Then
             NIBTerpilih = "" & RSDN!nib
             'PopupMenu MainForm.mnEditBaris
             List1.Visible = True
             List1.Top = Y + grdNominatif.Top
             List1.Left = X
-            
+
         End If
     End If
 End Sub
@@ -794,58 +794,58 @@ Private Sub HapusBaris_Click()
 End Sub
 
 Private Sub List1_Click()
-If List1.text = "Edit" Then
-    EditIsi_Click
-    List1.Visible = False
-ElseIf List1.text = "Sisip" Then
-    Sisip_Click
-    List1.Visible = False
-ElseIf List1.text = "Hapus" Then
-    HapusBaris_Click
-    List1.Visible = False
-End If
+    If List1.text = "Edit" Then
+        EditIsi_Click
+        List1.Visible = False
+    ElseIf List1.text = "Sisip" Then
+        Sisip_Click
+        List1.Visible = False
+    ElseIf List1.text = "Hapus" Then
+        HapusBaris_Click
+        List1.Visible = False
+    End If
 
 End Sub
 
 Private Sub List1_LostFocus()
-List1.Visible = False
+    List1.Visible = False
 End Sub
 
 Private Sub List1_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-pindah List1.hwnd, X, Y
+    pindah List1.hwnd, X, Y
 End Sub
 'untuk dragdropp list -----------------------------------------------------------------------------
-Public Function ListRowCalc(pobjLB As ListBox, ByVal Y As Single) As Integer '-----------------------------------------------------------------------------
-           
+Public Function ListRowCalc(pobjLB As ListBox, ByVal Y As Single) As Integer    '-----------------------------------------------------------------------------
+
     Const LB_GETITEMHEIGHT = &H1A1
-    
-    Dim intItemHeight   As Integer
-    Dim intRow          As Integer
-    
+
+    Dim intItemHeight As Integer
+    Dim intRow As Integer
+
     intItemHeight = SendMessage(pobjLB.hwnd, LB_GETITEMHEIGHT, 0, 0)
-    
+
     intRow = ((Y / Screen.TwipsPerPixelY) \ intItemHeight) + pobjLB.TopIndex
-    
+
     If intRow < pobjLB.ListCount - 1 Then
         ListRowCalc = intRow
     Else
         ListRowCalc = pobjLB.ListCount - 1
     End If
-                 
+
 End Function
 'untuk dragdropp list-----------------------------------------------------------------------------
 Public Sub ListRowMove(pobjLB As ListBox, _
                        ByVal pintOldRow As Integer, _
                        ByVal pintNewRow As Integer)
 '-----------------------------------------------------------------------------
-                       
-    Dim strSavedItem    As String
-    Dim intX            As Integer
+
+    Dim strSavedItem As String
+    Dim intX As Integer
 
     If pintOldRow = pintNewRow Then Exit Sub
-    
+
     strSavedItem = pobjLB.List(pintOldRow)
-    
+
     If pintOldRow > pintNewRow Then
         For intX = pintOldRow To pintNewRow + 1 Step -1
             pobjLB.List(intX) = pobjLB.List(intX - 1)
@@ -855,7 +855,7 @@ Public Sub ListRowMove(pobjLB As ListBox, _
             pobjLB.List(intX) = pobjLB.List(intX + 1)
         Next intX
     End If
-    
+
     pobjLB.List(pintNewRow) = strSavedItem
 
 End Sub
@@ -880,7 +880,7 @@ Private Sub Sisip_Click()
     Dim nAMApEMILIK As String
     If Not RSDN.EOF = True And Not RSDN.BOF = True Then
         posisi = RSDN.AbsolutePosition
-        
+
         RSDN.MovePrevious
         If RSDN.BOF Then
             RSDN.Move 1
@@ -888,12 +888,12 @@ Private Sub Sisip_Click()
         Else
             urutSebelum = RSDN!urutid
         End If
-        nAMApEMILIK = "" & RSDN!PEMILIK
-        
+        nAMApEMILIK = "" & RSDN!pemilik
+
         RSDN.AddNew
         RSDN!urutid = urutSebelum + 0.1
         RSDN!nib = NIBTerpilih
-        RSDN!PEMILIK = nAMApEMILIK
+        RSDN!pemilik = nAMApEMILIK
         RSDN.Update
         RSDN.Requery
         RSDN.Move posisi - 1
@@ -944,33 +944,38 @@ Public Function konekAccess() As ADODB.Recordset
 
 End Function
 
+Private Sub Refresh_Click()
+    RSDN.Requery
+    RapihkanGrid
+End Sub
+
 '>>>>>>> d3d07549d5308c63fd676dc3c8bf461ab7c97286
 
 Private Sub Transfer_Click()
 
 
-    Dim excel As New ADODB.Recordset
+    Dim Excel As New ADODB.Recordset
     Dim access As New ADODB.Recordset
 
     Dim i, j As Integer
-    Set excel = importExcel
+    Set Excel = importExcel
     Set access = konekAccess
 
     Dim temp As String
 
-    temp = excel.Fields("NIB")
-    For i = 1 To excel.RecordCount
+    temp = Excel.Fields("NIB")
+    For i = 1 To Excel.RecordCount
         With access
             .AddNew
             For j = 2 To 19
-                .Fields(j) = excel.Fields(j - 2)
+                .Fields(j) = Excel.Fields(j - 2)
 
             Next
 
-            If ((excel.Fields(17) <> 0) And (excel.Fields(18) <> 0) And (excel.Fields(19) <> 0)) Then
+            If ((Excel.Fields(17) <> 0) And (Excel.Fields(18) <> 0) And (Excel.Fields(19) <> 0)) Then
                 .Fields("Ukuran Jenis Tanaman") = "Besar"
-                .Fields("Jumlah tanaman") = excel.Fields(17)
-                .Fields("jenis tanaman") = excel.Fields(16)
+                .Fields("Jumlah tanaman") = Excel.Fields(17)
+                .Fields("jenis tanaman") = Excel.Fields(16)
                 If IsNull(access.Fields("idNIB")) Then
                     access.Fields("idNIB") = temp
                 ElseIf (Not IsNull(access.Fields("idNIB")) And (access.Fields("idNIB") <> temp)) Then
@@ -993,8 +998,8 @@ Private Sub Transfer_Click()
 
 
                 .Fields("Ukuran Jenis Tanaman") = "Sedang"
-                .Fields("Jumlah tanaman") = excel.Fields(18)
-                .Fields("jenis tanaman") = excel.Fields(16)
+                .Fields("Jumlah tanaman") = Excel.Fields(18)
+                .Fields("jenis tanaman") = Excel.Fields(16)
                 .MoveNext
                 .AddNew
                 If IsNull(access.Fields("idNIB")) Then
@@ -1007,12 +1012,12 @@ Private Sub Transfer_Click()
                 End If
 
                 .Fields("Ukuran Jenis Tanaman") = "Kecil"
-                .Fields("Jumlah tanaman") = excel.Fields(19)
-                .Fields("jenis tanaman") = excel.Fields(16)
-            ElseIf ((excel.Fields(17) <> 0) And (excel.Fields(18) <> 0)) Then
+                .Fields("Jumlah tanaman") = Excel.Fields(19)
+                .Fields("jenis tanaman") = Excel.Fields(16)
+            ElseIf ((Excel.Fields(17) <> 0) And (Excel.Fields(18) <> 0)) Then
                 .Fields("Ukuran Jenis Tanaman") = "Besar"
-                .Fields("Jumlah tanaman") = excel.Fields(17)
-                .Fields("jenis tanaman") = excel.Fields(16)
+                .Fields("Jumlah tanaman") = Excel.Fields(17)
+                .Fields("jenis tanaman") = Excel.Fields(16)
                 If IsNull(access.Fields("idNIB")) Then
                     access.Fields("idNIB") = temp
                 ElseIf (Not IsNull(access.Fields("idNIB")) And (access.Fields("idNIB") <> temp)) Then
@@ -1035,12 +1040,12 @@ Private Sub Transfer_Click()
                 End If
 
                 .Fields("Ukuran Jenis Tanaman") = "Sedang"
-                .Fields("Jumlah tanaman") = excel.Fields(18)
-                .Fields("jenis tanaman") = excel.Fields(16)
-            ElseIf ((excel.Fields(18) <> 0) And (excel.Fields(19) <> 0)) Then
+                .Fields("Jumlah tanaman") = Excel.Fields(18)
+                .Fields("jenis tanaman") = Excel.Fields(16)
+            ElseIf ((Excel.Fields(18) <> 0) And (Excel.Fields(19) <> 0)) Then
                 .Fields("Ukuran Jenis Tanaman") = "Sedang"
-                .Fields("Jumlah tanaman") = excel.Fields(18)
-                .Fields("jenis tanaman") = excel.Fields(16)
+                .Fields("Jumlah tanaman") = Excel.Fields(18)
+                .Fields("jenis tanaman") = Excel.Fields(16)
                 If IsNull(access.Fields("idNIB")) Then
                     access.Fields("idNIB") = temp
                 ElseIf (Not IsNull(access.Fields("idNIB")) And (access.Fields("idNIB") <> temp)) Then
@@ -1062,12 +1067,12 @@ Private Sub Transfer_Click()
                 End If
 
                 .Fields("Ukuran Jenis Tanaman") = "Kecil"
-                .Fields("Jumlah tanaman") = excel.Fields(19)
-                .Fields("jenis tanaman") = excel.Fields(16)
-            ElseIf ((excel.Fields(17) <> 0) And (excel.Fields(19) <> 0)) Then
+                .Fields("Jumlah tanaman") = Excel.Fields(19)
+                .Fields("jenis tanaman") = Excel.Fields(16)
+            ElseIf ((Excel.Fields(17) <> 0) And (Excel.Fields(19) <> 0)) Then
                 .Fields("Ukuran Jenis Tanaman") = "Besar"
-                .Fields("Jumlah tanaman") = excel.Fields(17)
-                .Fields("jenis tanaman") = excel.Fields(16)
+                .Fields("Jumlah tanaman") = Excel.Fields(17)
+                .Fields("jenis tanaman") = Excel.Fields(16)
                 If IsNull(access.Fields("idNIB")) Then
                     access.Fields("idNIB") = temp
                 ElseIf (Not IsNull(access.Fields("idNIB")) And (access.Fields("idNIB") <> temp)) Then
@@ -1089,12 +1094,12 @@ Private Sub Transfer_Click()
                 End If
 
                 .Fields("Ukuran Jenis Tanaman") = "Kecil"
-                .Fields("Jumlah tanaman") = excel.Fields(19)
-                .Fields("jenis tanaman") = excel.Fields(16)
-            ElseIf (excel.Fields(17) <> 0) Then
+                .Fields("Jumlah tanaman") = Excel.Fields(19)
+                .Fields("jenis tanaman") = Excel.Fields(16)
+            ElseIf (Excel.Fields(17) <> 0) Then
                 .Fields("Ukuran Jenis Tanaman") = "Besar"
-                .Fields("Jumlah tanaman") = excel.Fields(17)
-                .Fields("jenis tanaman") = excel.Fields(16)
+                .Fields("Jumlah tanaman") = Excel.Fields(17)
+                .Fields("jenis tanaman") = Excel.Fields(16)
                 If IsNull(access.Fields("idNIB")) Then
                     access.Fields("idNIB") = temp
                 ElseIf (Not IsNull(access.Fields("idNIB")) And (access.Fields("idNIB") <> temp)) Then
@@ -1104,10 +1109,10 @@ Private Sub Transfer_Click()
                     access.Fields("NIB") = access.Fields("idNIB")
                 End If
 
-            ElseIf (excel.Fields(18) <> 0) Then
+            ElseIf (Excel.Fields(18) <> 0) Then
                 .Fields("Ukuran Jenis Tanaman") = "Sedang"
-                .Fields("Jumlah tanaman") = excel.Fields(18)
-                .Fields("jenis tanaman") = excel.Fields(16)
+                .Fields("Jumlah tanaman") = Excel.Fields(18)
+                .Fields("jenis tanaman") = Excel.Fields(16)
                 If IsNull(access.Fields("idNIB")) Then
                     access.Fields("idNIB") = temp
                 ElseIf (Not IsNull(access.Fields("idNIB")) And (access.Fields("idNIB") <> temp)) Then
@@ -1117,10 +1122,10 @@ Private Sub Transfer_Click()
                     access.Fields("NIB") = access.Fields("idNIB")
                 End If
 
-            ElseIf (excel.Fields(19) <> 0) Then
+            ElseIf (Excel.Fields(19) <> 0) Then
                 .Fields("Ukuran Jenis Tanaman") = "Kecil"
-                .Fields("Jumlah tanaman") = excel.Fields(19)
-                .Fields("jenis tanaman") = excel.Fields(16)
+                .Fields("Jumlah tanaman") = Excel.Fields(19)
+                .Fields("jenis tanaman") = Excel.Fields(16)
                 If IsNull(access.Fields("idNIB")) Then
                     access.Fields("idNIB") = temp
                 ElseIf (Not IsNull(access.Fields("idNIB")) And (access.Fields("idNIB") <> temp)) Then
@@ -1146,7 +1151,7 @@ Private Sub Transfer_Click()
 
         access.Update
 
-        excel.MoveNext
+        Excel.MoveNext
         access.MoveNext
     Next
     access.MoveFirst
@@ -1158,6 +1163,6 @@ Private Sub Transfer_Click()
         access.MoveNext
     Next
     MsgBox "Transfered"
-    excel.Close
+    Excel.Close
     access.Close
 End Sub

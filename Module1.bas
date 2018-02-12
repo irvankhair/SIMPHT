@@ -5,8 +5,10 @@ Public NIBTerpilih As String
 Public excelPath As String
 Public pROJECTPATH As String
 Public RSDN As New ADODB.Recordset
+Public rsExcel As New ADODB.Recordset
 Public NamaProjek As String
 Public namaMdb As String
+Public exportExcel As String
 'koding untuk scroll grid
 Public MyProperty As Object
 Public Const MK_CONTROL = &H8
