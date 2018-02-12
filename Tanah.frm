@@ -11,8 +11,8 @@ Begin VB.Form Tanah
    ClientWidth     =   14220
    LinkTopic       =   "Form1"
    MDIChild        =   -1  'True
-   ScaleHeight     =   11535
-   ScaleWidth      =   19080
+   ScaleHeight     =   9195
+   ScaleWidth      =   14220
    WindowState     =   2  'Maximized
    Begin VB.PictureBox Tampilan 
       BackColor       =   &H00E0E0E0&
@@ -747,7 +747,7 @@ Dim rsDaftarNIB As ADODB.Recordset
             rsDaftarNIB.Find "idNIB='" & List6.List(i) & "'"
             If Not rsDaftarNIB.EOF Then
                 rsZona.AddNew
-                    rsZona!idtanah = rsDaftarNIB!id
+                    rsZona!idtanah = rsDaftarNIB!ID
                     rsZona!nomor = rsDaftarNIB![nomor urut]
                     rsZona!nib = rsDaftarNIB!idnib
                     rsZona!identitas = rsDaftarNIB!identitas

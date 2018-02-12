@@ -20,6 +20,7 @@ Form=Bangunan.frm
 Form=Resume.frm
 Form=Tanaman.frm
 Module=modMenuXP; modMenuXP.bas
+Form=Usaha.frm
 IconForm="DaftarNominatif"
 Startup="MainForm"
 HelpFile=""

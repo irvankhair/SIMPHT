@@ -11,17 +11,17 @@ Begin VB.Form Tanaman
    ClientWidth     =   14220
    LinkTopic       =   "Form1"
    MDIChild        =   -1  'True
-   ScaleHeight     =   11535
-   ScaleWidth      =   19080
+   ScaleHeight     =   9195
+   ScaleWidth      =   14220
    WindowState     =   2  'Maximized
    Begin VB.PictureBox Tampilan 
       BackColor       =   &H00E0E0E0&
       Height          =   7155
-      Left            =   240
+      Left            =   480
       ScaleHeight     =   7095
       ScaleWidth      =   5595
-      TabIndex        =   13
-      Top             =   2400
+      TabIndex        =   12
+      Top             =   2280
       Visible         =   0   'False
       Width           =   5655
       Begin VB.ListBox ListPeralihan 
@@ -38,7 +38,7 @@ Begin VB.Form Tanaman
          Height          =   4590
          Left            =   2280
          MultiSelect     =   1  'Simple
-         TabIndex        =   26
+         TabIndex        =   25
          Top             =   6600
          Visible         =   0   'False
          Width           =   2175
@@ -48,7 +48,7 @@ Begin VB.Form Tanaman
          Left            =   5640
          Picture         =   "Tanaman.frx":0000
          Style           =   1  'Graphical
-         TabIndex        =   25
+         TabIndex        =   24
          Top             =   2040
          Visible         =   0   'False
          Width           =   375
@@ -58,7 +58,7 @@ Begin VB.Form Tanaman
          Left            =   5640
          Picture         =   "Tanaman.frx":0342
          Style           =   1  'Graphical
-         TabIndex        =   24
+         TabIndex        =   23
          Top             =   2520
          Visible         =   0   'False
          Width           =   375
@@ -68,7 +68,7 @@ Begin VB.Form Tanaman
          Left            =   5640
          Picture         =   "Tanaman.frx":0684
          Style           =   1  'Graphical
-         TabIndex        =   23
+         TabIndex        =   22
          Top             =   3000
          Visible         =   0   'False
          Width           =   375
@@ -78,7 +78,7 @@ Begin VB.Form Tanaman
          Left            =   5640
          Picture         =   "Tanaman.frx":09C6
          Style           =   1  'Graphical
-         TabIndex        =   22
+         TabIndex        =   21
          Top             =   1560
          Visible         =   0   'False
          Width           =   375
@@ -89,7 +89,7 @@ Begin VB.Form Tanaman
          Height          =   375
          Left            =   2430
          Style           =   1  'Graphical
-         TabIndex        =   21
+         TabIndex        =   20
          Top             =   3840
          Width           =   855
       End
@@ -99,7 +99,7 @@ Begin VB.Form Tanaman
          Height          =   375
          Left            =   2400
          Style           =   1  'Graphical
-         TabIndex        =   20
+         TabIndex        =   19
          Top             =   2880
          Width           =   855
       End
@@ -118,7 +118,7 @@ Begin VB.Form Tanaman
          Left            =   120
          MultiSelect     =   1  'Simple
          Sorted          =   -1  'True
-         TabIndex        =   19
+         TabIndex        =   18
          Top             =   360
          Width           =   2175
       End
@@ -128,7 +128,7 @@ Begin VB.Form Tanaman
          Left            =   2640
          Picture         =   "Tanaman.frx":0D08
          Style           =   1  'Graphical
-         TabIndex        =   18
+         TabIndex        =   17
          Top             =   5040
          Width           =   420
       End
@@ -138,7 +138,7 @@ Begin VB.Form Tanaman
          Left            =   2640
          Picture         =   "Tanaman.frx":140A
          Style           =   1  'Graphical
-         TabIndex        =   17
+         TabIndex        =   16
          Top             =   4440
          Width           =   420
       End
@@ -148,7 +148,7 @@ Begin VB.Form Tanaman
          Left            =   2640
          Picture         =   "Tanaman.frx":1B0C
          Style           =   1  'Graphical
-         TabIndex        =   16
+         TabIndex        =   15
          Top             =   2280
          Width           =   420
       End
@@ -159,7 +159,7 @@ Begin VB.Form Tanaman
          Left            =   2640
          Picture         =   "Tanaman.frx":220E
          Style           =   1  'Graphical
-         TabIndex        =   15
+         TabIndex        =   14
          Top             =   1680
          Width           =   420
       End
@@ -181,7 +181,7 @@ Begin VB.Form Tanaman
          List            =   "Tanaman.frx":9166
          MultiSelect     =   1  'Simple
          Sorted          =   -1  'True
-         TabIndex        =   14
+         TabIndex        =   13
          ToolTipText     =   "Geser data dengan drag  dan dropp"
          Top             =   360
          Width           =   2055
@@ -201,7 +201,7 @@ Begin VB.Form Tanaman
          ForeColor       =   &H00000000&
          Height          =   375
          Left            =   120
-         TabIndex        =   28
+         TabIndex        =   27
          Top             =   0
          Width           =   2175
       End
@@ -220,7 +220,7 @@ Begin VB.Form Tanaman
          ForeColor       =   &H00000000&
          Height          =   375
          Left            =   3480
-         TabIndex        =   27
+         TabIndex        =   26
          Top             =   0
          Width           =   2655
       End
@@ -231,11 +231,11 @@ Begin VB.Form Tanaman
       ForeColor       =   &H80000008&
       Height          =   5055
       Left            =   120
-      TabIndex        =   11
+      TabIndex        =   10
       Top             =   5160
       Width           =   17295
       Begin VB.CommandButton Command22 
-         Caption         =   "&Terapkan Kalkulasi NPW Bangunan"
+         Caption         =   "&Terapkan Kalkulasi NPW Tanaman"
          BeginProperty Font 
             Name            =   "Calibri"
             Size            =   14.25
@@ -247,7 +247,7 @@ Begin VB.Form Tanaman
          EndProperty
          Height          =   495
          Left            =   10080
-         TabIndex        =   35
+         TabIndex        =   34
          Top             =   4440
          Width           =   4215
       End
@@ -264,7 +264,7 @@ Begin VB.Form Tanaman
          EndProperty
          Height          =   495
          Left            =   1560
-         TabIndex        =   34
+         TabIndex        =   33
          Top             =   4440
          Width           =   1335
       End
@@ -281,7 +281,7 @@ Begin VB.Form Tanaman
          EndProperty
          Height          =   495
          Left            =   4440
-         TabIndex        =   33
+         TabIndex        =   32
          Top             =   4440
          Width           =   1335
       End
@@ -298,7 +298,7 @@ Begin VB.Form Tanaman
          EndProperty
          Height          =   495
          Left            =   3000
-         TabIndex        =   32
+         TabIndex        =   31
          Top             =   4440
          Width           =   1335
       End
@@ -315,7 +315,7 @@ Begin VB.Form Tanaman
          EndProperty
          Height          =   495
          Left            =   5880
-         TabIndex        =   31
+         TabIndex        =   30
          Top             =   4440
          Width           =   1335
       End
@@ -332,14 +332,14 @@ Begin VB.Form Tanaman
          EndProperty
          Height          =   495
          Left            =   120
-         TabIndex        =   30
+         TabIndex        =   29
          Top             =   4440
          Width           =   1335
       End
-      Begin MSDataGridLib.DataGrid GRDBangunan 
+      Begin MSDataGridLib.DataGrid GRDTanaman 
          Height          =   3495
          Left            =   120
-         TabIndex        =   29
+         TabIndex        =   28
          Top             =   840
          Width           =   16815
          _ExtentX        =   29660
@@ -418,7 +418,7 @@ Begin VB.Form Tanaman
          ForeColor       =   &H80000008&
          Height          =   615
          Left            =   3480
-         TabIndex        =   12
+         TabIndex        =   11
          Top             =   120
          Width           =   6255
       End
@@ -426,7 +426,7 @@ Begin VB.Form Tanaman
    Begin MSDataListLib.DataList List1 
       Height          =   3375
       Left            =   8760
-      TabIndex        =   10
+      TabIndex        =   9
       Top             =   6120
       Visible         =   0   'False
       Width           =   1815
@@ -443,8 +443,8 @@ Begin VB.Form Tanaman
       TabIndex        =   1
       Top             =   840
       Width           =   11655
-      Begin VB.CommandButton Command21 
-         Caption         =   "&Tutup"
+      Begin VB.CommandButton Command23 
+         Caption         =   "&Tetapkan Harga"
          BeginProperty Font 
             Name            =   "Calibri"
             Size            =   14.25
@@ -455,10 +455,27 @@ Begin VB.Form Tanaman
             Strikethrough   =   0   'False
          EndProperty
          Height          =   495
-         Left            =   9960
-         TabIndex        =   9
-         Top             =   240
-         Width           =   1335
+         Left            =   9360
+         TabIndex        =   36
+         Top             =   3600
+         Width           =   1935
+      End
+      Begin VB.CommandButton Command21 
+         Caption         =   "&Ambil Data"
+         BeginProperty Font 
+            Name            =   "Calibri"
+            Size            =   14.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   495
+         Left            =   240
+         TabIndex        =   35
+         Top             =   3600
+         Width           =   1575
       End
       Begin VB.CommandButton Command1 
          Caption         =   "&Edit"
@@ -472,7 +489,7 @@ Begin VB.Form Tanaman
             Strikethrough   =   0   'False
          EndProperty
          Height          =   495
-         Left            =   240
+         Left            =   2880
          TabIndex        =   5
          Top             =   3600
          Width           =   1335
@@ -489,7 +506,7 @@ Begin VB.Form Tanaman
             Strikethrough   =   0   'False
          EndProperty
          Height          =   495
-         Left            =   3480
+         Left            =   6120
          TabIndex        =   4
          Top             =   3600
          Width           =   1335
@@ -506,7 +523,7 @@ Begin VB.Form Tanaman
             Strikethrough   =   0   'False
          EndProperty
          Height          =   495
-         Left            =   1680
+         Left            =   4320
          TabIndex        =   3
          Top             =   3600
          Width           =   1335
@@ -523,7 +540,7 @@ Begin VB.Form Tanaman
             Strikethrough   =   0   'False
          EndProperty
          Height          =   495
-         Left            =   4920
+         Left            =   7560
          TabIndex        =   2
          Top             =   3600
          Width           =   1335
@@ -663,7 +680,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Dim rsHarga As ADODB.Recordset
-Dim rsBangunan As ADODB.Recordset
+Dim rstanaman As ADODB.Recordset
 Private Declare Function SendMessage Lib "user32" Alias _
 "SendMessageA" (ByVal hwnd As Long, ByVal wMsg As Long, _
 ByVal wParam As Long, lParam As Long) As Long
@@ -726,18 +743,18 @@ Dim rsDaftarNIB As ADODB.Recordset
     'Tampilan.Top = txtNama.Top
     'Tampilan.Left = txtNama.Left
     Set db = New ADODB.Connection
-    db.Open "PROVIDER=Microsoft.Jet.OLEDB.4.0;Data Source=" & pROJECTPATH & ";Jet OLEDB:Database Password=globalisasi;Persist Security Info=False"
+    db.Open "PROVIDER=Microsoft.Jet.OLEDB.4.0;Data Source=" & pROJECTPATH & ";Persist Security Info=False"
     db.CursorLocation = adUseClient
-    'Set rsBangunan = New ADODB.Recordset
-    'rsBangunan.Open "select * from [Zona Tanah] ", db, adOpenDynamic, adLockOptimistic
+    'Set rstanaman = New ADODB.Recordset
+    'rstanaman.Open "select * from [Zona Tanah] ", db, adOpenDynamic, adLockOptimistic
     Set rsDaftarNIB = New ADODB.Recordset
-    rsDaftarNIB.Open "SELECT * from [daftar bangunan] order by urutid", db, adOpenDynamic, adLockOptimistic
-        If Not rsBangunan.RecordCount = 0 Then
-            rsBangunan.MoveFirst
+    rsDaftarNIB.Open "SELECT * from [daftar tanaman] order by urutid", db, adOpenDynamic, adLockOptimistic
+        If Not rstanaman.RecordCount = 0 Then
+            rstanaman.MoveFirst
         End If
-        While Not rsBangunan.EOF
-            rsBangunan.Delete
-            rsBangunan.MoveNext
+        While Not rstanaman.EOF
+            rstanaman.Delete
+            rstanaman.MoveNext
         Wend
         
         For i = 0 To List6.ListCount - 1
@@ -747,21 +764,21 @@ Dim rsDaftarNIB As ADODB.Recordset
 'metode bangunan bukan find tapi filter karena bis banyak bangunan untuk satu nib
             rsDaftarNIB.Filter = "idNIB='" & List6.List(i) & "'"
             While Not rsDaftarNIB.EOF
-                rsBangunan.AddNew
-                    rsBangunan!idbangunan = rsDaftarNIB!id
-                    rsBangunan!nomor = rsDaftarNIB![urutid]
-                    rsBangunan!nib = rsDaftarNIB!idnib
-                    rsBangunan!identitas = rsDaftarNIB!pemilik
-                    rsBangunan![Jenis bangunan] = rsDaftarNIB![Jenis bangunan]
-                    rsBangunan![jumlah jenis bangunan] = rsDaftarNIB![jumlah jenis bangunan]
-                    rsBangunan![Luas Bangunan] = rsDaftarNIB![Luas Bangunan]
+                rstanaman.AddNew
+                    rstanaman!idtanaman = rsDaftarNIB!ID
+                    rstanaman!nomor = rsDaftarNIB![urutid]
+                    rstanaman!nib = rsDaftarNIB!idnib
+                    rstanaman!Pemilik = rsDaftarNIB!Pemilik
+                    rstanaman![Jenis tanaman] = rsDaftarNIB![Jenis tanaman]
+                    rstanaman![ukuran jenis tanaman] = rsDaftarNIB![ukuran jenis tanaman]
+                    rstanaman![jumlah tanaman] = rsDaftarNIB![jumlah tanaman]
                     
-                rsBangunan.Update
+                rstanaman.Update
                 rsDaftarNIB.MoveNext
             Wend
         Next i
         Tampilan.Visible = False
-        GRDBangunan.ReBind
+        GRDTanaman.ReBind
 End Sub
 
 Private Sub Command19_Click()
@@ -788,17 +805,44 @@ Next i
 End Sub
 
 Private Sub Command21_Click()
-Frame1.Visible = False
+Dim rsDaftarTanaman As ADODB.Recordset
+ Dim i As Integer
+ 
+    Dim db As ADODB.Connection
+    Set db = New ADODB.Connection
+    db.Open "PROVIDER=Microsoft.Jet.OLEDB.4.0;Data Source=" & pROJECTPATH & ";Jet OLEDB:Database Password=globalisasi;Persist Security Info=False"
+    db.CursorLocation = adUseClient
+    Set rsDaftarTanaman = New ADODB.Recordset
+     rsDaftarTanaman.Open "SELECT DISTINCTROW [Daftar Nominatif].[jenis tanaman], [Daftar Nominatif].[Ukuran Jenis Tanaman], Sum([Daftar Nominatif].[Jumlah tanaman]) AS [Sum Of Jumlah tanaman], Avg([Daftar Nominatif].[Nilai Tanaman per Meter Persegi]) AS [Harga], Count(*) AS [Jumlah Tanaman] From [Daftar Nominatif] GROUP BY [Daftar Nominatif].[jenis tanaman], [Daftar Nominatif].[Ukuran Jenis Tanaman] HAVING ((([Daftar Nominatif].[jenis tanaman]) Is Not Null));", db, adOpenDynamic, adLockOptimistic
+     
+     While Not rsDaftarTanaman.EOF
+        If Not rsHarga.RecordCount = 0 Then
+        rsHarga.MoveFirst
+        End If
+        rsHarga.Filter = "[jenis tanaman]='" & rsDaftarTanaman![Jenis tanaman] & "' and [ukuran]='" & rsDaftarTanaman![ukuran jenis tanaman] & "'"
+        'MsgBox "[jenis tanaman]='" & rsDaftarTanaman![jenis tanaman] & "' and ukuran = '" & rsDaftarTanaman![Ukuran Jenis Tanaman] & "'"
+        If rsHarga.EOF Then
+            rsHarga.AddNew
+                rsHarga!harga = rsDaftarTanaman!harga
+                rsHarga![Jenis tanaman] = rsDaftarTanaman![Jenis tanaman]
+                rsHarga![ukuran] = rsDaftarTanaman![ukuran jenis tanaman]
+            rsHarga.Update
+        End If
+        rsDaftarTanaman.MoveNext
+    Wend
+    rsHarga.Filter = ""
+    rsHarga.Sort = "[jenis tanaman],ukuran"
+    rsHarga.Requery
 End Sub
 
 Private Sub Command22_Click()
 Dim JumlahItem As Single
-Dim luasBangunan As Single
+Dim JumlahTanaman As Single
 Dim NilaiSusut As Single
-X = MsgBox("Apakah Anda yakin untuk melakukan proses kalkulasi NPW bangunan dengan harga pada klasifikasi yang telah ditetapkan?", vbYesNo, "Konfirmasi Kalkulasi NPW Tanah")
+X = MsgBox("Apakah Anda yakin untuk melakukan proses kalkulasi NPW tanaman dengan harga pada klasifikasi yang telah ditetapkan?", vbYesNo, "Konfirmasi Kalkulasi NPW Tanah")
 If X = vbYes Then
-    rsBangunan.Filter = "harga > 0"
-    rsBangunan.MoveFirst
+    rstanaman.Filter = "harga > 0"
+    rstanaman.MoveFirst
     Dim db As ADODB.Connection
     Dim RSDN As ADODB.Recordset
     Dim rsKalkulasi As ADODB.Recordset
@@ -809,63 +853,57 @@ If X = vbYes Then
         db.Open "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & pROJECTPATH & ";Persist Security Info=False;Jet OLEDB:Database "    ';pwd=globalisasi"
         db.CursorLocation = adUseClient
    
-        RSDN.Open "select id,idnib,[Jumlah Jenis Bangunan],[Luas Bangunan],[Nilai Bangunan per meter persegi],penyusutan,[jumlah nilai bangunan],[nilai pasar bangunan] from [daftar nominatif] where [jenis bangunan] is not null ", db, adOpenDynamic, adLockOptimistic
+        RSDN.Open "select id,idnib,[Jumlah Tanaman],[Nilai Tanaman per meter persegi],[jumlah nilai tanaman],[nilai pasar Tanaman] from [daftar nominatif] where [jenis tanaman] is not null ", db, adOpenDynamic, adLockOptimistic
         If Not RSDN.EOF Then
 'kalkulasi tahap 1 jumlah tiap bangunan dengan penyusutan
-            While Not rsBangunan.EOF
+            While Not rstanaman.EOF
                 RSDN.MoveFirst
-                RSDN.Find "id='" & rsBangunan!idbangunan & "'"
+                RSDN.Find "id='" & rstanaman!idtanaman & "'"
                 If Not RSDN.EOF Then
-                    If IsNull(RSDN![jumlah jenis bangunan]) Then
+                    If IsNull(RSDN![jumlah tanaman]) Then
                         JumlahItem = 1
                     Else
-                        JumlahItem = RSDN![jumlah jenis bangunan]
+                        JumlahItem = RSDN![jumlah tanaman]
                     End If
-                    If IsNull(RSDN![Luas Bangunan]) Then
-                        luasBangunan = 1
+                    If IsNull(RSDN![jumlah tanaman]) Then
+                        JumlahTanaman = 1
                     Else
-                        luasBangunan = RSDN![Luas Bangunan]
-                    End If
-                    If IsNull(rsBangunan!penyusutan) Then
-                        NilaiSusut = 100
-                    Else
-                        NilaiSusut = rsBangunan!penyusutan
-                        RSDN!penyusutan = rsBangunan!penyusutan
+                        luasBangunan = RSDN![jumlah tanaman]
                     End If
                     
-                    'MsgBox rsBangunan!harga & Chr(13) & JumlahItem & Chr(13) & luasbangunan & Chr(13) & NilaiSusut
-                    RSDN![Nilai Bangunan per meter persegi] = rsBangunan!harga '* JumlahItem * luasbangunan * NilaiSusut / 100
-                    RSDN![jumlah nilai bangunan] = rsBangunan!harga * JumlahItem * luasBangunan * NilaiSusut / 100
+                    'MsgBox rstanaman!harga & Chr(13) & JumlahItem & Chr(13) & luasbangunan & Chr(13) & NilaiSusut
+                    RSDN![Nilai tanaman per meter persegi] = rstanaman!harga '* JumlahItem * luasbangunan * NilaiSusut / 100
+                    RSDN![jumlah nilai tanaman] = rstanaman!harga * JumlahItem * JumlahTanaman
                     
-                    'RSDN![Nilai Pasar Tanah] = rsBangunan!harga * RSDN![Luas Hasil Ukur di Dalam Trase]
+                    'RSDN![Nilai Pasar Tanah] = rstanaman!harga * RSDN![Luas Hasil Ukur di Dalam Trase]
                     RSDN.Update
                     
-                    rsBangunan!keterangan = "NPW telah diupdate pada tanggal " & Format(Date, "dd-mm-yyyy")
+                    rstanaman!keterangan = "NPW telah diupdate untuk tanaman pada tanggal " & Format(Date, "dd-mm-yyyy")
                     
                     
                 Else
-                    rsBangunan!keterangan = "NIB tidak ditemukan pada database"
+                    rstanaman!keterangan = "NIB tidak ditemukan pada database"
                 End If
-                rsBangunan.MoveNext
+                rstanaman.MoveNext
             Wend
             
             
             
 'kalkulasi tahap 2 nilai pasar bangunan
-            rsBangunan.MoveFirst
-            While Not rsBangunan.EOF
+            rstanaman.MoveFirst
+            While Not rstanaman.EOF
                 RSDN.Close
-                rsKalkulasi.Open "select sum([jumlah nilai bangunan]) from [daftar nominatif] where idnib='" & rsBangunan!nib & " ' and pemilik='" & rsBangunan!identitas & "' group by idnib", db, adOpenDynamic, adLockOptimistic
-                RSDN.Open "select id,urutid,[Nilai pasar bangunan] from [daftar nominatif] where idnib='" & rsBangunan!nib & " ' and pemilik='" & rsBangunan!identitas & "' order by urutid"
+                rsKalkulasi.Open "select sum([jumlah tanaman]) from [daftar nominatif] where idnib='" & rstanaman!nib & " ' and pemilik='" & rstanaman!Pemilik & "' group by idnib", db, adOpenDynamic, adLockOptimistic
+                RSDN.Open "select id,urutid,[Nilai pasar tanaman] from [daftar nominatif] where idnib='" & rstanaman!nib & " ' and pemilik='" & rstanaman!Pemilik & "' order by urutid"
                 If Not RSDN.EOF Then
-                    RSDN![nilai pasar bangunan] = rsKalkulasi.Fields(0)
+                    RSDN![nilai pasar tanaman] = rsKalkulasi.Fields(0)
                     RSDN.Update
-                'MsgBox rsBangunan!identitas
+                'MsgBox rstanaman!identitas
                 'MsgBox RSDN.Fields(0)
                 'RSDN.Close
                 End If
                 rsKalkulasi.Close
-                rsBangunan.MoveNext
+                rstanaman.MoveNext
             Wend
         End If
         
@@ -880,9 +918,35 @@ If X = vbYes Then
        ' RapihkanGrid
 
        
-  rsBangunan.Filter = ""
-    rsBangunan.Requery
+  rstanaman.Filter = ""
+    rstanaman.Requery
 End If
+End Sub
+
+Private Sub Command23_Click()
+
+ 
+ Dim i As Integer
+    If Not rstanaman.RecordCount = 0 Then
+        rstanaman.MoveFirst
+    End If
+     While Not rstanaman.EOF
+        If Not rsHarga.RecordCount = 0 Then
+        rsHarga.MoveFirst
+        End If
+        rsHarga.Filter = "[jenis tanaman]='" & rstanaman![Jenis tanaman] & "' and [ukuran]='" & rstanaman![ukuran jenis tanaman] & "'"
+        'MsgBox "[jenis tanaman]='" & rsDaftarTanaman![jenis tanaman] & "' and ukuran = '" & rsDaftarTanaman![Ukuran Jenis Tanaman] & "'"
+        If Not rsHarga.EOF Then
+            rstanaman!harga = rsHarga!harga
+            rsHarga.Update
+        End If
+        rstanaman.MoveNext
+    Wend
+    rsHarga.Filter = ""
+    rsHarga.Sort = "[jenis tanaman],ukuran"
+    rsHarga.Requery
+    
+    
 End Sub
 
 Private Sub Command3_Click()
@@ -901,11 +965,11 @@ Private Sub Command9_Click()
     Set db = New ADODB.Connection
     db.Open "PROVIDER=Microsoft.Jet.OLEDB.4.0;Data Source=" & pROJECTPATH & ";Jet OLEDB:Database Password=globalisasi;Persist Security Info=False"
     db.CursorLocation = adUseClient
-    'Set rsBangunan = New ADODB.Recordset
-    'rsBangunan.Open "select * from [Zona Tanah] ", db, adOpenDynamic, adLockOptimistic
+    'Set rstanaman = New ADODB.Recordset
+    'rstanaman.Open "select * from [Zona Tanah] ", db, adOpenDynamic, adLockOptimistic
     Set rsDaftarNIB = New ADODB.Recordset
     'rsDaftarNIB.Open "SELECT [Daftar Bangunan].[id],[Daftar Bangunan].urutid, [Daftar Bangunan].idNIB, [Daftar Bangunan].Pemilik FROM [Daftar Bangunan] LEFT JOIN [Bangunan] ON [Daftar Bangunan].urutid = [Bangunan].[ID] WHERE ((([Bangunan].ID) Is Null));", db, adOpenDynamic, adLockOptimistic
-     rsDaftarNIB.Open "SELECT [Daftar Bangunan].idNIB FROM [Daftar Bangunan] LEFT JOIN Bangunan ON [Daftar Bangunan].[idNIB] = Bangunan.[NIB] GROUP BY [Daftar Bangunan].idNIB, Bangunan.NIB HAVING (((Bangunan.NIB) Is Null));", db, adOpenDynamic, adLockOptimistic
+     rsDaftarNIB.Open "SELECT [Daftar tanaman].idNIB FROM [Daftar tanaman] LEFT JOIN tanaman ON [Daftar tanaman].[idNIB] = tanaman.[NIB] GROUP BY [Daftar tanaman].idNIB, tanaman.NIB HAVING (((tanaman.NIB) Is Null));", db, adOpenDynamic, adLockOptimistic
      
   
     
@@ -913,11 +977,11 @@ Private Sub Command9_Click()
     List6.Clear
     While Not rsDaftarNIB.EOF
         
-        List5.AddItem rsDaftarNIB!idnib
+        List5.AddItem "" & rsDaftarNIB!idnib
         rsDaftarNIB.MoveNext
     Wend
     rsDaftarNIB.Close
-    rsDaftarNIB.Open "SELECT nib from bangunan where nib is not null group by nib", db, adOpenDynamic, adLockOptimistic
+    rsDaftarNIB.Open "SELECT nib from tanaman where nib is not null group by nib", db, adOpenDynamic, adLockOptimistic
     While Not rsDaftarNIB.EOF
         
         List6.AddItem rsDaftarNIB!nib
@@ -938,9 +1002,10 @@ End Sub
 
 Private Sub Form_Load()
 
- Set MyProperty = GRDBangunan   'nama datagrid yang inigin di scroll dengan mouse
-        WheelHook GRDBangunan
-
+ Set MyProperty = GRDTanaman   'nama datagrid yang inigin di scroll dengan mouse
+        WheelHook GRDTanaman
+'Set MyProperty = grdHarga   'nama datagrid yang inigin di scroll dengan mouse
+'        WheelHook grdHarga
 If pROJECTPATH = "" Then
 MsgBox "Maaf belum ada file project yang dipilih", vbInformation
 Me.Hide
@@ -957,19 +1022,19 @@ Dim db As ADODB.Connection
         'rsKolom.Open "select * from [kostum tabel] where [nama tabel]='Daftar Nominatif' ", db, adOpenDynamic, adLockOptimistic
         'Sumber = rsKolom!Source
         Set rsHarga = New ADODB.Recordset
-            rsHarga.Open "SELECT ID,NOMOR,KLASIFIKASI,HARGA,KETERANGAN from [kLASIFIKASI bANGUNAN]", db, adOpenDynamic, adLockOptimistic  '"SELECT * FROM [DAFTAR NOMINATIF] order by UrutId"
+            rsHarga.Open "select * from [Harga tanaman] order by [jenis tanaman]", db, adOpenDynamic, adLockOptimistic  '"SELECT * FROM [DAFTAR NOMINATIF] order by UrutId"
 
         Set grdHarga.DataSource = rsHarga
         grdHarga.ReBind
         grdHarga.Columns("ID").Visible = False
-        Set rsBangunan = New ADODB.Recordset
-        rsBangunan.Open "SELECT *  from [BANGUNAN] ORDER BY NOMOR", db, adOpenDynamic, adLockOptimistic  '"SELECT * FROM [DAFTAR NOMINATIF] order by UrutId"
+        Set rstanaman = New ADODB.Recordset
+        rstanaman.Open "SELECT *  from tanaman ORDER BY NOMOR", db, adOpenDynamic, adLockOptimistic  '"SELECT * FROM [DAFTAR NOMINATIF] order by UrutId"
         
-        Set GRDBangunan.DataSource = rsBangunan
-        GRDBangunan.ReBind
-        GRDBangunan.Columns("idBANGUNAN").Visible = False
-        GRDBangunan.Columns("ID").Visible = False
-        'grdbangunan.Columns("Zona Tanah").Button = True
+        Set GRDTanaman.DataSource = rstanaman
+        GRDTanaman.ReBind
+        GRDTanaman.Columns("idTanaman").Visible = False
+        GRDTanaman.Columns("ID").Visible = False
+        'grdTanaman.Columns("Zona Tanah").Button = True
         'MsgBox rsHarga.RecordCount
         'Set List1.DataSource = rsHarga
         'Set List1.RowSource = rsHarga 'rsHarga![zona tanah]
@@ -983,32 +1048,32 @@ Frame1.Left = 0
 'label3.Top=frame1.
 End Sub
 
-Private Sub grdbangunan_AfterColEdit(ByVal ColIndex As Integer)
-If GRDBangunan.Col = GRDBangunan.Columns("Penyusutan").ColIndex Then
+Private Sub grdTanaman_AfterColEdit(ByVal ColIndex As Integer)
+If GRDTanaman.Col = GRDTanaman.Columns("Penyusutan").ColIndex Then
     'rsHarga.MoveFirst
-    'rsHarga.Find "Nomor ='" & GRDBangunan.Columns("Penyusutan").Value & "'"
+    'rsHarga.Find "Nomor ='" & grdTanaman.Columns("Penyusutan").Value & "'"
     'If Not rsHarga.EOF Then
-    '    GRDBangunan.Columns("Harga").Value = rsHarga!harga
+    '    grdTanaman.Columns("Harga").Value = rsHarga!harga
         'Sendkeys "{down}"
-        rsBangunan.MoveNext
-        GRDBangunan.Col = GRDBangunan.Col - 1
+        rstanaman.MoveNext
+        GRDTanaman.Col = GRDTanaman.Col - 1
     'Else
     'MsgBox "Maaf nomor zona tersebut belum diidentifikasi, silahkan tambahkan pada daftar harga zona!", vbCritical
-    'GRDBangunan.SetFocus
+    'grdTanaman.SetFocus
     'End If
     Exit Sub
 End If
-If GRDBangunan.Col = GRDBangunan.Columns("Klasifikasi").ColIndex Then
+If GRDTanaman.Col = GRDTanaman.Columns("Klasifikasi").ColIndex Then
     rsHarga.MoveFirst
-    rsHarga.Find "Nomor ='" & GRDBangunan.Columns("Klasifikasi").Value & "'"
+    rsHarga.Find "Nomor ='" & GRDTanaman.Columns("Klasifikasi").Value & "'"
     If Not rsHarga.EOF Then
-        GRDBangunan.Columns("Harga").Value = rsHarga!harga
-        GRDBangunan.Col = GRDBangunan.Col + 1
+        GRDTanaman.Columns("Harga").Value = rsHarga!harga
+        GRDTanaman.Col = GRDTanaman.Col + 1
         'Sendkeys "{down}"
-        'rsBangunan.MoveNext
+        'rstanaman.MoveNext
     Else
     MsgBox "Maaf nomor zona tersebut belum diidentifikasi, silahkan tambahkan pada daftar harga zona!", vbCritical
-    GRDBangunan.SetFocus
+    GRDTanaman.SetFocus
     End If
 End If
 
@@ -1021,12 +1086,12 @@ Public Sub Sendkeys(text As Variant, Optional wait As Boolean = False)
    WshShell.Sendkeys CStr(text), wait
    Set WshShell = Nothing
 End Sub
-Private Sub grdbangunan_ButtonClick(ByVal ColIndex As Integer)
+Private Sub grdTanaman_ButtonClick(ByVal ColIndex As Integer)
 'tampilList
 Dim co
-    Set co = GRDBangunan.Columns(GRDBangunan.Col)
+    Set co = GRDTanaman.Columns(GRDTanaman.Col)
     List1.Left = DataGrid1.Left + co.Left + co.Width
-    List1.Top = DataGrid1.Top + GRDBangunan.RowTop(GRDBangunan.Row)
+    List1.Top = DataGrid1.Top + GRDTanaman.RowTop(GRDTanaman.Row)
     List1.Visible = True
         
         

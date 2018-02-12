@@ -139,6 +139,9 @@ Begin VB.MDIForm MainForm
       Begin VB.Menu mnDataNonfisik 
          Caption         =   "Data &Nonfisik"
          Tag             =   "Data &Nonfisik|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
+         Begin VB.Menu mnUsaha 
+            Caption         =   "&Kerugian Usaha"
+         End
       End
    End
    Begin VB.Menu mnSetting 
@@ -506,12 +509,9 @@ End Sub
 Private Sub mntanaH_Click()
     Tanah.Show
 End Sub
-
-
-
 Private Sub MnTanaman_Click()
 Tanaman.Show
-
+End Sub
 
 Private Sub MenuEvents_MenuHelp(ByVal MenuText As String, ByVal MenuHelp As String, ByVal Enabled As Boolean)
     If gbSubClassMenu Then
@@ -586,4 +586,8 @@ Private Sub MDIForm_UnLoad(Cancel As Integer)
         Set objMenuEx = Nothing
     End If
 
+End Sub
+
+Private Sub mnUsaha_Click()
+Usaha.Show
 End Sub
